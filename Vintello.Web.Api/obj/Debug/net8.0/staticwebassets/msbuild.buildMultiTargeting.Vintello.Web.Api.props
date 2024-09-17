@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Vintello.Web.Api.props" />
+</Project>

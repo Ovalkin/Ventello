@@ -1,0 +1,14 @@
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\bin\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.deps.json
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\bin\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.runtimeconfig.json
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\bin\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.dll
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\bin\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.pdb
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.csproj.AssemblyReference.cache
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.AssemblyInfoInputs.cache
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.AssemblyInfo.cs
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.csproj.CoreCompileInputs.cache
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.dll
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\refint\Vintello.Common.EntityModel.PostgreSql.dll
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.pdb
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.genruntimeconfig.cache
+C:\Users\ovalkin\Desktop\Vintello\Vintello.Common.EntityModel.PostgreSql\obj\Debug\net8.0\ref\Vintello.Common.EntityModel.PostgreSql.dll

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "qKuL1SNYZ0bGNyOKWNgx93ucAdfNaSf+IM6QBrtwVW8=",
+  "Source": "Vintello.Web.Api",
+  "BasePath": "_content/Vintello.Web.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
