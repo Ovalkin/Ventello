@@ -1,8 +1,6 @@
-/Vintello.Common.DataContext.PostgreSql/bin/
-/Vintello.Common.DataContext.PostgreSql/obj/
-/Vintello.Common.EntityModel.PostgreSql/bin/
-/Vintello.Common.EntityModel.PostgreSql/obj/
-/Vintello.Web.Api/bin/
-/Vintello.Web.Api/obj/
-/*/obj/
-/*/bin/
+Vintello.Common.DataContext.PostgreSql/bin
+Vintello.Common.DataContext.PostgreSql/obj
+Vintello.Common.EntityModel.PostgreSql/bin
+Vintello.Common.EntityModel.PostgreSql/obj
+Vintello.Web.Api/bin
+Vintello.Web.Api/obj
