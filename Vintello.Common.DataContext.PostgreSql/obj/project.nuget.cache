@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2EAy0AYBytg3fVALa10oBdr4VUUFNl4pr4IOe4Vqhdhj7Qn3fd3fquVZICSSCvKIYF9jdGo6x1Ii7e79zxcSlA==",
+  "dgSpecHash": "rbtpXIkWCRNN4OvBumvX/tGJgsiJ4S9xvr73w3g4U4nZsHgLujjYxQ5VJ65qlKutQEexa40BEjQDKV8Eu9h+Kw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\egorv\\Desktop\\Vintello — копия\\Vintello.Common.DataContext.PostgreSql\\Vintello.Common.DataContext.PostgreSql.csproj",
+  "projectFilePath": "C:\\Users\\egorv\\Desktop\\LL\\Vintello\\Vintello.Common.DataContext.PostgreSql\\Vintello.Common.DataContext.PostgreSql.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",

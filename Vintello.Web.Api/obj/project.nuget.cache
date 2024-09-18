@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "r8djSgb6pjZbp6ysnQER+7uYQoUvKzUfQe63lEl+NIyn92NWntZCPYPw3cqSJRZtZU4m3DsXgP38UJDSB3iYiQ==",
+  "dgSpecHash": "uaYwhOYGIx0fdDWxfn4uSwCvStEogF5modQEOXZn6uERbM85TvD+A1DiNC17Cs5eoRU5UT6ghTEOOow9Kktvcg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\egorv\\Desktop\\Vintello — копия\\Vintello.Web.Api\\Vintello.Web.Api.csproj",
+  "projectFilePath": "C:\\Users\\egorv\\Desktop\\LL\\Vintello\\Vintello.Web.Api\\Vintello.Web.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
