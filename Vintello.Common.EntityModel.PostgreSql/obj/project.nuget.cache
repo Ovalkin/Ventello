@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TFvF8VRNG9srF/jQni65eiqzP0GmqbzaIH8kzp2YlZYoGDF4u+PR8dll5KhhK11AKbrLGGzjP3iTykm66pX2nw==",
+  "dgSpecHash": "fGIFsw53I3uWA8nysUOC1JWLTuodQhwggmN1xwhhQ/ko7i/6/02+LziO/sG9sLrUahEYXTrb60Xf5mM8VI5u+Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj",
+  "projectFilePath": "C:\\Users\\egorv\\Desktop\\Vintello — копия\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\egorv\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

@@ -14,4 +14,8 @@
       <ProjectReference Include="..\Vintello.Common.DataContext.PostgreSql\Vintello.Common.DataContext.PostgreSql.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="obj\" />
+    </ItemGroup>
+
 </Project>
