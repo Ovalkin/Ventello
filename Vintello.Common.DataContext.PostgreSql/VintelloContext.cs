@@ -19,15 +19,14 @@ public partial class VintelloContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("host=localhost;" +
                                     " port=5432;" +
-                                    " database=vintello;" +
+                                    " database=postgres;" +
                                     " username=postgres;" +
-                                    " password=1234;");
+                                    " password=7878;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>(entity =>
         {
-            entity.Property(e => e.Role).HasDefaultValueSql("'client'::character varying");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql(DateTime.Now.ToString(CultureInfo.InvariantCulture));
         });
 

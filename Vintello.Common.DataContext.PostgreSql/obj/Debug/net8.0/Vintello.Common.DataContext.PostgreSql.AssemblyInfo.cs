@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Vintello.Common.DataContext.PostgreSql")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b768d26dd75623d58067a77fe636ff49c1c06c3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75de1b64e4134c31206c7aef899e4c3b413f0356")]
 [assembly: System.Reflection.AssemblyProductAttribute("Vintello.Common.DataContext.PostgreSql")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Vintello.Common.DataContext.PostgreSql")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

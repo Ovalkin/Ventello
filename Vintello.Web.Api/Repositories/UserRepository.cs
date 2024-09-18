@@ -7,7 +7,6 @@ public class UserRepository : IUserRepository
 {
     private static ConcurrentDictionary<int, User>? _userCache;
     private readonly VintelloContext _db;
-
     public UserRepository(VintelloContext db)
     {
         _db = db;
@@ -24,11 +23,13 @@ public class UserRepository : IUserRepository
                 if (_userCache.TryUpdate(id, user, old)) return user;
             }
         }
+
         return null!;
     }
-    
+
     public async Task<User?> CreateAsync(User user)
     {
+        user.Location = user.Location?.ToLower();
         await _db.Users.AddAsync(user);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
@@ -41,21 +42,33 @@ public class UserRepository : IUserRepository
 
     public Task<User?> RetrieveByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        if (_userCache is null) return null!;
+        _userCache.TryGetValue(id, out User? user);
+        return Task.FromResult(user);
     }
 
-    public Task<IEnumerable<User>?> RetrieveAllAsync(int id)
+    public Task<IEnumerable<User>> RetrieveAllAsync()
     {
-        throw new NotImplementedException();
+        return Task.FromResult(_userCache?.Values ?? Enumerable.Empty<User>());
     }
 
-    public Task<User?> UpdateAsync(int id, User user)
+    public async Task<User?> UpdateAsync(int id, User newUser)
     {
-        throw new NotImplementedException();
+        newUser.Location = newUser.Location?.ToLower();
+        _db.Update(newUser);
+        int affected = await _db.SaveChangesAsync();
+        if (affected == 1) return UpdateCache(id, newUser);
+        else return null;
     }
 
-    public Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        User? user = await _db.Users.FindAsync(id);
+        if (user is null) return false;
+        _db.Users.Remove(user);
+        int affected = await _db.SaveChangesAsync();
+        if (affected == 1)
+            if (_userCache is not null) return _userCache.TryRemove(id, out user);
+        return false;
     }
 }

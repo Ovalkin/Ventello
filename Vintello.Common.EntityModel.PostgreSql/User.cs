@@ -11,9 +11,9 @@ public partial class User
     [Required]
     public int Id { get; set; }
 
-    [Column("role")]
-    [StringLength(255)]
-    public string? Role { get; set; }
+    [Column("role")] 
+    [StringLength(255)] 
+    public string? Role { get; set; } = "client";
 
     [Column("first_name")]
     [StringLength(255)]
