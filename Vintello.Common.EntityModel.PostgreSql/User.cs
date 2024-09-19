@@ -50,4 +50,11 @@ public partial class User
 
     [Column("bio")]
     public string? Bio { get; set; }
+
+    [InverseProperty("User")]
+    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
+
+    [ForeignKey("Role")]
+    [InverseProperty("Users")]
+    public virtual Role RoleNavigation { get; set; } = null!;
 }
