@@ -50,6 +50,7 @@ public partial class User
     public string? Bio { get; set; }
 
     [InverseProperty("User")]
+    [JsonIgnore]
     public virtual ICollection<Item> Items { get; set; } = new List<Item>();
 
     [ForeignKey("Role")]

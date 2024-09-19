@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using Microsoft.EntityFrameworkCore;
 using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Web.Api.Repositories;
