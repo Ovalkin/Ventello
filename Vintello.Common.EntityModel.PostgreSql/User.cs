@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace Vintello.Common.EntityModel.PostgreSql;
 
@@ -56,5 +54,6 @@ public partial class User
 
     [ForeignKey("Role")]
     [InverseProperty("Users")]
-    public virtual Role RoleNavigation { get; set; } = null!;
+    [JsonIgnore]
+    public virtual Role? RoleNavigation { get; set; } = null!;
 }

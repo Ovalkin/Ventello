@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Microsoft.EntityFrameworkCore;
 using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Web.Api.Repositories;
@@ -29,6 +30,8 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> CreateAsync(User user)
     {
+        user.RoleNavigation = await _db.Roles.FindAsync(user.Role);
+        
         user.Location = user.Location?.ToLower();
         await _db.Users.AddAsync(user);
         int affected = await _db.SaveChangesAsync();
