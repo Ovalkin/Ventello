@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Vintello.Common.EntityModel.PostgreSql;
@@ -19,16 +20,19 @@ public partial class VintelloContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("host=localhost;" +
                                     " port=5432;" +
-                                    " database=postgres;" +
-                                    " username=postgres;" +
-                                    " password=7878;");
+                                    " database=vintello;" +
+                                    "  username=postgres;" +
+                                    "  password=7878;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasPostgresExtension("pg_catalog", "adminpack");
+
         modelBuilder.Entity<User>(entity =>
         {
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql(DateTime.Now.ToString(CultureInfo.InvariantCulture));
-            entity.Property(e => e.Id).HasDefaultValueSql("nextval('users_id_seq'::regclass)");
+            entity.HasKey(e => e.Id).HasName("users_pkey");
+
+            entity.Property(e => e.Role).HasDefaultValueSql("'client'::character varying");
         });
 
         OnModelCreatingPartial(modelBuilder);
