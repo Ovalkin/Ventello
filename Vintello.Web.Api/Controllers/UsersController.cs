@@ -18,12 +18,14 @@ public class UsersController : ControllerBase
     //POST: api/users
     //BODY: User (JSON, XML)
     [HttpPost]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
     public async Task<IActionResult> Create([FromBody] User? user)
     {
         if (user is null) return BadRequest();
         User? addedUser = await _repo.CreateAsync(user);
         if (addedUser is null) return BadRequest();
-        else return Ok();
+        else return Ok(user);
     }
 
     //GET: api/users

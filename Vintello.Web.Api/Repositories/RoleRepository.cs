@@ -62,11 +62,11 @@ public class RoleRepository : IRoleRepository
         else return null;
     }
 
-    public async Task<bool?> DeleteAsync(string roleName)
+    public async Task<bool> DeleteAsync(string roleName)
     {
         roleName = roleName.ToLower();
         Role? deletedRole = await _db.Roles.FindAsync(roleName);
-        if (deletedRole is null) return null;
+        if (deletedRole is null) return false;
         _db.Roles.Remove(deletedRole);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
