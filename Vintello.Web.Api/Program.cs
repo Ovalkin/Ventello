@@ -9,6 +9,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddVintelloContext();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 var app = builder.Build();
 

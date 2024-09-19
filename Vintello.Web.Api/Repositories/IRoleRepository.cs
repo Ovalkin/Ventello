@@ -8,5 +8,5 @@ public interface IRoleRepository
     public Task<Role?> RetriveByNameAsync(string roleName);
     public Task<IEnumerable<Role>> RetriveAllAsync();
     public Task<Role?> UpdateAsync(string roleName, Role newRole);
-    public Task<bool?> DeleteAsync(string roleName);
+    public Task<bool> DeleteAsync(string roleName);
 }
