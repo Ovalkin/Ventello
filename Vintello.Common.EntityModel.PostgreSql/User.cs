@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vintello.Common.EntityModel.PostgreSql;
 
@@ -8,16 +11,14 @@ public partial class User
 {
     [Key]
     [Column("id")]
-    [Required]
     public int Id { get; set; }
 
-    [Column("role")] 
-    [StringLength(255)] 
-    public string? Role { get; set; } = "client";
+    [Column("role")]
+    [StringLength(255)]
+    public string Role { get; set; } = null!;
 
     [Column("first_name")]
     [StringLength(255)]
-    [Required]
     public string FirstName { get; set; } = null!;
 
     [Column("last_name")]
@@ -26,23 +27,21 @@ public partial class User
 
     [Column("email")]
     [StringLength(255)]
-    [Required]
     public string Email { get; set; } = null!;
 
     [Column("phone")]
-    [StringLength(20)]
+    [StringLength(255)]
     public string? Phone { get; set; }
 
     [Column("password")]
     [StringLength(255)]
-    [Required]
     public string Password { get; set; } = null!;
 
     [Column("location")]
     [StringLength(255)]
     public string? Location { get; set; }
 
-    [Column("created_at", TypeName = "timestamp with time zone")]
+    [Column("created_at")]
     public DateTime? CreatedAt { get; set; }
 
     [Column("profile_pic")]
@@ -51,4 +50,11 @@ public partial class User
 
     [Column("bio")]
     public string? Bio { get; set; }
+
+    [InverseProperty("User")]
+    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
+
+    [ForeignKey("Role")]
+    [InverseProperty("Users")]
+    public virtual Role RoleNavigation { get; set; } = null!;
 }

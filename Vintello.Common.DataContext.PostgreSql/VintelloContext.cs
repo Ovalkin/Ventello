@@ -28,6 +28,7 @@ public partial class VintelloContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.Property(e => e.CreatedAt).HasDefaultValueSql(DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('users_id_seq'::regclass)");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -13,7 +13,7 @@ public static class VintelloContextExtensions
     /// <returns>An IServiceCollection that can be used to add more services.</returns>
     public static IServiceCollection AddVintelloContext(this IServiceCollection services, string connection = "..")
     {
-        string connectionString = "host=localhost; port=5432; database=vintello;  username=postgres;  password=1234;";
+        string connectionString = "host=localhost; port=5432; database=vintello;  username=postgres;  password=7878;";
         services.AddDbContext<VintelloContext>(options =>
             options.UseNpgsql(connectionString)
         );
