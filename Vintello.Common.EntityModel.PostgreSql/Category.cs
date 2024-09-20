@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace Vintello.Common.EntityModel.PostgreSql;
 
@@ -21,5 +19,6 @@ public partial class Category
     public string? Description { get; set; }
 
     [InverseProperty("Category")]
+    [JsonIgnore]
     public virtual ICollection<Item> Items { get; set; } = new List<Item>();
 }

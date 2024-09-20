@@ -25,7 +25,7 @@ public class UsersController : ControllerBase
         if (user is null) return BadRequest();
         User? addedUser = await _repo.CreateAsync(user);
         if (addedUser is null) return BadRequest();
-        else return Ok(user);
+        else return Ok(addedUser);
     }
 
     //GET: api/users
