@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.EntityModel.PostgreSql;
-using Vintello.Web.Api.Repositories;
+using Vintello.Common.Repositories;
 
 namespace Vintello.Web.Api.Controllers;
 
