@@ -33,7 +33,7 @@ public class UsersController : ControllerBase
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
     public async Task<IEnumerable<User>> GetUsers(string? location)
-    {
+    {   
         if (string.IsNullOrWhiteSpace(location)) return await _repo.RetrieveAllAsync();
         location = location.ToLower();
         return (await _repo.RetrieveAllAsync()).Where(user => user.Location == location);

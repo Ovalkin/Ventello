@@ -15,7 +15,7 @@ public class CategoryRepository : ICategoryRepository
             (_db.Categories.ToDictionary(category => category.Id));
     }
 
-    public Category UpdateCache(int id, Category category)
+    private Category? UpdateCache(int id, Category category)
     {
         if (_categoryCashe is not null)
         {
@@ -23,7 +23,7 @@ public class CategoryRepository : ICategoryRepository
             {
                 if (_categoryCashe.TryUpdate(id, category, oldCategory)) return category;
             }
-        }
+        }   
         return null!;
     }
     public async Task<Category?> CreateAsync(Category? category)
@@ -35,7 +35,7 @@ public class CategoryRepository : ICategoryRepository
         if (affected == 1)
         {
             if (_categoryCashe is null) return category;
-            else return _categoryCashe.AddOrUpdate(category.Id, category, UpdateCache);
+            else return _categoryCashe.AddOrUpdate(category.Id, category, UpdateCache!);
         }
         else return null;
     }

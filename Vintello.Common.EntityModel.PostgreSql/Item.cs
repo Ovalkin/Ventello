@@ -38,10 +38,10 @@ public partial class Item
     [ForeignKey("CategoryId")]
     [InverseProperty("Items")]
     [JsonIgnore]
-    public virtual Category Category { get; set; } = null!;
+    public virtual Category? Category { get; set; } = null!;
 
     [ForeignKey("UserId")]
     [InverseProperty("Items")]
     [JsonIgnore]
-    public virtual User User { get; set; } = null!;
+    public virtual User? User { get; set; } = null!;
 }
