@@ -1,7 +1,8 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Vintello.Common.DTOs;
 using Vintello.Common.EntityModel.PostgreSql;
-using Vintello.Web.Api.Repositories;
-
+using Vintello.Common.Repositories;
 namespace Vintello.Web.Api.Controllers;
 
 [ApiController]
@@ -9,10 +10,12 @@ namespace Vintello.Web.Api.Controllers;
 public class CategoriesController : ControllerBase
 {
     private readonly ICategoryRepository _repo;
+    private readonly IMapper _mapper;
 
-    public CategoriesController(ICategoryRepository repo)
+    public CategoriesController(ICategoryRepository repo, IMapper mapper)
     {
         _repo = repo;
+        _mapper = mapper;
     }
     
     //POST: api/categories
@@ -20,9 +23,10 @@ public class CategoriesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateCategory([FromBody] Category? category)
+    public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto? createdCategory)
     {
-        if (category is null) return BadRequest();
+        if (createdCategory is null) return BadRequest();
+        var category = _mapper.Map<Category>(createdCategory);
         Category? addedCategory = await _repo.CreateAsync(category);
         if (addedCategory is null) return BadRequest();
         else return Ok(addedCategory);

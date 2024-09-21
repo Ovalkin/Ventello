@@ -27,7 +27,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Vintello.Common.DTOs\Vintello.Common.DTOs.csproj" />
       <ProjectReference Include="..\Vintello.Common.EntityModel.PostgreSql\Vintello.Common.EntityModel.PostgreSql.csproj" />
+      <ProjectReference Include="..\Vintello.Common.Mapping\Vintello.Common.Mapping.csproj" />
+      <ProjectReference Include="..\Vintello.Common.Repositories\Vintello.Common.Repositories.csproj" />
     </ItemGroup>
 
 </Project>
