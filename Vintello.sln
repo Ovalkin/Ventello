@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Common.Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Common.Mapping", "Vintello.Common.Mapping\Vintello.Common.Mapping.csproj", "{EAE8308F-43AF-4A8D-84C8-C4C4B4D0980D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Services", "Vintello.Services\Vintello.Services.csproj", "{1C731629-C9B1-490F-8326-781B95A9389D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{EAE8308F-43AF-4A8D-84C8-C4C4B4D0980D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAE8308F-43AF-4A8D-84C8-C4C4B4D0980D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAE8308F-43AF-4A8D-84C8-C4C4B4D0980D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C731629-C9B1-490F-8326-781B95A9389D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C731629-C9B1-490F-8326-781B95A9389D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C731629-C9B1-490F-8326-781B95A9389D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C731629-C9B1-490F-8326-781B95A9389D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

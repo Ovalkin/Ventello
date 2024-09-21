@@ -1,6 +1,7 @@
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Common.Mapping;
 using Vintello.Common.Repositories;
+using Vintello.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
 
 builder.Services.AddAutoMapper(typeof(AppMappingProfile));
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

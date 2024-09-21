@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Common.Repositories;
+using Vintello.Services;
+
 namespace Vintello.Web.Api.Controllers;
 
 [ApiController]
@@ -11,11 +13,13 @@ public class CategoriesController : ControllerBase
 {
     private readonly ICategoryRepository _repo;
     private readonly IMapper _mapper;
+    private readonly ICategoryService _service;
 
-    public CategoriesController(ICategoryRepository repo, IMapper mapper)
+    public CategoriesController(ICategoryRepository repo, IMapper mapper, ICategoryService service)
     {
         _repo = repo;
         _mapper = mapper;
+        _service = service;
     }
     
     //POST: api/categories
@@ -42,13 +46,13 @@ public class CategoriesController : ControllerBase
     
     //GET: api/categories/[id]
     [HttpGet("{id}")]
-    [ProducesResponseType(200, Type = typeof(Category))]
+    [ProducesResponseType(200, Type = typeof(RetriveCategoryDto))]
     [ProducesResponseType(404)]
     public async Task<IActionResult> GetCategory(int id)
     {
-        Category? category = await _repo.RetriveByIdAsync(id);
-        if (category is null) return NotFound();
-        else return Ok(category);
+        RetriveCategoryDto? categoryDto = await _service.RetriveByIdAsync(id);
+        if (categoryDto is null) return NotFound();
+        else return Ok(categoryDto);
     }
     
     //PUT: api/categories/[id]

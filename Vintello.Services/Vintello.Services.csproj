@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Vintello.Common.DTOs\Vintello.Common.DTOs.csproj" />
+      <ProjectReference Include="..\Vintello.Common.Mapping\Vintello.Common.Mapping.csproj" />
+      <ProjectReference Include="..\Vintello.Common.Repositories\Vintello.Common.Repositories.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="obj\" />
+    </ItemGroup>
+
+</Project>

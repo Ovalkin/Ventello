@@ -8,7 +8,7 @@ public class AppMappingProfile: Profile
 {
     public AppMappingProfile()
     {
-        CreateMap<CreateCategoryDto, Category>().ReverseMap();
+        CreateMap<Category, RetriveCategoryDto>();
         CreateMap<CreateItemDto, Item>();
         CreateMap<CreateRoleDto, Role>();
         CreateMap<CreateUserDto, User>();

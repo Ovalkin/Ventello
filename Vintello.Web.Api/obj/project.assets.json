@@ -423,6 +423,21 @@
         "runtime": {
           "bin/placeholder/Vintello.Common.Repositories.dll": {}
         }
+      },
+      "Vintello.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Vintello.Common.DTOs": "1.0.0",
+          "Vintello.Common.Mapping": "1.0.0",
+          "Vintello.Common.Repositories": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Vintello.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Vintello.Services.dll": {}
+        }
       }
     }
   },
@@ -1225,6 +1240,11 @@
       "type": "project",
       "path": "../Vintello.Common.Repositories/Vintello.Common.Repositories.csproj",
       "msbuildProject": "../Vintello.Common.Repositories/Vintello.Common.Repositories.csproj"
+    },
+    "Vintello.Services/1.0.0": {
+      "type": "project",
+      "path": "../Vintello.Services/Vintello.Services.csproj",
+      "msbuildProject": "../Vintello.Services/Vintello.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1233,7 +1253,8 @@
       "Vintello.Common.DTOs >= 1.0.0",
       "Vintello.Common.EntityModel.PostgreSql >= 1.0.0",
       "Vintello.Common.Mapping >= 1.0.0",
-      "Vintello.Common.Repositories >= 1.0.0"
+      "Vintello.Common.Repositories >= 1.0.0",
+      "Vintello.Services >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1280,6 +1301,9 @@
             },
             "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Common.Repositories\\Vintello.Common.Repositories.csproj": {
               "projectPath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Common.Repositories\\Vintello.Common.Repositories.csproj"
+            },
+            "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj": {
+              "projectPath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj"
             }
           }
         }
