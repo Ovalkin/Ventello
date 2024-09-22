@@ -32,7 +32,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj": {
+                "projectPath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Vintello.Common.DTOs;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Common.Repositories;
+using Vintello.Services;
 
 namespace Vintello.Web.Api.Controllers;
 
@@ -8,28 +10,26 @@ namespace Vintello.Web.Api.Controllers;
 [Route("api/[controller]")]
 public class RolesController : ControllerBase
 {
+    private readonly IRoleService _service;
     private readonly IRoleRepository _repo;
 
-    public RolesController(IRoleRepository repo)
+    public RolesController(IRoleService service, IRoleRepository repo)
     {
+        _service = service;
         _repo = repo;
     }
     
-    //POST: api/roles
-    //BODY: Role (JSON)
     [HttpPost]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Create([FromBody] Role? role)
+    public async Task<IActionResult> Create([FromBody] CreatedUpdatedRetrivedRolesDto? createdRole)
     {
-        if (role is null) return BadRequest();
-        role.RoleName = role.RoleName.ToLower();
-        Role? addedRole = await _repo.CreateAsync(role);
+        if (createdRole is null) return BadRequest();
+        RetriveRoleDto? addedRole = await _service.CreateAsync(createdRole);
         if (addedRole is null) return BadRequest();
-        else return Ok(role);
+        else return Ok(addedRole);
     }
     
-    //GET: api/roles/[name]
     [HttpGet("{name}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
@@ -41,7 +41,6 @@ public class RolesController : ControllerBase
         else return Ok(role);
     }
     
-    //GET: api/roles
     [HttpGet]
     [ProducesResponseType(200)]
     public async Task<IEnumerable<Role>> GetAll()
@@ -49,8 +48,6 @@ public class RolesController : ControllerBase
         return await _repo.RetriveAllAsync();
     }
     
-    //PUT: api/roles/[name]
-    //BODY: Role (JSON)
     [HttpPut("{name}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
@@ -64,7 +61,6 @@ public class RolesController : ControllerBase
         else return Ok(updatedRole);
     }
     
-    //DELTE: api/roles/[name]
     [HttpDelete("{name}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]

@@ -15,10 +15,15 @@ public class AppMappingProfile : Profile
         CreateMap<Category, CreatedCategoryDto>().ReverseMap();
         CreateMap<Category, UpdatedCategoryDto>().ReverseMap();
         
+        CreateMap<CreatedUpdatedRetrivedRolesDto, Role>();
+        CreateMap<Role, RetriveRoleDto>()
+            .ForMember(r => r.Users, expression => expression.MapFrom(src => src.Users ))
+            .ReverseMap();
 
         CreateMap<CreateItemDto, Item>().ReverseMap();
         CreateMap<RetriveAllItemDto, Item>().ReverseMap();
-        CreateMap<CreateRoleDto, Role>();
+        
+        
         CreateMap<CreateUserDto, User>();
     }
 }

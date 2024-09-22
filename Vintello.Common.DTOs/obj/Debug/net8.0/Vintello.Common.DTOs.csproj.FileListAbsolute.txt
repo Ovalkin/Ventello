@@ -10,3 +10,7 @@ C:\Users\egorv\Desktop\Vintello\Vintello.Common.DTOs\obj\Debug\net8.0\Vintello.C
 C:\Users\egorv\Desktop\Vintello\Vintello.Common.DTOs\obj\Debug\net8.0\refint\Vintello.Common.DTOs.dll
 C:\Users\egorv\Desktop\Vintello\Vintello.Common.DTOs\obj\Debug\net8.0\Vintello.Common.DTOs.pdb
 C:\Users\egorv\Desktop\Vintello\Vintello.Common.DTOs\obj\Debug\net8.0\ref\Vintello.Common.DTOs.dll
+C:\Users\egorv\Desktop\Vintello\Vintello.Common.DTOs\bin\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.dll
+C:\Users\egorv\Desktop\Vintello\Vintello.Common.DTOs\bin\Debug\net8.0\Vintello.Common.EntityModel.PostgreSql.pdb
+C:\Users\egorv\Desktop\Vintello\Vintello.Common.DTOs\obj\Debug\net8.0\Vintello.Common.DTOs.csproj.AssemblyReference.cache
+C:\Users\egorv\Desktop\Vintello\Vintello.Common.DTOs\obj\Debug\net8.0\Vintello.D67E3624.Up2Date

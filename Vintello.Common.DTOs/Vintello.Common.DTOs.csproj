@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Vintello.Common.EntityModel.PostgreSql\Vintello.Common.EntityModel.PostgreSql.csproj" />
+    </ItemGroup>
+
 </Project>

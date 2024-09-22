@@ -188,6 +188,9 @@
         }
       },
       "Vintello.Common.DTOs/1.0.0": {
+        "dependencies": {
+          "Vintello.Common.EntityModel.PostgreSql": "1.0.0"
+        },
         "runtime": {
           "Vintello.Common.DTOs.dll": {
             "assemblyVersion": "1.0.0",
