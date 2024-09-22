@@ -8,5 +8,5 @@ public interface ICategoryRepository
     Task<Category?> RetriveByIdAsync(int id);
     Task<IEnumerable<Category>> RetriveAllAsync();
     Task<Category?> UpdateAsync(int id, Category category);
-    Task<bool> DeleteAsync(int id);
+    Task<bool> DeleteAsync(Category category);
 }

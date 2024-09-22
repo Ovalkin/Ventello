@@ -1,14 +1,30 @@
+using System.Text.Json.Serialization;
+
 namespace Vintello.Common.DTOs;
 
-public class CreateCategoryDto
+public class CreatedCategoryDto
 {
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
 }
 
-public class RetriveCategoryDto
+public class RetrivedCategoriesDto
 {
     public int Id { get; set; }
+    public string Name { get; set; } = null!;
+    public string? Description { get; set; }
+}
+public class RetrivedCategoryDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = null!;
+    public string? Description { get; set; }
+    public List<RetriveAllItemDto> Items { get; set; } = new();
+}
+public class UpdatedCategoryDto
+{
+    [JsonIgnore]
+    public int? Id { get; set; }
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
 }

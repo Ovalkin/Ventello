@@ -1,6 +1,0 @@
-@App.Web.Api_HostAddress = https://localhost:5001/
-
-GET {{App.Web.Api_HostAddress}}/api/category
-Accept: application/json
-
-###

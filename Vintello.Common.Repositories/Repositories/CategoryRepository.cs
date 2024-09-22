@@ -40,11 +40,14 @@ public class CategoryRepository : ICategoryRepository
         else return null;
     }
 
-    public Task<Category?> RetriveByIdAsync(int id)
+    public async Task<Category?> RetriveByIdAsync(int id)
     {
         if (_categoryCashe is null) return null!;
         _categoryCashe.TryGetValue(id, out Category? category);
-        return Task.FromResult(category);
+        if (category is null) return null!; 
+        
+        await _db.Entry(category).Collection(c => c.Items).LoadAsync();
+        return category;
     }
 
     public Task<IEnumerable<Category>> RetriveAllAsync()
@@ -54,22 +57,20 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<Category?> UpdateAsync(int id, Category category)
     {
-        category.Name = category.Name.ToLower();
         _db.Update(category);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1) return UpdateCache(id, category);
         else return null;
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(Category? category)
     {
-        Category? category = await _db.Categories.FindAsync(id);
         if (category is null) return false;
         _db.Categories.Remove(category);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
             if (_categoryCashe is not null)
-                return _categoryCashe.TryRemove(id, out category);
+                return _categoryCashe.TryRemove(category.Id, out category);
         return false;
     }
 }

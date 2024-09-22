@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Vintello.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55aaa2abd19fbc664706f9aa0e1072cadf622cab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2712d0bffd7360fb76daa06a5fa410698890f82")]
 [assembly: System.Reflection.AssemblyProductAttribute("Vintello.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Vintello.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

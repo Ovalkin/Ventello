@@ -1,86 +1,66 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
-using Vintello.Common.EntityModel.PostgreSql;
-using Vintello.Common.Repositories;
 using Vintello.Services;
 
 namespace Vintello.Web.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CategoriesController : ControllerBase
+public class CategoriesController(ICategoryService service) : ControllerBase
 {
-    private readonly ICategoryRepository _repo;
-    private readonly IMapper _mapper;
-    private readonly ICategoryService _service;
-
-    public CategoriesController(ICategoryRepository repo, IMapper mapper, ICategoryService service)
-    {
-        _repo = repo;
-        _mapper = mapper;
-        _service = service;
-    }
-    
-    //POST: api/categories
-    //BODY: Category (JSON)
     [HttpPost]
-    [ProducesResponseType(200)]
+    [ProducesResponseType(201, Type = typeof(RetrivedCategoryDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto? createdCategory)
+    public async Task<IActionResult> CreateCategory([FromBody] CreatedCategoryDto? createdCategory)
     {
         if (createdCategory is null) return BadRequest();
-        var category = _mapper.Map<Category>(createdCategory);
-        Category? addedCategory = await _repo.CreateAsync(category);
+        RetrivedCategoryDto? addedCategory = await service.CreateAsync(createdCategory);
         if (addedCategory is null) return BadRequest();
-        else return Ok(addedCategory);
+        return CreatedAtRoute(
+            routeName: nameof(GetCategory),
+            routeValues: new { id = addedCategory.Id },
+            value: addedCategory);
     }
-    
-    //GET: api/categories
+
     [HttpGet]
-    [ProducesResponseType(200, Type = typeof(IEnumerable<Category>))]
-    public async Task<IEnumerable<Category>> GetCategories()
+    [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedCategoriesDto>))]
+    public async Task<IEnumerable<RetrivedCategoriesDto>> GetCategories()
     {
-        return await _repo.RetriveAllAsync();
+        return await service.RetriveAllAsync();
     }
-    
-    //GET: api/categories/[id]
-    [HttpGet("{id}")]
-    [ProducesResponseType(200, Type = typeof(RetriveCategoryDto))]
+
+    [HttpGet("{id}", Name = nameof(GetCategory))]
+    [ProducesResponseType(200, Type = typeof(RetrivedCategoryDto))]
     [ProducesResponseType(404)]
     public async Task<IActionResult> GetCategory(int id)
     {
-        RetriveCategoryDto? categoryDto = await _service.RetriveByIdAsync(id);
+        RetrivedCategoryDto? categoryDto = await service.RetriveByIdAsync(id);
         if (categoryDto is null) return NotFound();
         else return Ok(categoryDto);
     }
-    
-    //PUT: api/categories/[id]
-    //BODY: Category (JSON)
+
     [HttpPut("{id}")]
-    [ProducesResponseType(200, Type = typeof(Category))]
+    [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> UpdateCategory(int id, [FromBody] Category? category)
+    public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdatedCategoryDto? category)
     {
-        if (category is null || id != category.Id) return BadRequest();
-        category.Name = category.Name.ToLower();
-        Category? updatedCategory = await _repo.UpdateAsync(id, category);
-        if (updatedCategory is null) return NotFound();
-        else return Ok(updatedCategory);
+        if (category is null) return BadRequest();
+        bool? updated = await service.UpdateAsync(id, category);
+        if (updated == true) return NoContent();
+        else if (updated == false) return BadRequest();
+        else return NotFound();
     }
-    
-    //DELETE: api/categories/[id]
+
     [HttpDelete("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
     public async Task<IActionResult> DeleteCategory(int id)
     {
-        Category? category = await _repo.RetriveByIdAsync(id);
-        if (category is null) return NotFound();
-        bool deleted = await _repo.DeleteAsync(id);
-        if (deleted) return NoContent();
+        bool? deleted = await service.DeleteAsync(id);
+        if (deleted == true) return NoContent();
+        else if (deleted == null) return NotFound();
         else return BadRequest();
     }
 }
