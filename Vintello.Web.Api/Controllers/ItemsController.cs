@@ -51,11 +51,11 @@ public class ItemsController : ControllerBase
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> UpdateItem(int id, Item? item)
+    public async Task<IActionResult> UpdateItem(int id, UpdatedItemDto? item)
     {
         if (item is null) return BadRequest();
         item.Status = item.Status.ToLower();
-        Item? newItem = await _repo.UpdateAsync(id, item);
+        RetrivedItemsDto? newItem = await _service.UpdateAsync(id, item);
         if (newItem is null) return NotFound();
         else return Ok(newItem);
     }
@@ -66,10 +66,9 @@ public class ItemsController : ControllerBase
     [ProducesResponseType(400)]
     public async Task<IActionResult> RemoveItem(int id)
     {
-        Item? item = await _repo.RetriveByIdAsync(id);
-        if (item is null) return NotFound();
-        bool deleted = await _repo.RemoveAsync(id);
-        if (deleted) return NoContent();
+        bool? deleted = await _service.DeleteAsync(id);
+        if (deleted == true) return NoContent();
+        else if (deleted == null) return NotFound();
         else return BadRequest();
     }
 }

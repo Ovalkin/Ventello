@@ -44,6 +44,22 @@ public class ItemService : IItemService
     {
         return _mapper.Map<RetrivedItemsDto?>(await _repo.RetriveByIdAsync(id));
     }
-    
-    
+
+    public async Task<RetrivedItemsDto?> UpdateAsync(int id, UpdatedItemDto updatedItemDto)
+    {
+        Item item = _mapper.Map<Item>(updatedItemDto);
+        Item? findItem = await _repo.RetriveByIdAsync(id);
+        if (findItem is null) return null;
+        item.Id = findItem.Id;
+        item.UserId = findItem.UserId;
+        item.UpdatedAt = DateTime.UtcNow;
+        return _mapper.Map<RetrivedItemsDto?>(await _repo.UpdateAsync(id, item));
+    }
+
+    public async Task<bool?> DeleteAsync(int id)
+    {
+        Item? item = await _repo.RetriveByIdAsync(id);
+        if (item is null) return null;
+        return await _repo.RemoveAsync(id);
+    }
 }

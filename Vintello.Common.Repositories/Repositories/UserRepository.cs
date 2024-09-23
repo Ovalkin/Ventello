@@ -42,11 +42,13 @@ public class UserRepository : IUserRepository
         else return null;
     }
 
-    public Task<User?> RetrieveByIdAsync(int id)
+    public async Task<User?> RetrieveByIdAsync(int id)
     {
         if (_userCache is null) return null!;
         _userCache.TryGetValue(id, out User? user);
-        return Task.FromResult(user);
+        if (user is null) return null;
+        await _db.Entry(user).Collection(u => u.Items).LoadAsync();
+        return user;
     }
 
     public Task<IEnumerable<User>> RetrieveAllAsync()

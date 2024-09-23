@@ -20,3 +20,13 @@ public class RetrivedItemsDto
     public DateTime? UpdatedAt { get; set; }
     public List<string>? Images { get; set; }
 }
+
+public class UpdatedItemDto
+{
+    public int CategoryId { get; set; }
+    public string Title { get; set; } = null!;
+    public string Status { get; set; } = null!;
+    public decimal? Price { get; set; }
+    public List<string>? Images { get; set; }
+
+}
