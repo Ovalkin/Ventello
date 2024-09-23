@@ -20,6 +20,7 @@ builder.Services.AddAutoMapper(typeof(AppMappingProfile));
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IItemService, ItemService>();
 
 var app = builder.Build();
 

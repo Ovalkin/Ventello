@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Vintello.Common.DTOs;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Common.Repositories;
+using Vintello.Services;
 
 namespace Vintello.Web.Api.Controllers;
 
@@ -9,57 +11,42 @@ namespace Vintello.Web.Api.Controllers;
 public class ItemsController : ControllerBase
 {
     private readonly IItemRepository _repo;
+    private readonly IItemService _service;
 
-    public ItemsController(IItemRepository repo)
+    public ItemsController(IItemRepository repo, IItemService service)
     {
+        _service = service;
         _repo = repo;
     }
     
-    //POST: api/items
-    //BODY: Item (JSON)
     [HttpPost]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Create([FromBody] Item? item)
+    public async Task<IActionResult> Create([FromBody] CreatedItemDto? item)
     {
         if (item is null) return BadRequest();
-        item.Status = item.Status.ToLower();
-        Item? addedItem = await _repo.CreateAsync(item);
+        CreatedItemDto? addedItem = await _service.CreateAsync(item);
         if (addedItem is null) return BadRequest();
         else return Ok(addedItem);
     }
     
-    //GET: api/items
-    //GET: api/items?status=[status]&user=[userId]&category=[status]
     [HttpGet]
     [ProducesResponseType(200)]
-    public async Task<IEnumerable<Item>> GetItems(string? status, int? user, int? category)
+    public async Task<IEnumerable<RetrivedItemsDto>> GetItems(string? status, int? user, int? category)
     {
-        IEnumerable<Item> allItems = (await _repo.RetriveAllAsync()).ToList();
-        if (string.IsNullOrWhiteSpace(status) && user is null && category is null) return allItems;
-        IEnumerable<Item> items = allItems;
-        if(!string.IsNullOrWhiteSpace(status)) 
-            items = items.Intersect(allItems.Where(i => i.Status == status));
-        if (user is not null)
-            items = items.Intersect(allItems.Where(i => i.UserId == user));
-        if (category is not null)
-            items = items.Intersect(allItems.Where(i => i.CategoryId == category));
-        return items;
+        return await _service.RetriveByParamsAsync(status, user, category);
     }
     
-    //GET: api/items/[id]
     [HttpGet("{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     public async Task<IActionResult> GetItem(int id)
     {
-        Item? item = await _repo.RetriveByIdAsync(id);
+        RetrivedItemsDto? item = await _service.RetriveByIdAsync(id);
         if (item is not null) return Ok(item);
         else return NotFound();
     }
     
-    //PUT: api/items/[id]
-    //BODY: Item (JSON)
     [HttpPut("{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
@@ -73,7 +60,6 @@ public class ItemsController : ControllerBase
         else return Ok(newItem);
     }
     
-    //DELETE: api/items/[id]
     [HttpDelete("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]

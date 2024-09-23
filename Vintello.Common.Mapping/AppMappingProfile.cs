@@ -20,8 +20,8 @@ public class AppMappingProfile : Profile
             .ForMember(r => r.Users, expression => expression.MapFrom(src => src.Users ))
             .ReverseMap();
 
-        CreateMap<CreateItemDto, Item>().ReverseMap();
-        CreateMap<RetriveAllItemDto, Item>().ReverseMap();
+        CreateMap<CreatedItemDto, Item>().ReverseMap();
+        CreateMap<RetrivedItemsDto, Item>().ReverseMap();
         
         CreateMap<RetrivedUsersDto, User>().ReverseMap();
         

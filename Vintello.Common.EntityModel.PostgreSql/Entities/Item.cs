@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Vintello.Common.EntityModel.PostgreSql;
 
@@ -37,11 +36,9 @@ public partial class Item
 
     [ForeignKey("CategoryId")]
     [InverseProperty("Items")]
-    [JsonIgnore]
-    public virtual Category? Category { get; set; } = null!;
+    public virtual Category? Category { get; set; }
 
     [ForeignKey("UserId")]
     [InverseProperty("Items")]
-    [JsonIgnore]
-    public virtual User? User { get; set; } = null!;
+    public virtual User? User { get; set; }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Vintello.Common.Repositories")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90918ee7608e3b7afd6a23bc993995f231354556")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+901ef2e5943bc107973f44272c39dd820ea35f36")]
 [assembly: System.Reflection.AssemblyProductAttribute("Vintello.Common.Repositories")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Vintello.Common.Repositories")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
