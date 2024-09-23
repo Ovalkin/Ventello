@@ -16,11 +16,40 @@ public class RoleService : IRoleService
         _mapper = mapper;
     }
 
-    public async Task<RetriveRoleDto?> CreateAsync(CreatedUpdatedRetrivedRolesDto createdRole)
+    public async Task<RetrivedRoleDto?> CreateAsync(CreatedUpdatedRetrivedRolesDto createdRole)
     {
         createdRole.RoleName = createdRole.RoleName.ToLower();
         Role? retriveRole = await _repo.CreateAsync(_mapper.Map<Role>(createdRole));
         if (retriveRole is null) return null;
-        else return _mapper.Map<RetriveRoleDto>(retriveRole);
+        else return _mapper.Map<RetrivedRoleDto>(retriveRole);
+    }
+
+    public async Task<RetrivedRoleDto?> RetriveByNameAsync(string name)
+    {
+        name = name.ToLower();
+        Role? role = await _repo.RetriveByNameAsync(name);
+        if (role is null) return null;
+        return _mapper.Map<RetrivedRoleDto?>(role);
+    }
+
+    public async Task<IEnumerable<CreatedUpdatedRetrivedRolesDto>> RetriveAllAsync()
+    {
+        var roles = await _repo.RetriveAllAsync();
+        return _mapper.Map<IEnumerable<CreatedUpdatedRetrivedRolesDto>>(roles);
+    }
+
+    public async Task<CreatedUpdatedRetrivedRolesDto?> UpdateAsync(string name, CreatedUpdatedRetrivedRolesDto role)
+    {
+        name = name.ToLower();
+        Role newRole =_mapper.Map<Role>(role);
+        Role? updatedRole = await _repo.UpdateAsync(name, newRole);
+        return _mapper.Map<CreatedUpdatedRetrivedRolesDto?>(updatedRole);
+    }
+
+    public async Task<bool?> DeleteAsync(string name)
+    {
+        name = name.ToLower();
+        bool? deleted = await _repo.DeleteAsync(name);
+        return deleted;
     }
 }

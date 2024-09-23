@@ -40,12 +40,14 @@ public class RoleRepository : IRoleRepository
         else return null;
     }
 
-    public Task<Role?> RetriveByNameAsync(string roleName)
+    public async Task<Role?> RetriveByNameAsync(string roleName)
     {
         if (_roleCashe is null) return null!;
         roleName = roleName.ToLower();
         _roleCashe.TryGetValue(roleName, out Role? role);
-        return Task.FromResult(role);
+        if (role is null) return null;
+        await _db.Entry(role).Collection(r => r.Users).LoadAsync();
+        return role;
     }
 
     public Task<IEnumerable<Role>> RetriveAllAsync()
@@ -62,11 +64,11 @@ public class RoleRepository : IRoleRepository
         else return null;
     }
 
-    public async Task<bool> DeleteAsync(string roleName)
+    public async Task<bool?> DeleteAsync(string roleName)
     {
         roleName = roleName.ToLower();
         Role? deletedRole = await _db.Roles.FindAsync(roleName);
-        if (deletedRole is null) return false;
+        if (deletedRole is null) return null;
         _db.Roles.Remove(deletedRole);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)

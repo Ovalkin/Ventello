@@ -11,13 +11,13 @@ public class CreateUserDto
     public string? ProfilePic { get; set; }
 }
 
-public class RetriveUserDto
+public class RetrivedUsersDto
 {
     public int Id { get; set; }
-    public string Role { get; set; }
-    public string FirstName { get; set; }
+    public string Role { get; set; } = null!;
+    public string FirstName { get; set; } = null!;
     public string? LastName { get; set; }
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
     public string? Phone { get; set; }
     public string? Location { get; set; }
     public string? ProfilePic { get; set; }
