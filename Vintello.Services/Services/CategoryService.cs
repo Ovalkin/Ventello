@@ -16,7 +16,7 @@ public class CategoryService : ICategoryService
         _mapper = mapper;
     }
 
-    public async Task<RetrivedCategoryDto?> CreateAsync(CreatedCategoryDto categoryDto)
+    public async Task<RetrivedCategoryDto?> CreateAsync(CreatedUpdatedCategoryDto categoryDto)
     {
         Category? category = await _repo.CreateAsync(_mapper.Map<Category>(categoryDto));
         if (category is not null) return _mapper.Map<RetrivedCategoryDto>(category);
@@ -35,13 +35,14 @@ public class CategoryService : ICategoryService
         return _mapper.Map<RetrivedCategoryDto>(category);
     }
 
-    public async Task<bool?> UpdateAsync(int id, UpdatedCategoryDto category)
+    public async Task<bool?> UpdateAsync(int id, CreatedUpdatedCategoryDto category)
     {
         Category? existing = await _repo.RetriveByIdAsync(id);
         if (existing is null) return null;
         
-        category.Id = id;
         Category updatedCategory = _mapper.Map<Category>(category);
+        updatedCategory.Id = id;
+        
         Category? updated = await _repo.UpdateAsync(id, updatedCategory);
         if (updated is null) return false;
         else return true;
@@ -51,8 +52,6 @@ public class CategoryService : ICategoryService
     {
         Category? category = await _repo.RetriveByIdAsync(id);
         if (category is null) return null;
-        bool deleted = await _repo.DeleteAsync(category);
-        if (deleted) return true;
-        else return false;
+        return await _repo.DeleteAsync(category);
     }
 }

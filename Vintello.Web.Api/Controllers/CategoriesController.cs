@@ -11,20 +11,19 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrivedCategoryDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateCategory([FromBody] CreatedCategoryDto? createdCategory)
+    public async Task<IActionResult> CreateCategory([FromBody] CreatedUpdatedCategoryDto? category)
     {
+        if (category is null) return BadRequest();
+        RetrivedCategoryDto? createdCategory = await service.CreateAsync(category);
         if (createdCategory is null) return BadRequest();
-        RetrivedCategoryDto? addedCategory = await service.CreateAsync(createdCategory);
-        if (addedCategory is null) return BadRequest();
-        return CreatedAtRoute(
-            routeName: nameof(GetCategory),
-            routeValues: new { id = addedCategory.Id },
-            value: addedCategory);
+        return CreatedAtRoute(nameof(GetCategory),
+            new { id = createdCategory.Id },
+            createdCategory);
     }
 
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedCategoriesDto>))]
-    public async Task<IEnumerable<RetrivedCategoriesDto>> GetCategories()
+    public async Task<IEnumerable<RetrivedCategoriesDto>> RetriveCategories()
     {
         return await service.RetriveAllAsync();
     }
@@ -34,16 +33,16 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     [ProducesResponseType(404)]
     public async Task<IActionResult> GetCategory(int id)
     {
-        RetrivedCategoryDto? categoryDto = await service.RetriveByIdAsync(id);
-        if (categoryDto is null) return NotFound();
-        else return Ok(categoryDto);
+        RetrivedCategoryDto? category = await service.RetriveByIdAsync(id);
+        if (category is null) return NotFound();
+        return Ok(category);
     }
 
     [HttpPut("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdatedCategoryDto? category)
+    public async Task<IActionResult> UpdateCategory(int id, [FromBody] CreatedUpdatedCategoryDto? category)
     {
         if (category is null) return BadRequest();
         bool? updated = await service.UpdateAsync(id, category);

@@ -36,7 +36,7 @@ public class RetrivedUserDto
     public string? ProfilePic { get; set; }
     public string? Bio { get; set; }
     public DateTime? CreatedAt { get; set; }
-    public List<RetrivedItemsDto> Items { get; set; } = new();
+    public List<RetrivedItemDto> Items { get; set; } = new();
 }
 
 public class UpdatedUserDto

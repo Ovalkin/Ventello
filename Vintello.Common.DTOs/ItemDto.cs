@@ -8,7 +8,7 @@ public class CreatedItemDto
     public decimal Price { get; set; }
     public string[] Images { get; set; } = null!;
 }
-public class RetrivedItemsDto
+public class RetrivedItemDto
 {
     public int Id { get; set; }
     public int UserId { get; set; }

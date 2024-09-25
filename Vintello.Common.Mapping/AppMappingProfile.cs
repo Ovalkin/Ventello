@@ -9,8 +9,7 @@ public class AppMappingProfile : Profile
     public AppMappingProfile()
     {
         CreateMap<Category, RetrivedCategoriesDto>().ReverseMap();
-        CreateMap<Category, CreatedCategoryDto>().ReverseMap();
-        CreateMap<Category, UpdatedCategoryDto>().ReverseMap();
+        CreateMap<Category, CreatedUpdatedCategoryDto>().ReverseMap();
         CreateMap<Category, RetrivedCategoryDto>()
             .ForMember(c => c.Items, expression => expression.MapFrom(src => src.Items))
             .ReverseMap();
@@ -21,7 +20,7 @@ public class AppMappingProfile : Profile
             .ReverseMap();
 
         CreateMap<CreatedItemDto, Item>().ReverseMap();
-        CreateMap<RetrivedItemsDto, Item>().ReverseMap();
+        CreateMap<RetrivedItemDto, Item>().ReverseMap();
         CreateMap<UpdatedItemDto, Item>().ReverseMap();
 
         CreateMap<UpdatedUserDto, User>().ReverseMap();

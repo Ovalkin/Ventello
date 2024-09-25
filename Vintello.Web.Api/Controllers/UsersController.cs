@@ -16,30 +16,32 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(200)]
+    [ProducesResponseType(201, Type = typeof(RetrivedUserDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Create([FromBody] CreateUserDto? user)
+    public async Task<IActionResult> CreateUser([FromBody] CreateUserDto? user)
     {
         if (user is null) return BadRequest();
-        RetrivedUserDto? addedUser = await _service.CreateAsync(user);
-        if (addedUser is null) return BadRequest();
-        else return Ok(addedUser);
+        RetrivedUserDto? createdUser = await _service.CreateAsync(user);
+        if (createdUser is null) return BadRequest();
+        else return CreatedAtRoute(nameof(RetriveUser),
+            new {id = createdUser.Id},
+            createdUser);
     }
 
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedUsersDto>))]
-    public async Task<IActionResult> GetUsers(string? location)
+    public async Task<IActionResult> RetriveUsers(string? location)
     {
         return Ok(await _service.RetriveAllOrLocationUserAsync(location));
     }
     
-    [HttpGet("{id}", Name = nameof(GetUser))]
+    [HttpGet("{id}", Name = nameof(RetriveUser))]
     [ProducesResponseType(200, Type = typeof(RetrivedUserDto))]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> GetUser(int id)
+    public async Task<IActionResult> RetriveUser(int id)
     {
         RetrivedUserDto? user = await _service.RetriveByIdAsync(id);
-        if (user == null) return NotFound();
+        if (user is null) return NotFound();
         return Ok(user);
     }
     
@@ -47,12 +49,13 @@ public class UsersController : ControllerBase
     [ProducesResponseType(404)]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> UpdateUser(int id,[FromBody] UpdatedUserDto? newUser)
+    public async Task<IActionResult> UpdateUser(int id,[FromBody] UpdatedUserDto? user)
     {
-        if (newUser is null) return BadRequest();
-        RetrivedUserDto? updatedUser = await _service.UpdateAsync(id, newUser);
-        if (updatedUser == null) return NotFound();
-        else return Ok(updatedUser);
+        if (user is null) return BadRequest();
+        bool? updated = await _service.UpdateAsync(id, user);
+        if (updated == true) return NoContent();
+        else if (updated == false) return BadRequest();
+        else return NotFound();
     }
     
     [HttpDelete("{id}")]
@@ -62,8 +65,8 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> DeleteUser(int id)
     {
         bool? deleted = await _service.DeleteAsync(id);
-        if (deleted == null) return NotFound();
-        else if (deleted == true) return NoContent();
+        if (deleted == true) return NoContent();
+        else if (deleted == null) return NotFound();
         else return BadRequest();
     }
 }

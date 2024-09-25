@@ -16,21 +16,21 @@ public class ItemService : IItemService
         _mapper = mapper;
     }
     
-    public async Task<CreatedItemDto?> CreateAsync(CreatedItemDto item)
+    public async Task<RetrivedItemDto?> CreateAsync(CreatedItemDto item)
     {
         Item? addItem = _mapper.Map<Item>(item);
         addItem.Status = "created";
         addItem.CreatedAt = DateTime.UtcNow;
         Item? addedItem = await _repo.CreateAsync(addItem);
-        return _mapper.Map<CreatedItemDto?>(addedItem);
+        return _mapper.Map<RetrivedItemDto?>(addedItem);
     }
 
-    public async Task<IEnumerable<RetrivedItemsDto>> RetriveByParamsAsync(string? status, int? user, int? category)
+    public async Task<IEnumerable<RetrivedItemDto>> RetriveByParamsAsync(string? status, int? user, int? category)
     {
-        IEnumerable<RetrivedItemsDto> allItems = _mapper.Map<IEnumerable<RetrivedItemsDto>>((await _repo.RetriveAllAsync()).ToList()); 
+        IEnumerable<RetrivedItemDto> allItems = _mapper.Map<IEnumerable<RetrivedItemDto>>((await _repo.RetriveAllAsync()).ToList()); 
         if (string.IsNullOrWhiteSpace(status) && user is null && category is null) return allItems;
-        var retrivedItemsDtos = allItems as RetrivedItemsDto[] ?? allItems.ToArray();
-        IEnumerable<RetrivedItemsDto> items = retrivedItemsDtos;
+        var retrivedItemsDtos = allItems as RetrivedItemDto[] ?? allItems.ToArray();
+        IEnumerable<RetrivedItemDto> items = retrivedItemsDtos;
         if(!string.IsNullOrWhiteSpace(status)) 
             items = items.Intersect(retrivedItemsDtos.Where(i => i.Status == status));
         if (user is not null)
@@ -40,20 +40,24 @@ public class ItemService : IItemService
         return items;
     }
 
-    public async Task<RetrivedItemsDto?> RetriveByIdAsync(int id)
+    public async Task<RetrivedItemDto?> RetriveByIdAsync(int id)
     {
-        return _mapper.Map<RetrivedItemsDto?>(await _repo.RetriveByIdAsync(id));
+        return _mapper.Map<RetrivedItemDto?>(await _repo.RetriveByIdAsync(id));
     }
 
-    public async Task<RetrivedItemsDto?> UpdateAsync(int id, UpdatedItemDto updatedItemDto)
+    public async Task<bool?> UpdateAsync(int id, UpdatedItemDto item)
     {
-        Item item = _mapper.Map<Item>(updatedItemDto);
-        Item? findItem = await _repo.RetriveByIdAsync(id);
-        if (findItem is null) return null;
-        item.Id = findItem.Id;
-        item.UserId = findItem.UserId;
-        item.UpdatedAt = DateTime.UtcNow;
-        return _mapper.Map<RetrivedItemsDto?>(await _repo.UpdateAsync(id, item));
+        Item? existing = await _repo.RetriveByIdAsync(id);
+        if (existing is null) return null;
+        
+        Item updatedItem = _mapper.Map<Item>(item);
+        updatedItem.Id = existing.Id;
+        updatedItem.UserId = existing.UserId;
+        updatedItem.UpdatedAt = DateTime.UtcNow;
+        
+        Item? updated = await _repo.UpdateAsync(id, updatedItem);
+        if (updated is null) return false;
+        else return true;
     }
 
     public async Task<bool?> DeleteAsync(int id)

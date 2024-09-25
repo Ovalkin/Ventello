@@ -35,11 +35,17 @@ public class UserService : IUserService
         return _mapper.Map<RetrivedUserDto>(await _repo.RetrieveByIdAsync(id));
     }
 
-    public async Task<RetrivedUserDto?> UpdateAsync(int id, UpdatedUserDto updatedUserDto)
+    public async Task<bool?> UpdateAsync(int id, UpdatedUserDto user)
     {
-        User? user = _mapper.Map<User>(updatedUserDto);
-        user.Id = id;
-        return _mapper.Map<RetrivedUserDto?>(await _repo.UpdateAsync(id, user));
+        User? existing = await _repo.RetrieveByIdAsync(id);
+        if (existing is null) return null;
+        
+        User? updatedUser = _mapper.Map<User>(user);
+        updatedUser.Id = id;
+
+        User? updated = await _repo.UpdateAsync(id, updatedUser);
+        if (updated is null) return false;
+        else return true;
     }
 
     public async Task<bool?> DeleteAsync(int id)

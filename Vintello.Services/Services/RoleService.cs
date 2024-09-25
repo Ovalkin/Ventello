@@ -38,18 +38,24 @@ public class RoleService : IRoleService
         return _mapper.Map<IEnumerable<CreatedUpdatedRetrivedRolesDto>>(roles);
     }
 
-    public async Task<CreatedUpdatedRetrivedRolesDto?> UpdateAsync(string name, CreatedUpdatedRetrivedRolesDto role)
+    public async Task<bool?> UpdateAsync(string name, CreatedUpdatedRetrivedRolesDto role)
     {
         name = name.ToLower();
-        Role newRole =_mapper.Map<Role>(role);
-        Role? updatedRole = await _repo.UpdateAsync(name, newRole);
-        return _mapper.Map<CreatedUpdatedRetrivedRolesDto?>(updatedRole);
+        Role? existing = await _repo.RetriveByNameAsync(name);
+        if (existing is null) return null;
+        
+        Role updatedRole =_mapper.Map<Role>(role);
+        
+        Role? updated = await _repo.UpdateAsync(name, updatedRole);
+        if (updated is null) return false;
+        else return true;
     }
 
     public async Task<bool?> DeleteAsync(string name)
     {
         name = name.ToLower();
-        bool? deleted = await _repo.DeleteAsync(name);
-        return deleted;
+        Role? role = await _repo.RetriveByNameAsync(name);
+        if (role is null) return null;
+        return await _repo.DeleteAsync(name);
     }
 }
