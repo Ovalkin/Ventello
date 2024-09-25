@@ -9,10 +9,13 @@ public class AppMappingProfile : Profile
     public AppMappingProfile()
     {
         CreateMap<Category, RetrivedCategoriesDto>().ReverseMap();
-        CreateMap<Category, CreatedUpdatedCategoryDto>().ReverseMap();
+        CreateMap<Category, CreatedCategoryDto>().ReverseMap();
         CreateMap<Category, RetrivedCategoryDto>()
             .ForMember(c => c.Items, expression => expression.MapFrom(src => src.Items))
             .ReverseMap();
+        CreateMap<UpdatedCategoryDto, Category>()
+            .ForAllMembers(ops => ops
+                .Condition((src, dest, srcMember) => srcMember != null));
         
         CreateMap<CreatedUpdatedRetrivedRolesDto, Role>().ReverseMap();
         CreateMap<Role, RetrivedRoleDto>()
@@ -21,13 +24,17 @@ public class AppMappingProfile : Profile
 
         CreateMap<CreatedItemDto, Item>().ReverseMap();
         CreateMap<RetrivedItemDto, Item>().ReverseMap();
-        CreateMap<UpdatedItemDto, Item>().ReverseMap();
-
-        CreateMap<UpdatedUserDto, User>().ReverseMap();
+        CreateMap<UpdatedItemDto, Item>()
+            .ForAllMembers(ops => ops
+                .Condition((src, dest, srcMember) => srcMember != null));
+        
         CreateMap<RetrivedUsersDto, User>().ReverseMap();
         CreateMap<CreateUserDto, User>().ReverseMap();
         CreateMap<RetrivedUserDto, User>()
             .ForMember(u => u.Items, expression => expression.MapFrom(src => src.Items))
             .ReverseMap();
+        CreateMap<UpdatedUserDto, User>()
+            .ForAllMembers(ops => ops
+                .Condition((src, dest, srcMember) => srcMember != null));
     }
 }

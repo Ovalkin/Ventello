@@ -11,7 +11,7 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrivedCategoryDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateCategory([FromBody] CreatedUpdatedCategoryDto? category)
+    public async Task<IActionResult> CreateCategory([FromBody] CreatedCategoryDto? category)
     {
         if (category is null) return BadRequest();
         RetrivedCategoryDto? createdCategory = await service.CreateAsync(category);
@@ -42,7 +42,7 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> UpdateCategory(int id, [FromBody] CreatedUpdatedCategoryDto? category)
+    public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdatedCategoryDto? category)
     {
         if (category is null) return BadRequest();
         bool? updated = await service.UpdateAsync(id, category);

@@ -23,10 +23,9 @@ public class RetrivedItemDto
 
 public class UpdatedItemDto
 {
-    public int CategoryId { get; set; }
-    public string Title { get; set; } = null!;
-    public string Status { get; set; } = null!;
+    public int? CategoryId { get; set; }
+    public string? Title { get; set; }
+    public string? Status { get; set; } 
     public decimal? Price { get; set; }
     public List<string>? Images { get; set; }
-
 }

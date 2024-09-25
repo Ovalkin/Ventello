@@ -52,7 +52,6 @@ public class ItemsController : ControllerBase
     public async Task<IActionResult> UpdateItem(int id, UpdatedItemDto? item)
     {
         if (item is null) return BadRequest();
-        item.Status = item.Status.ToLower();
         bool? updated = await _service.UpdateAsync(id, item);
         if (updated == true) return NoContent();
         else if (updated == false) return BadRequest();

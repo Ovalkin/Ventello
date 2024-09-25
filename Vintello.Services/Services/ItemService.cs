@@ -49,10 +49,9 @@ public class ItemService : IItemService
     {
         Item? existing = await _repo.RetriveByIdAsync(id);
         if (existing is null) return null;
+
+        Item updatedItem = _mapper.Map(item, existing);
         
-        Item updatedItem = _mapper.Map<Item>(item);
-        updatedItem.Id = existing.Id;
-        updatedItem.UserId = existing.UserId;
         updatedItem.UpdatedAt = DateTime.UtcNow;
         
         Item? updated = await _repo.UpdateAsync(id, updatedItem);
