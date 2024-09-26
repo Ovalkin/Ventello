@@ -11,9 +11,9 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrivedCategoryDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateCategory([FromBody] CreatedCategoryDto? category)
+    public async Task<IActionResult> CreateCategory([FromBody] CreatedCategoryDto category)
     {
-        if (category is null) return BadRequest();
+        if (!ModelState.IsValid) return BadRequest();
         RetrivedCategoryDto? createdCategory = await service.CreateAsync(category);
         if (createdCategory is null) return BadRequest();
         return CreatedAtRoute(nameof(GetCategory),
@@ -42,13 +42,13 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdatedCategoryDto? category)
+    public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdatedCategoryDto category)
     {
-        if (category is null) return BadRequest();
+        if (!ModelState.IsValid) return BadRequest();
         bool? updated = await service.UpdateAsync(id, category);
         if (updated == true) return NoContent();
-        else if (updated == false) return BadRequest();
-        else return NotFound();
+        if (updated == false) return BadRequest();
+        return NotFound();
     }
 
     [HttpDelete("{id}")]
@@ -59,7 +59,7 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     {
         bool? deleted = await service.DeleteAsync(id);
         if (deleted == true) return NoContent();
-        else if (deleted == null) return NotFound();
-        else return BadRequest();
+        if (deleted == null) return NotFound();
+        return BadRequest();
     }
 }

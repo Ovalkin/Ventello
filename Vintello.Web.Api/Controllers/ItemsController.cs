@@ -18,9 +18,9 @@ public class ItemsController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrivedItemDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateItem([FromBody] CreatedItemDto? item)
+    public async Task<IActionResult> CreateItem([FromBody] CreatedItemDto item)
     {
-        if (item is null) return BadRequest();
+        if (!ModelState.IsValid) return BadRequest();
         RetrivedItemDto? createdItem = await _service.CreateAsync(item);
         if (createdItem is null) return BadRequest();
         return CreatedAtRoute(nameof(RetrieveItem),
@@ -49,13 +49,13 @@ public class ItemsController : ControllerBase
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> UpdateItem(int id, UpdatedItemDto? item)
+    public async Task<IActionResult> UpdateItem(int id, UpdatedItemDto item)
     {
-        if (item is null) return BadRequest();
+        if (!ModelState.IsValid) return BadRequest();
         bool? updated = await _service.UpdateAsync(id, item);
         if (updated == true) return NoContent();
-        else if (updated == false) return BadRequest();
-        else return NotFound();
+        if (updated == false) return BadRequest();
+        return NotFound();
     }
 
     [HttpDelete("{id}")]
@@ -66,7 +66,7 @@ public class ItemsController : ControllerBase
     {
         bool? deleted = await _service.DeleteAsync(id);
         if (deleted == true) return NoContent();
-        else if (deleted == null) return NotFound();
-        else return BadRequest();
+        if (deleted == null) return NotFound();
+        return BadRequest();
     }
 }

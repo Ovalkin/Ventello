@@ -18,13 +18,13 @@ public class UsersController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrivedUserDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto? user)
+    public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto user)
     {
-        if (user is null) return BadRequest();
+        if (!ModelState.IsValid) return BadRequest();
         RetrivedUserDto? createdUser = await _service.CreateAsync(user);
         if (createdUser is null) return BadRequest();
-        else return CreatedAtRoute(nameof(RetrieveUser),
-            new {id = createdUser.Id},
+        return CreatedAtRoute(nameof(RetrieveUser),
+            new { id = createdUser.Id },
             createdUser);
     }
 
@@ -34,7 +34,7 @@ public class UsersController : ControllerBase
     {
         return Ok(await _service.RetrieveAsync(location));
     }
-    
+
     [HttpGet("{id}", Name = nameof(RetrieveUser))]
     [ProducesResponseType(200, Type = typeof(RetrivedUserDto))]
     [ProducesResponseType(404)]
@@ -44,20 +44,20 @@ public class UsersController : ControllerBase
         if (user is null) return NotFound();
         return Ok(user);
     }
-    
+
     [HttpPut("{id}")]
     [ProducesResponseType(404)]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> UpdateUser(int id,[FromBody] UpdatedUserDto? user)
+    public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdatedUserDto user)
     {
-        if (user is null) return BadRequest();
+        if (!ModelState.IsValid) return BadRequest();
         bool? updated = await _service.UpdateAsync(id, user);
         if (updated == true) return NoContent();
-        else if (updated == false) return BadRequest();
-        else return NotFound();
+        if (updated == false) return BadRequest();
+        return NotFound();
     }
-    
+
     [HttpDelete("{id}")]
     [ProducesResponseType(404)]
     [ProducesResponseType(204)]
@@ -66,7 +66,7 @@ public class UsersController : ControllerBase
     {
         bool? deleted = await _service.DeleteAsync(id);
         if (deleted == true) return NoContent();
-        else if (deleted == null) return NotFound();
-        else return BadRequest();
+        if (deleted == null) return NotFound();
+        return BadRequest();
     }
 }
