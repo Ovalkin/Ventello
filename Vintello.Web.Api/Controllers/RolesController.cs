@@ -23,24 +23,24 @@ public class RolesController : ControllerBase
         if (role is null) return BadRequest();
         RetrivedRoleDto? createdRole = await _service.CreateAsync(role);
         if (createdRole is null) return BadRequest();
-        return CreatedAtRoute(nameof(RetriveRole),
+        return CreatedAtRoute(nameof(RetrieveRole),
             new {id = createdRole.Id},
             createdRole);
     }
     
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedRolesDto>))]
-    public async Task<IEnumerable<RetrivedRolesDto>> RetriveRoles()
+    public async Task<IEnumerable<RetrivedRolesDto>> RetrieveRoles()
     {
-        return await _service.RetriveAsync();
+        return await _service.RetrieveAsync();
     }
     
-    [HttpGet("{id}", Name = nameof(RetriveRole))]
+    [HttpGet("{id}", Name = nameof(RetrieveRole))]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> RetriveRole(int id)
+    public async Task<IActionResult> RetrieveRole(int id)
     {
-        RetrivedRoleDto? role = await _service.RetriveByIdAsync(id);
+        RetrivedRoleDto? role = await _service.RetrieveByIdAsync(id);
         if (role is null) return NotFound();
         return Ok(role);
     }

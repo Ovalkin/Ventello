@@ -23,24 +23,24 @@ public class ItemsController : ControllerBase
         if (item is null) return BadRequest();
         RetrivedItemDto? createdItem = await _service.CreateAsync(item);
         if (createdItem is null) return BadRequest();
-        return CreatedAtRoute(nameof(RetriveItem),
+        return CreatedAtRoute(nameof(RetrieveItem),
             new { id = createdItem.Id },
             createdItem);
     }
 
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedItemDto>))]
-    public async Task<IEnumerable<RetrivedItemDto>> RetriveItems(string? status, int? user, int? category)
+    public async Task<IEnumerable<RetrivedItemDto>> RetrieveItems(string? status, int? user, int? category)
     {
-        return await _service.RetriveAsync(status, user, category);
+        return await _service.RetrieveAsync(status, user, category);
     }
 
-    [HttpGet("{id}", Name = nameof(RetriveItem))]
+    [HttpGet("{id}", Name = nameof(RetrieveItem))]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> RetriveItem(int id)
+    public async Task<IActionResult> RetrieveItem(int id)
     {
-        RetrivedItemDto? item = await _service.RetriveByIdAsync(id);
+        RetrivedItemDto? item = await _service.RetrieveByIdAsync(id);
         if (item is null) return NotFound();
         return Ok(item);
     }

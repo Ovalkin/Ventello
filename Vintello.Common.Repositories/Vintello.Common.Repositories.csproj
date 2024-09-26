@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Vintello.Common.EntityModel.PostgreSql\Vintello.Common.EntityModel.PostgreSql.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="obj\" />
+    </ItemGroup>
+
 </Project>

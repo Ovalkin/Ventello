@@ -5,54 +5,52 @@ namespace Vintello.Common.Repositories;
 
 public class CategoryRepository : ICategoryRepository
 {
-    private static ConcurrentDictionary<int, Category>? _categoryCashe;
+    private static ConcurrentDictionary<int, Category>? _categoryCache;
     private readonly VintelloContext _db;
 
     public CategoryRepository(VintelloContext db)
     {
         _db = db;
-        _categoryCashe ??= new ConcurrentDictionary<int, Category>
+        _categoryCache ??= new ConcurrentDictionary<int, Category>
             (_db.Categories.ToDictionary(category => category.Id));
     }
 
-    private Category? UpdateCache(int id, Category category)
+    private Category UpdateCache(int id, Category category)
     {
-        if (_categoryCashe is not null)
+        if (_categoryCache is not null)
         {
-            if (_categoryCashe.TryGetValue(id, out Category? oldCategory))
+            if (_categoryCache.TryGetValue(id, out Category? oldCategory))
             {
-                if (_categoryCashe.TryUpdate(id, category, oldCategory)) return category;
+                if (_categoryCache.TryUpdate(id, category, oldCategory)) return category;
             }
         }   
         return null!;
     }
-    public async Task<Category?> CreateAsync(Category? category)
+    public async Task<Category?> CreateAsync(Category category)
     {
-        if (category is null) return null;
-        category.Name = category.Name.ToLower();
         await _db.Categories.AddAsync(category);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
         {
-            if (_categoryCashe is null) return category;
-            else return _categoryCashe.AddOrUpdate(category.Id, category, UpdateCache!);
+            if (_categoryCache is null) return category;
+            else return _categoryCache.AddOrUpdate(category.Id, category, UpdateCache);
         }
         else return null;
     }
 
-    public async Task<Category?> RetriveByIdAsync(int id)
+    public async Task<Category?> RetrieveByIdAsync(int id)
     {
-        if (_categoryCashe is null) return null!;
-        _categoryCashe.TryGetValue(id, out Category? category);
+        if (_categoryCache is null) return null!;
+        _categoryCache.TryGetValue(id, out Category? category);
         if (category is null) return null!; 
         
         await _db.Entry(category).Collection(c => c.Items).LoadAsync();
         return category;
     }
 
-    public Task<IEnumerable<Category>> RetriveAllAsync()
+    public Task<IEnumerable<Category>> RetrieveAllAsync()
     {
-        return Task.FromResult(_categoryCashe?.Values ?? Enumerable.Empty<Category>());
+        return Task.FromResult(_categoryCache?.Values ?? Enumerable.Empty<Category>());
     }
 
     public async Task<Category?> UpdateAsync(int id, Category category)
@@ -68,8 +66,7 @@ public class CategoryRepository : ICategoryRepository
         _db.Categories.Remove(category);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
-            if (_categoryCashe is not null)
-                return _categoryCashe.TryRemove(category.Id, out category!);
+            if (_categoryCache is not null) return _categoryCache.TryRemove(category.Id, out category!);
         return false;
     }
 }

@@ -29,7 +29,6 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> CreateAsync(User user)
     {
-        user.Location = user.Location?.ToLower();
         await _db.Users.AddAsync(user);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
@@ -56,7 +55,6 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> UpdateAsync(int id, User newUser)
     {
-        newUser.Location = newUser.Location?.ToLower();
         _db.Update(newUser);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1) return UpdateCache(id, newUser);

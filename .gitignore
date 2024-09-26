@@ -1,19 +1,6 @@
-Vintello.Common.EntityModel.PostgreSql/bin/
-Vintello.Common.EntityModel.PostgreSql/obj/Release/
-Vintello.Common.EntityModel.PostgreSql/obj/Debug/
+*/bin/
+*/obj/Debug/
+*/obj/Realese/
 
-Vintello.Web.Api/bin/
-Vintello.Web.Api/obj/Debug/
-Vintello.Web.Api/obj/Realese/
-
-Vintello.Common.DTOs/bin/
-Vintello.Common.DTOs/obj/Debug/
-Vintello.Common.DTOs/obj/Realese/
-
-Vintello.Common.Mapping/bin/
-Vintello.Common.Mapping/obj/Debug/
-Vintello.Common.Mapping/obj/Realese/
-
-Vintello.Common.Repositories/bin/
-Vintello.Common.Repositories/obj/Debug/
-Vintello.Common.Repositories/obj/Realese/
+.vs/
+.idea/

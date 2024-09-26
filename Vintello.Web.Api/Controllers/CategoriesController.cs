@@ -23,9 +23,9 @@ public class CategoriesController(ICategoryService service) : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedCategoriesDto>))]
-    public async Task<IEnumerable<RetrivedCategoriesDto>> RetriveCategories()
+    public async Task<IEnumerable<RetrivedCategoriesDto>> RetrieveCategories()
     {
-        return await service.RetriveAsync();
+        return await service.RetrieveAsync();
     }
 
     [HttpGet("{id}", Name = nameof(GetCategory))]
@@ -33,7 +33,7 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     [ProducesResponseType(404)]
     public async Task<IActionResult> GetCategory(int id)
     {
-        RetrivedCategoryDto? category = await service.RetriveByIdAsync(id);
+        RetrivedCategoryDto? category = await service.RetrieveByIdAsync(id);
         if (category is null) return NotFound();
         return Ok(category);
     }

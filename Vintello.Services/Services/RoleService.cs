@@ -23,22 +23,22 @@ public class RoleService : IRoleService
         else return _mapper.Map<RetrivedRoleDto>(retriveRole);
     }
 
-    public async Task<RetrivedRoleDto?> RetriveByIdAsync(int id)
+    public async Task<RetrivedRoleDto?> RetrieveByIdAsync(int id)
     {
-        Role? role = await _repo.RetriveByIdAsync(id);
+        Role? role = await _repo.RetrieveByIdAsync(id);
         if (role is null) return null;
         return _mapper.Map<RetrivedRoleDto?>(role);
     }
 
-    public async Task<IEnumerable<RetrivedRolesDto>> RetriveAsync()
+    public async Task<IEnumerable<RetrivedRolesDto>> RetrieveAsync()
     {
-        var roles = await _repo.RetriveAllAsync();
+        var roles = await _repo.RetrieveAllAsync();
         return _mapper.Map<IEnumerable<RetrivedRolesDto>>(roles);
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedRoleDto role)
     {
-        Role? existing = await _repo.RetriveByIdAsync(id);
+        Role? existing = await _repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
 
         Role? updatedRole = _mapper.Map(role, existing);
@@ -50,7 +50,7 @@ public class RoleService : IRoleService
 
     public async Task<bool?> DeleteAsync(int id)
     {
-        Role? role = await _repo.RetriveByIdAsync(id);
+        Role? role = await _repo.RetrieveByIdAsync(id);
         if (role is null) return null;
         return await _repo.DeleteAsync(role);
     }

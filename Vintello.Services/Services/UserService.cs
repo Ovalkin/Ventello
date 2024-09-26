@@ -22,7 +22,7 @@ public class UserService : IUserService
         return _mapper.Map<RetrivedUserDto?>(await _repo.CreateAsync(user));
     }
 
-    public async Task<IEnumerable<RetrivedUsersDto>> RetriveAsync(string? location)
+    public async Task<IEnumerable<RetrivedUsersDto>> RetrieveAsync(string? location)
     {
         List<RetrivedUsersDto> users = _mapper.Map<List<RetrivedUsersDto>>(await _repo.RetrieveAllAsync());
         if (string.IsNullOrWhiteSpace(location)) return users;
@@ -30,7 +30,7 @@ public class UserService : IUserService
         return users.Where(user => user.Location == location);
     }
 
-    public async Task<RetrivedUserDto?> RetriveByIdAsync(int id)
+    public async Task<RetrivedUserDto?> RetrieveByIdAsync(int id)
     {
         return _mapper.Map<RetrivedUserDto>(await _repo.RetrieveByIdAsync(id));
     }

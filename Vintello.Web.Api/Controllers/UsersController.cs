@@ -23,24 +23,24 @@ public class UsersController : ControllerBase
         if (user is null) return BadRequest();
         RetrivedUserDto? createdUser = await _service.CreateAsync(user);
         if (createdUser is null) return BadRequest();
-        else return CreatedAtRoute(nameof(RetriveUser),
+        else return CreatedAtRoute(nameof(RetrieveUser),
             new {id = createdUser.Id},
             createdUser);
     }
 
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedUsersDto>))]
-    public async Task<IActionResult> RetriveUsers(string? location)
+    public async Task<IActionResult> RetrieveUsers(string? location)
     {
-        return Ok(await _service.RetriveAsync(location));
+        return Ok(await _service.RetrieveAsync(location));
     }
     
-    [HttpGet("{id}", Name = nameof(RetriveUser))]
+    [HttpGet("{id}", Name = nameof(RetrieveUser))]
     [ProducesResponseType(200, Type = typeof(RetrivedUserDto))]
     [ProducesResponseType(404)]
-    public async Task<IActionResult> RetriveUser(int id)
+    public async Task<IActionResult> RetrieveUser(int id)
     {
-        RetrivedUserDto? user = await _service.RetriveByIdAsync(id);
+        RetrivedUserDto? user = await _service.RetrieveByIdAsync(id);
         if (user is null) return NotFound();
         return Ok(user);
     }

@@ -39,7 +39,7 @@ public class RoleRepository : IRoleRepository
         else return null;
     }
 
-    public async Task<Role?> RetriveByIdAsync(int id)
+    public async Task<Role?> RetrieveByIdAsync(int id)
     {
         if (_roleCashe is null) return null!;
         _roleCashe.TryGetValue(id, out Role? role);
@@ -48,7 +48,7 @@ public class RoleRepository : IRoleRepository
         return role;
     }
 
-    public Task<IEnumerable<Role>> RetriveAllAsync()
+    public Task<IEnumerable<Role>> RetrieveAllAsync()
     {
         return Task.FromResult(_roleCashe?.Values ?? Enumerable.Empty<Role>());
     }
@@ -66,8 +66,7 @@ public class RoleRepository : IRoleRepository
         _db.Roles.Remove(role);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
-            if (_roleCashe is not null)
-                return _roleCashe.TryRemove(role.Id, out role!);
+            if (_roleCashe is not null) return _roleCashe.TryRemove(role.Id, out role!);
         return false;
     }
 }

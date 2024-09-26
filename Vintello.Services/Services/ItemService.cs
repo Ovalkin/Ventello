@@ -25,9 +25,9 @@ public class ItemService : IItemService
         return _mapper.Map<RetrivedItemDto?>(addedItem);
     }
 
-    public async Task<IEnumerable<RetrivedItemDto>> RetriveAsync(string? status, int? user, int? category)
+    public async Task<IEnumerable<RetrivedItemDto>> RetrieveAsync(string? status, int? user, int? category)
     {
-        IEnumerable<RetrivedItemDto> allItems = _mapper.Map<IEnumerable<RetrivedItemDto>>((await _repo.RetriveAllAsync()).ToList()); 
+        IEnumerable<RetrivedItemDto> allItems = _mapper.Map<IEnumerable<RetrivedItemDto>>((await _repo.RetrieveAllAsync()).ToList()); 
         if (string.IsNullOrWhiteSpace(status) && user is null && category is null) return allItems;
         var retrivedItemsDtos = allItems as RetrivedItemDto[] ?? allItems.ToArray();
         IEnumerable<RetrivedItemDto> items = retrivedItemsDtos;
@@ -40,14 +40,14 @@ public class ItemService : IItemService
         return items;
     }
 
-    public async Task<RetrivedItemDto?> RetriveByIdAsync(int id)
+    public async Task<RetrivedItemDto?> RetrieveByIdAsync(int id)
     {
-        return _mapper.Map<RetrivedItemDto?>(await _repo.RetriveByIdAsync(id));
+        return _mapper.Map<RetrivedItemDto?>(await _repo.RetrieveByIdAsync(id));
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedItemDto item)
     {
-        Item? existing = await _repo.RetriveByIdAsync(id);
+        Item? existing = await _repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
 
         Item updatedItem = _mapper.Map(item, existing);
@@ -61,7 +61,7 @@ public class ItemService : IItemService
 
     public async Task<bool?> DeleteAsync(int id)
     {
-        Item? item = await _repo.RetriveByIdAsync(id);
+        Item? item = await _repo.RetrieveByIdAsync(id);
         if (item is null) return null;
         return await _repo.DeleteAsync(item);
     }

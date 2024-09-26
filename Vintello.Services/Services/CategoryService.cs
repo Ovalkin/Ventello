@@ -23,21 +23,21 @@ public class CategoryService : ICategoryService
         else return null;
     }
 
-    public async Task<IEnumerable<RetrivedCategoriesDto>> RetriveAsync()
+    public async Task<IEnumerable<RetrivedCategoriesDto>> RetrieveAsync()
     {
-        var categories = await _repo.RetriveAllAsync();
+        var categories = await _repo.RetrieveAllAsync();
         return _mapper.Map<IEnumerable<RetrivedCategoriesDto>>(categories);
     }
     
-    public async Task<RetrivedCategoryDto?> RetriveByIdAsync(int id)
+    public async Task<RetrivedCategoryDto?> RetrieveByIdAsync(int id)
     {
-        var category = await _repo.RetriveByIdAsync(id);
+        var category = await _repo.RetrieveByIdAsync(id);
         return _mapper.Map<RetrivedCategoryDto>(category);
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedCategoryDto category)
     {
-        Category? existing = await _repo.RetriveByIdAsync(id);
+        Category? existing = await _repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
         
         Category updatedCategory = _mapper.Map(category, existing);
@@ -49,7 +49,7 @@ public class CategoryService : ICategoryService
 
     public async Task<bool?> DeleteAsync(int id)
     {
-        Category? category = await _repo.RetriveByIdAsync(id);
+        Category? category = await _repo.RetrieveByIdAsync(id);
         if (category is null) return null;
         return await _repo.DeleteAsync(category);
     }

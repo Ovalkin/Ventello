@@ -28,11 +28,8 @@ public class ItemRepository : IItemRepository
         return null!;
     }
     
-    public async Task<Item?> CreateAsync(Item? item)
+    public async Task<Item?> CreateAsync(Item item)
     {
-        if (item is null) return null;
-        item.Status = item.Status.ToLower();
-        
         Category? category = await _db.Categories.FindAsync(item.CategoryId);
         if (category is null) return null;
         item.Category = category;
@@ -51,25 +48,23 @@ public class ItemRepository : IItemRepository
         else return null;
     }
 
-    public Task<IEnumerable<Item>> RetriveAllAsync()
-    {
-        return Task.FromResult(_itemCashe?.Values ?? Enumerable.Empty<Item>());
-    }
-
-    public Task<Item?> RetriveByIdAsync(int id)
+    public Task<Item?> RetrieveByIdAsync(int id)
     {
         if (_itemCashe is null) return null!;
         _itemCashe.TryGetValue(id, out Item? item);
         return Task.FromResult(item);
     }
 
+    public Task<IEnumerable<Item>> RetrieveAllAsync()
+    {
+        return Task.FromResult(_itemCashe?.Values ?? Enumerable.Empty<Item>());
+    }
     public async Task<Item?> UpdateAsync(int id, Item item)
     {
-        item.Status = item.Status.ToLower();
         _db.Update(item);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1) return UpdateCache(id, item);
-        return null;
+        else return null;
     }
 
     public async Task<bool> DeleteAsync(Item item)
@@ -77,8 +72,7 @@ public class ItemRepository : IItemRepository
         _db.Items.Remove(item);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
-            if (_itemCashe is not null)
-                return _itemCashe.TryRemove(item.Id, out item!);
+            if (_itemCashe is not null) return _itemCashe.TryRemove(item.Id, out item!);
         return false;
     }
 }
