@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vintello.Common.EntityModel.PostgreSql;
 
@@ -22,20 +24,20 @@ public partial class VintelloContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("host=localhost; port=5432; database=vintello;  username=postgres;  password=7878;");
+        => optionsBuilder.UseNpgsql("host=localhost; port=5432; database=vintello2;  username=postgres;  password=7878;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasPostgresExtension("pg_catalog", "adminpack");
-
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("categories_pkey");
+            entity.HasKey(e => e.Id).HasName("category_pkey");
+
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('category_id_seq'::regclass)");
         });
 
         modelBuilder.Entity<Item>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("item_pkey");
+            entity.HasKey(e => e.Id).HasName("items_pkey");
 
             entity.HasOne(d => d.Category).WithMany(p => p.Items)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -48,16 +50,17 @@ public partial class VintelloContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleName).HasName("roles_pkey");
+            entity.HasKey(e => e.Id).HasName("roles_pkey");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("users_pkey");
+            entity.HasKey(e => e.Id).HasName("user_pkey");
 
-            entity.Property(e => e.Role).HasDefaultValueSql("'client'::character varying");
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('user_id_seq'::regclass)");
+            entity.Property(e => e.RoleId).HasDefaultValue(2);
 
-            entity.HasOne(d => d.RoleNavigation).WithMany(p => p.Users)
+            entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("role");
         });

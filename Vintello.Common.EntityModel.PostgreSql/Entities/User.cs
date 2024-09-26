@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vintello.Common.EntityModel.PostgreSql;
 
@@ -11,9 +13,8 @@ public partial class User
     [Column("id")]
     public int Id { get; set; }
 
-    [Column("role")]
-    [StringLength(255)]
-    public string Role { get; set; } = null!;
+    [Column("role_id")]
+    public int RoleId { get; set; }
 
     [Column("first_name")]
     [StringLength(255)]
@@ -39,9 +40,6 @@ public partial class User
     [StringLength(255)]
     public string? Location { get; set; }
 
-    [Column("created_at")]
-    public DateTime? CreatedAt { get; set; }
-
     [Column("profile_pic")]
     [StringLength(255)]
     public string? ProfilePic { get; set; }
@@ -49,12 +47,16 @@ public partial class User
     [Column("bio")]
     public string? Bio { get; set; }
 
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; }
+
+    [Column("updated_at")]
+    public DateTime? UpdatedAt { get; set; }
+
     [InverseProperty("User")]
-    [JsonIgnore]
     public virtual ICollection<Item> Items { get; set; } = new List<Item>();
 
-    [ForeignKey("Role")]
+    [ForeignKey("RoleId")]
     [InverseProperty("Users")]
-    [JsonIgnore]
-    public virtual Role? RoleNavigation { get; set; } = null!;
+    public virtual Role Role { get; set; } = null!;
 }

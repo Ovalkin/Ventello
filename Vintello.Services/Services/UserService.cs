@@ -15,14 +15,14 @@ public class UserService : IUserService
         _repo = repo;
         _mapper = mapper;
     }
-    public async Task<RetrivedUserDto?> CreateAsync(CreateUserDto createUserDto)
+    public async Task<RetrivedUserDto?> CreateAsync(CreatedUserDto createUserDto)
     {
         User user = _mapper.Map<User>(createUserDto);
         user.CreatedAt = DateTime.UtcNow;
         return _mapper.Map<RetrivedUserDto?>(await _repo.CreateAsync(user));
     }
 
-    public async Task<IEnumerable<RetrivedUsersDto>> RetriveAllOrLocationUserAsync(string? location)
+    public async Task<IEnumerable<RetrivedUsersDto>> RetriveAsync(string? location)
     {
         List<RetrivedUsersDto> users = _mapper.Map<List<RetrivedUsersDto>>(await _repo.RetrieveAllAsync());
         if (string.IsNullOrWhiteSpace(location)) return users;
@@ -51,6 +51,6 @@ public class UserService : IUserService
     {
         User? user = await _repo.RetrieveByIdAsync(id);
         if (user is null) return null;
-        return await _repo.DeleteAsync(id);
+        return await _repo.DeleteAsync(user);
     }
 }

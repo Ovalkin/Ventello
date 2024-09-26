@@ -25,7 +25,7 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedCategoriesDto>))]
     public async Task<IEnumerable<RetrivedCategoriesDto>> RetriveCategories()
     {
-        return await service.RetriveAllAsync();
+        return await service.RetriveAsync();
     }
 
     [HttpGet("{id}", Name = nameof(GetCategory))]

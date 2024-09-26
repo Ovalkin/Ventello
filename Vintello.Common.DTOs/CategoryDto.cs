@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace Vintello.Common.DTOs;
 
 public class CreatedCategoryDto

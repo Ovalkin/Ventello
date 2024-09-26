@@ -8,5 +8,5 @@ public interface IUserRepository
     Task<User?> RetrieveByIdAsync(int id);
     Task<IEnumerable<User>> RetrieveAllAsync();
     Task<User?> UpdateAsync(int id, User newUser);
-    Task<bool> DeleteAsync(int id);
+    Task<bool> DeleteAsync(User user);
 }

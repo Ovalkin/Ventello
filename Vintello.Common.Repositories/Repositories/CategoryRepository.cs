@@ -63,14 +63,13 @@ public class CategoryRepository : ICategoryRepository
         else return null;
     }
 
-    public async Task<bool> DeleteAsync(Category? category)
+    public async Task<bool> DeleteAsync(Category category)
     {
-        if (category is null) return false;
         _db.Categories.Remove(category);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
             if (_categoryCashe is not null)
-                return _categoryCashe.TryRemove(category.Id, out category);
+                return _categoryCashe.TryRemove(category.Id, out category!);
         return false;
     }
 }

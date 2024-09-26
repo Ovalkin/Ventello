@@ -25,7 +25,7 @@ public class ItemService : IItemService
         return _mapper.Map<RetrivedItemDto?>(addedItem);
     }
 
-    public async Task<IEnumerable<RetrivedItemDto>> RetriveByParamsAsync(string? status, int? user, int? category)
+    public async Task<IEnumerable<RetrivedItemDto>> RetriveAsync(string? status, int? user, int? category)
     {
         IEnumerable<RetrivedItemDto> allItems = _mapper.Map<IEnumerable<RetrivedItemDto>>((await _repo.RetriveAllAsync()).ToList()); 
         if (string.IsNullOrWhiteSpace(status) && user is null && category is null) return allItems;
@@ -63,6 +63,6 @@ public class ItemService : IItemService
     {
         Item? item = await _repo.RetriveByIdAsync(id);
         if (item is null) return null;
-        return await _repo.RemoveAsync(id);
+        return await _repo.DeleteAsync(item);
     }
 }

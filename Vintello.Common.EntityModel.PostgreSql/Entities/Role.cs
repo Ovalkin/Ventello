@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vintello.Common.EntityModel.PostgreSql;
 
@@ -8,14 +10,16 @@ namespace Vintello.Common.EntityModel.PostgreSql;
 public partial class Role
 {
     [Key]
-    [Column("role_name")]
+    [Column("id")]
+    public int Id { get; set; }
+
+    [Column("name")]
     [StringLength(255)]
-    public string RoleName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
     [Column("description")]
     public string? Description { get; set; }
 
-    [InverseProperty("RoleNavigation")]
-    [JsonIgnore]
+    [InverseProperty("Role")]
     public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

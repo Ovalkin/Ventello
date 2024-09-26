@@ -32,7 +32,7 @@ public class ItemsController : ControllerBase
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedItemDto>))]
     public async Task<IEnumerable<RetrivedItemDto>> RetriveItems(string? status, int? user, int? category)
     {
-        return await _service.RetriveByParamsAsync(status, user, category);
+        return await _service.RetriveAsync(status, user, category);
     }
 
     [HttpGet("{id}", Name = nameof(RetriveItem))]

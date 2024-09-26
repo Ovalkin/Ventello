@@ -23,7 +23,7 @@ public class CategoryService : ICategoryService
         else return null;
     }
 
-    public async Task<IEnumerable<RetrivedCategoriesDto>> RetriveAllAsync()
+    public async Task<IEnumerable<RetrivedCategoriesDto>> RetriveAsync()
     {
         var categories = await _repo.RetriveAllAsync();
         return _mapper.Map<IEnumerable<RetrivedCategoriesDto>>(categories);

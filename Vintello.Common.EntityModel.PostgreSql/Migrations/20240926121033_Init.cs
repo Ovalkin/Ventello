@@ -8,16 +8,26 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Vintello.Common.EntityModel.PostgreSql.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("Npgsql:PostgresExtension:pg_catalog.adminpack", ",,");
-
             migrationBuilder.CreateTable(
                 name: "categories",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('category_id_seq'::regclass)"),
+                    name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("category_pkey", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "roles",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -27,66 +37,55 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("categories_pkey", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "roles",
-                columns: table => new
-                {
-                    role_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    description = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("roles_pkey", x => x.role_name);
+                    table.PrimaryKey("roles_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "users",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    role = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false, defaultValueSql: "'client'::character varying"),
+                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('user_id_seq'::regclass)"),
+                    role_id = table.Column<int>(type: "integer", nullable: false, defaultValue: 2),
                     first_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     last_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     phone = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     password = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     location = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     profile_pic = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-                    bio = table.Column<string>(type: "text", nullable: true)
+                    bio = table.Column<string>(type: "text", nullable: true),
+                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("users_pkey", x => x.id);
+                    table.PrimaryKey("user_pkey", x => x.id);
                     table.ForeignKey(
                         name: "role",
-                        column: x => x.role,
+                        column: x => x.role_id,
                         principalTable: "roles",
-                        principalColumn: "role_name");
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "item",
+                name: "items",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     user_id = table.Column<int>(type: "integer", nullable: false),
                     category_id = table.Column<int>(type: "integer", nullable: false),
-                    title = table.Column<string>(type: "character varying", nullable: false),
-                    status = table.Column<string>(type: "character varying", nullable: false),
-                    price = table.Column<decimal>(type: "money", nullable: true),
+                    title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    status = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    images = table.Column<List<string>>(type: "text[]", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    images = table.Column<List<string>>(type: "text[]", nullable: true)
+                    price = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("item_pkey", x => x.id);
+                    table.PrimaryKey("items_pkey", x => x.id);
                     table.ForeignKey(
                         name: "category_id",
                         column: x => x.category_id,
@@ -100,26 +99,26 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_item_category_id",
-                table: "item",
+                name: "IX_items_category_id",
+                table: "items",
                 column: "category_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_item_user_id",
-                table: "item",
+                name: "IX_items_user_id",
+                table: "items",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_users_role",
+                name: "IX_users_role_id",
                 table: "users",
-                column: "role");
+                column: "role_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "item");
+                name: "items");
 
             migrationBuilder.DropTable(
                 name: "categories");

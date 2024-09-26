@@ -18,7 +18,7 @@ public class UsersController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrivedUserDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUserDto? user)
+    public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto? user)
     {
         if (user is null) return BadRequest();
         RetrivedUserDto? createdUser = await _service.CreateAsync(user);
@@ -32,7 +32,7 @@ public class UsersController : ControllerBase
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedUsersDto>))]
     public async Task<IActionResult> RetriveUsers(string? location)
     {
-        return Ok(await _service.RetriveAllOrLocationUserAsync(location));
+        return Ok(await _service.RetriveAsync(location));
     }
     
     [HttpGet("{id}", Name = nameof(RetriveUser))]

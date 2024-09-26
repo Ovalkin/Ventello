@@ -5,23 +5,23 @@ namespace Vintello.Common.Repositories;
 
 public class RoleRepository : IRoleRepository
 {
-    private static ConcurrentDictionary<string, Role>? _roleCashe;
+    private static ConcurrentDictionary<int, Role>? _roleCashe;
     private readonly VintelloContext _db;
 
     public RoleRepository(VintelloContext db)
     {
         _db = db;
-        _roleCashe ??= new ConcurrentDictionary<string, Role>
-            (db.Roles.ToDictionary(r => r.RoleName));
+        _roleCashe ??= new ConcurrentDictionary<int, Role>
+            (db.Roles.ToDictionary(r => r.Id));
     }
 
-    private Role UpdateCache(string roleName, Role role)
+    private Role UpdateCache(int id, Role role)
     {
         if (_roleCashe is not null)
         {
-            if (_roleCashe.TryGetValue(roleName, out Role? old))
+            if (_roleCashe.TryGetValue(id, out Role? old))
             {
-                if (_roleCashe.TryUpdate(roleName, role, old)) return role;
+                if (_roleCashe.TryUpdate(id, role, old)) return role;
             }
         }
         return null!;
@@ -29,22 +29,20 @@ public class RoleRepository : IRoleRepository
     
     public async Task<Role?> CreateAsync(Role role)
     {
-        role.RoleName = role.RoleName.ToLower();
         await _db.Roles.AddAsync(role);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
         {
             if (_roleCashe is null) return role;
-            else return _roleCashe.AddOrUpdate(role.RoleName, role, UpdateCache);
+            else return _roleCashe.AddOrUpdate(role.Id, role, UpdateCache);
         }
         else return null;
     }
 
-    public async Task<Role?> RetriveByNameAsync(string roleName)
+    public async Task<Role?> RetriveByIdAsync(int id)
     {
         if (_roleCashe is null) return null!;
-        roleName = roleName.ToLower();
-        _roleCashe.TryGetValue(roleName, out Role? role);
+        _roleCashe.TryGetValue(id, out Role? role);
         if (role is null) return null;
         await _db.Entry(role).Collection(r => r.Users).LoadAsync();
         return role;
@@ -55,25 +53,21 @@ public class RoleRepository : IRoleRepository
         return Task.FromResult(_roleCashe?.Values ?? Enumerable.Empty<Role>());
     }
 
-    public async Task<Role?> UpdateAsync(string roleName, Role newRole)
+    public async Task<Role?> UpdateAsync(int id, Role newRole)
     {
-        roleName = roleName.ToLower();
         _db.Update(newRole);
         int affected = await _db.SaveChangesAsync();
-        if (affected == 1) return UpdateCache(roleName, newRole);
+        if (affected == 1) return UpdateCache(id, newRole);
         else return null;
     }
 
-    public async Task<bool?> DeleteAsync(string roleName)
+    public async Task<bool> DeleteAsync(Role role)
     {
-        roleName = roleName.ToLower();
-        Role? deletedRole = await _db.Roles.FindAsync(roleName);
-        if (deletedRole is null) return null;
-        _db.Roles.Remove(deletedRole);
+        _db.Roles.Remove(role);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
             if (_roleCashe is not null)
-                return _roleCashe.TryRemove(roleName, out deletedRole);
+                return _roleCashe.TryRemove(role.Id, out role!);
         return false;
     }
 }

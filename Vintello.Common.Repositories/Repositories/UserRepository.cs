@@ -29,8 +29,6 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> CreateAsync(User user)
     {
-        user.RoleNavigation = await _db.Roles.FindAsync(user.Role);
-        
         user.Location = user.Location?.ToLower();
         await _db.Users.AddAsync(user);
         int affected = await _db.SaveChangesAsync();
@@ -65,14 +63,12 @@ public class UserRepository : IUserRepository
         else return null;
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(User user)
     {
-        User? user = await _db.Users.FindAsync(id);
-        if (user is null) return false;
         _db.Users.Remove(user);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
-            if (_userCache is not null) return _userCache.TryRemove(id, out user);
+            if (_userCache is not null) return _userCache.TryRemove(user.Id, out user!);
         return false;
     }
 }

@@ -4,9 +4,9 @@ namespace Vintello.Services;
 
 public interface IRoleService
 {
-    Task<RetrivedRoleDto?> CreateAsync(CreatedUpdatedRetrivedRolesDto createdRole);
-    Task<RetrivedRoleDto?> RetriveByNameAsync(string name);
-    Task<IEnumerable<CreatedUpdatedRetrivedRolesDto>> RetriveAllAsync();
-    Task<bool?> UpdateAsync(string name, CreatedUpdatedRetrivedRolesDto role);
-    Task<bool?> DeleteAsync(string name);
+    Task<RetrivedRoleDto?> CreateAsync(CreatedRolesDto createdRole);
+    Task<RetrivedRoleDto?> RetriveByIdAsync(int id);
+    Task<IEnumerable<RetrivedRolesDto>> RetriveAsync();
+    Task<bool?> UpdateAsync(int id, UpdatedRoleDto role);
+    Task<bool?> DeleteAsync(int id);
 }

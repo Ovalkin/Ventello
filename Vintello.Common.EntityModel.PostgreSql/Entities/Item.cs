@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vintello.Common.EntityModel.PostgreSql;
 
-[Table("item")]
+[Table("items")]
 public partial class Item
 {
     [Key]
@@ -16,14 +19,19 @@ public partial class Item
     [Column("category_id")]
     public int CategoryId { get; set; }
 
-    [Column("title", TypeName = "character varying")]
+    [Column("title")]
+    [StringLength(255)]
     public string Title { get; set; } = null!;
 
-    [Column("status", TypeName = "character varying")]
+    [Column("description")]
+    public string? Description { get; set; }
+
+    [Column("status")]
+    [StringLength(255)]
     public string Status { get; set; } = null!;
 
-    [Column("price", TypeName = "money")]
-    public decimal? Price { get; set; }
+    [Column("images")]
+    public List<string>? Images { get; set; }
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; }
@@ -31,14 +39,14 @@ public partial class Item
     [Column("updated_at")]
     public DateTime? UpdatedAt { get; set; }
 
-    [Column("images")]
-    public List<string>? Images { get; set; }
+    [Column("price")]
+    public int? Price { get; set; }
 
     [ForeignKey("CategoryId")]
     [InverseProperty("Items")]
-    public virtual Category? Category { get; set; }
+    public virtual Category Category { get; set; } = null!;
 
     [ForeignKey("UserId")]
     [InverseProperty("Items")]
-    public virtual User? User { get; set; }
+    public virtual User User { get; set; } = null!;
 }

@@ -17,7 +17,11 @@ public class AppMappingProfile : Profile
             .ForAllMembers(ops => ops
                 .Condition((src, dest, srcMember) => srcMember != null));
         
-        CreateMap<CreatedUpdatedRetrivedRolesDto, Role>().ReverseMap();
+        CreateMap<CreatedRolesDto, Role>().ReverseMap();
+        CreateMap<RetrivedRolesDto, Role>().ReverseMap();
+        CreateMap<UpdatedRoleDto, Role>()
+            .ForAllMembers(ops => ops
+                .Condition((src, dest, srcMember) => srcMember != null));
         CreateMap<Role, RetrivedRoleDto>()
             .ForMember(r => r.Users, expression => expression.MapFrom(src => src.Users ))
             .ReverseMap();
@@ -29,7 +33,7 @@ public class AppMappingProfile : Profile
                 .Condition((src, dest, srcMember) => srcMember != null));
         
         CreateMap<RetrivedUsersDto, User>().ReverseMap();
-        CreateMap<CreateUserDto, User>().ReverseMap();
+        CreateMap<CreatedUserDto, User>().ReverseMap();
         CreateMap<RetrivedUserDto, User>()
             .ForMember(u => u.Items, expression => expression.MapFrom(src => src.Items))
             .ReverseMap();

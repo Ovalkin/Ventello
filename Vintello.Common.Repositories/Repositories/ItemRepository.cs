@@ -72,15 +72,13 @@ public class ItemRepository : IItemRepository
         return null;
     }
 
-    public async Task<bool> RemoveAsync(int id)
+    public async Task<bool> DeleteAsync(Item item)
     {
-        Item? item = await _db.Items.FindAsync(id);
-        if (item is null) return false;
         _db.Items.Remove(item);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
             if (_itemCashe is not null)
-                return _itemCashe.TryRemove(id, out item);
+                return _itemCashe.TryRemove(item.Id, out item!);
         return false;
     }
 }

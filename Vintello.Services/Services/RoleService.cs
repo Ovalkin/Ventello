@@ -16,46 +16,42 @@ public class RoleService : IRoleService
         _mapper = mapper;
     }
 
-    public async Task<RetrivedRoleDto?> CreateAsync(CreatedUpdatedRetrivedRolesDto createdRole)
+    public async Task<RetrivedRoleDto?> CreateAsync(CreatedRolesDto createdRole)
     {
-        createdRole.RoleName = createdRole.RoleName.ToLower();
         Role? retriveRole = await _repo.CreateAsync(_mapper.Map<Role>(createdRole));
         if (retriveRole is null) return null;
         else return _mapper.Map<RetrivedRoleDto>(retriveRole);
     }
 
-    public async Task<RetrivedRoleDto?> RetriveByNameAsync(string name)
+    public async Task<RetrivedRoleDto?> RetriveByIdAsync(int id)
     {
-        name = name.ToLower();
-        Role? role = await _repo.RetriveByNameAsync(name);
+        Role? role = await _repo.RetriveByIdAsync(id);
         if (role is null) return null;
         return _mapper.Map<RetrivedRoleDto?>(role);
     }
 
-    public async Task<IEnumerable<CreatedUpdatedRetrivedRolesDto>> RetriveAllAsync()
+    public async Task<IEnumerable<RetrivedRolesDto>> RetriveAsync()
     {
         var roles = await _repo.RetriveAllAsync();
-        return _mapper.Map<IEnumerable<CreatedUpdatedRetrivedRolesDto>>(roles);
+        return _mapper.Map<IEnumerable<RetrivedRolesDto>>(roles);
     }
 
-    public async Task<bool?> UpdateAsync(string name, CreatedUpdatedRetrivedRolesDto role)
+    public async Task<bool?> UpdateAsync(int id, UpdatedRoleDto role)
     {
-        name = name.ToLower();
-        Role? existing = await _repo.RetriveByNameAsync(name);
+        Role? existing = await _repo.RetriveByIdAsync(id);
         if (existing is null) return null;
+
+        Role? updatedRole = _mapper.Map(role, existing);
         
-        Role updatedRole =_mapper.Map<Role>(role);
-        
-        Role? updated = await _repo.UpdateAsync(name, updatedRole);
+        Role? updated = await _repo.UpdateAsync(id, updatedRole);
         if (updated is null) return false;
         else return true;
     }
 
-    public async Task<bool?> DeleteAsync(string name)
+    public async Task<bool?> DeleteAsync(int id)
     {
-        name = name.ToLower();
-        Role? role = await _repo.RetriveByNameAsync(name);
+        Role? role = await _repo.RetriveByIdAsync(id);
         if (role is null) return null;
-        return await _repo.DeleteAsync(name);
+        return await _repo.DeleteAsync(role);
     }
 }

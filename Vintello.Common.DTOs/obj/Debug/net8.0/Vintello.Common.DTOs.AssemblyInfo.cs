@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Vintello.Common.DTOs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b422efa20facf711434c343603b05d1ea06ed05")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+367c25041ef091414953901bd9aa91668e03dbc3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Vintello.Common.DTOs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Vintello.Common.DTOs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
