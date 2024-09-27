@@ -20,7 +20,7 @@ public class CreatedUserDto
     public string? ProfilePic { get; set; }
 }
 
-public class RetrivedUsersDto
+public class RetrievedUsersDto
 {
     public int Id { get; set; }
     public int RoleId { get; set; }
@@ -35,7 +35,7 @@ public class RetrivedUsersDto
     public DateTime? UpdatedAt { get; set; }
 }
 
-public class RetrivedUserDto
+public class RetrievedUserDto
 {
     public int Id { get; set; }
     public int RoleId { get; set; }
@@ -48,7 +48,7 @@ public class RetrivedUserDto
     public string? Bio { get; set; }
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public List<RetrivedItemDto> Items { get; set; } = new();
+    public List<RetrievedItemDto> Items { get; set; } = new();
 }
 
 public class UpdatedUserDto

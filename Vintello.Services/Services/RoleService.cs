@@ -16,24 +16,24 @@ public class RoleService : IRoleService
         _mapper = mapper;
     }
 
-    public async Task<RetrivedRoleDto?> CreateAsync(CreatedRolesDto createdRole)
+    public async Task<RetrievedRoleDto?> CreateAsync(CreatedRolesDto createdRole)
     {
         Role? retriveRole = await _repo.CreateAsync(_mapper.Map<Role>(createdRole));
         if (retriveRole is null) return null;
-        else return _mapper.Map<RetrivedRoleDto>(retriveRole);
+        else return _mapper.Map<RetrievedRoleDto>(retriveRole);
     }
 
-    public async Task<RetrivedRoleDto?> RetrieveByIdAsync(int id)
+    public async Task<RetrievedRoleDto?> RetrieveByIdAsync(int id)
     {
         Role? role = await _repo.RetrieveByIdAsync(id);
         if (role is null) return null;
-        return _mapper.Map<RetrivedRoleDto?>(role);
+        return _mapper.Map<RetrievedRoleDto?>(role);
     }
 
-    public async Task<IEnumerable<RetrivedRolesDto>> RetrieveAsync()
+    public async Task<IEnumerable<RetrievedRolesDto>> RetrieveAsync()
     {
         var roles = await _repo.RetrieveAllAsync();
-        return _mapper.Map<IEnumerable<RetrivedRolesDto>>(roles);
+        return _mapper.Map<IEnumerable<RetrievedRolesDto>>(roles);
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedRoleDto role)

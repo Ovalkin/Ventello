@@ -16,12 +16,12 @@ public class RolesController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(201, Type = typeof(RetrivedUserDto))]
+    [ProducesResponseType(201, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(400)]
     public async Task<IActionResult> CreateRole([FromBody] CreatedRolesDto role)
     {
         if (!ModelState.IsValid) return BadRequest();
-        RetrivedRoleDto? createdRole = await _service.CreateAsync(role);
+        RetrievedRoleDto? createdRole = await _service.CreateAsync(role);
         if (createdRole is null) return BadRequest();
         return CreatedAtRoute(nameof(RetrieveRole),
             new { id = createdRole.Id },
@@ -29,8 +29,8 @@ public class RolesController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedRolesDto>))]
-    public async Task<IEnumerable<RetrivedRolesDto>> RetrieveRoles()
+    [ProducesResponseType(200, Type = typeof(IEnumerable<RetrievedRolesDto>))]
+    public async Task<IEnumerable<RetrievedRolesDto>> RetrieveRoles()
     {
         return await _service.RetrieveAsync();
     }
@@ -40,7 +40,7 @@ public class RolesController : ControllerBase
     [ProducesResponseType(404)]
     public async Task<IActionResult> RetrieveRole(int id)
     {
-        RetrivedRoleDto? role = await _service.RetrieveByIdAsync(id);
+        RetrievedRoleDto? role = await _service.RetrieveByIdAsync(id);
         if (role is null) return NotFound();
         return Ok(role);
     }

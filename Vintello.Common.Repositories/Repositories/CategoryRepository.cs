@@ -23,9 +23,10 @@ public class CategoryRepository : ICategoryRepository
             {
                 if (_categoryCache.TryUpdate(id, category, oldCategory)) return category;
             }
-        }   
+        }
         return null!;
     }
+
     public async Task<Category?> CreateAsync(Category category)
     {
         await _db.Categories.AddAsync(category);
@@ -33,17 +34,17 @@ public class CategoryRepository : ICategoryRepository
         if (affected == 1)
         {
             if (_categoryCache is null) return category;
-            else return _categoryCache.AddOrUpdate(category.Id, category, UpdateCache);
+            return _categoryCache.AddOrUpdate(category.Id, category, UpdateCache);
         }
-        else return null;
+        return null;
     }
 
     public async Task<Category?> RetrieveByIdAsync(int id)
     {
         if (_categoryCache is null) return null!;
         _categoryCache.TryGetValue(id, out Category? category);
-        if (category is null) return null!; 
-        
+        if (category is null) return null!;
+
         await _db.Entry(category).Collection(c => c.Items).LoadAsync();
         return category;
     }
@@ -58,7 +59,7 @@ public class CategoryRepository : ICategoryRepository
         _db.Update(category);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1) return UpdateCache(id, category);
-        else return null;
+        return null;
     }
 
     public async Task<bool> DeleteAsync(Category category)
@@ -66,7 +67,8 @@ public class CategoryRepository : ICategoryRepository
         _db.Categories.Remove(category);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
-            if (_categoryCache is not null) return _categoryCache.TryRemove(category.Id, out category!);
+            if (_categoryCache is not null)
+                return _categoryCache.TryRemove(category.Id, out category!);
         return false;
     }
 }

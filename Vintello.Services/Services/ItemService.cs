@@ -16,21 +16,21 @@ public class ItemService : IItemService
         _mapper = mapper;
     }
     
-    public async Task<RetrivedItemDto?> CreateAsync(CreatedItemDto item)
+    public async Task<RetrievedItemDto?> CreateAsync(CreatedItemDto item)
     {
         Item? addItem = _mapper.Map<Item>(item);
         addItem.Status = "created";
         addItem.CreatedAt = DateTime.UtcNow;
         Item? addedItem = await _repo.CreateAsync(addItem);
-        return _mapper.Map<RetrivedItemDto?>(addedItem);
+        return _mapper.Map<RetrievedItemDto?>(addedItem);
     }
 
-    public async Task<IEnumerable<RetrivedItemDto>> RetrieveAsync(string? status, int? user, int? category)
+    public async Task<IEnumerable<RetrievedItemDto>> RetrieveAsync(string? status, int? user, int? category)
     {
-        IEnumerable<RetrivedItemDto> allItems = _mapper.Map<IEnumerable<RetrivedItemDto>>((await _repo.RetrieveAllAsync()).ToList()); 
+        IEnumerable<RetrievedItemDto> allItems = _mapper.Map<IEnumerable<RetrievedItemDto>>((await _repo.RetrieveAllAsync()).ToList()); 
         if (string.IsNullOrWhiteSpace(status) && user is null && category is null) return allItems;
-        var retrivedItemsDtos = allItems as RetrivedItemDto[] ?? allItems.ToArray();
-        IEnumerable<RetrivedItemDto> items = retrivedItemsDtos;
+        var retrivedItemsDtos = allItems as RetrievedItemDto[] ?? allItems.ToArray();
+        IEnumerable<RetrievedItemDto> items = retrivedItemsDtos;
         if(!string.IsNullOrWhiteSpace(status)) 
             items = items.Intersect(retrivedItemsDtos.Where(i => i.Status == status));
         if (user is not null)
@@ -40,9 +40,9 @@ public class ItemService : IItemService
         return items;
     }
 
-    public async Task<RetrivedItemDto?> RetrieveByIdAsync(int id)
+    public async Task<RetrievedItemDto?> RetrieveByIdAsync(int id)
     {
-        return _mapper.Map<RetrivedItemDto?>(await _repo.RetrieveByIdAsync(id));
+        return _mapper.Map<RetrievedItemDto?>(await _repo.RetrieveByIdAsync(id));
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedItemDto item)

@@ -9,12 +9,12 @@ namespace Vintello.Web.Api.Controllers;
 public class CategoriesController(ICategoryService service) : ControllerBase
 {
     [HttpPost]
-    [ProducesResponseType(201, Type = typeof(RetrivedCategoryDto))]
+    [ProducesResponseType(201, Type = typeof(RetrievedCategoryDto))]
     [ProducesResponseType(400)]
     public async Task<IActionResult> CreateCategory([FromBody] CreatedCategoryDto category)
     {
         if (!ModelState.IsValid) return BadRequest();
-        RetrivedCategoryDto? createdCategory = await service.CreateAsync(category);
+        RetrievedCategoryDto? createdCategory = await service.CreateAsync(category);
         if (createdCategory is null) return BadRequest();
         return CreatedAtRoute(nameof(GetCategory),
             new { id = createdCategory.Id },
@@ -22,18 +22,18 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedCategoriesDto>))]
-    public async Task<IEnumerable<RetrivedCategoriesDto>> RetrieveCategories()
+    [ProducesResponseType(200, Type = typeof(IEnumerable<RetrievedCategoriesDto>))]
+    public async Task<IEnumerable<RetrievedCategoriesDto>> RetrieveCategories()
     {
         return await service.RetrieveAsync();
     }
 
     [HttpGet("{id}", Name = nameof(GetCategory))]
-    [ProducesResponseType(200, Type = typeof(RetrivedCategoryDto))]
+    [ProducesResponseType(200, Type = typeof(RetrievedCategoryDto))]
     [ProducesResponseType(404)]
     public async Task<IActionResult> GetCategory(int id)
     {
-        RetrivedCategoryDto? category = await service.RetrieveByIdAsync(id);
+        RetrievedCategoryDto? category = await service.RetrieveByIdAsync(id);
         if (category is null) return NotFound();
         return Ok(category);
     }

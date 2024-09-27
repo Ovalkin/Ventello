@@ -24,8 +24,4 @@
       <None Remove="obj\**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="obj\" />
-    </ItemGroup>
-
 </Project>

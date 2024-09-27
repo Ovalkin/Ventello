@@ -21,7 +21,7 @@ public class CreatedItemDto
     [Required(ErrorMessage = "Фотографии обязательны!")]
     public string[] Images { get; set; } = null!;
 }
-public class RetrivedItemDto
+public class RetrievedItemDto
 {
     public int Id { get; set; }
     public int UserId { get; set; }

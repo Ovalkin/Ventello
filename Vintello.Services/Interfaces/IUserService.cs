@@ -4,9 +4,9 @@ namespace Vintello.Services;
 
 public interface IUserService
 {
-    Task<RetrivedUserDto?> CreateAsync(CreatedUserDto user);
-    Task<RetrivedUserDto?> RetrieveByIdAsync(int id);
-    Task<IEnumerable<RetrivedUsersDto>> RetrieveAsync(string? location);
+    Task<RetrievedUserDto?> CreateAsync(CreatedUserDto user);
+    Task<RetrievedUserDto?> RetrieveByIdAsync(int id);
+    Task<IEnumerable<RetrievedUsersDto>> RetrieveAsync(string? location);
     Task<bool?> UpdateAsync(int id, UpdatedUserDto updatedUserDto);
     Task<bool?> DeleteAsync(int id);
 }

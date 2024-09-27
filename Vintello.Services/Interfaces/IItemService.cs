@@ -4,9 +4,9 @@ namespace Vintello.Services;
 
 public interface IItemService
 {
-    Task<RetrivedItemDto?> CreateAsync(CreatedItemDto item);
-    Task<RetrivedItemDto?> RetrieveByIdAsync(int id);
-    Task<IEnumerable<RetrivedItemDto>> RetrieveAsync(string? status, int? user, int? category);
+    Task<RetrievedItemDto?> CreateAsync(CreatedItemDto item);
+    Task<RetrievedItemDto?> RetrieveByIdAsync(int id);
+    Task<IEnumerable<RetrievedItemDto>> RetrieveAsync(string? status, int? user, int? category);
     Task<bool?> UpdateAsync(int id, UpdatedItemDto updatedItemDto);
     Task<bool?> DeleteAsync(int id);
 }

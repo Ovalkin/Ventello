@@ -10,18 +10,18 @@ public class CreatedCategoryDto
     public string? Description { get; set; }
 }
 
-public class RetrivedCategoriesDto
+public class RetrievedCategoriesDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
 }
-public class RetrivedCategoryDto
+public class RetrievedCategoryDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
-    public List<RetrivedItemDto> Items { get; set; } = new();
+    public List<RetrievedItemDto> Items { get; set; } = new();
 }
 
 public class UpdatedCategoryDto

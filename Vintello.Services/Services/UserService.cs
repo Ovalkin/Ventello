@@ -15,24 +15,24 @@ public class UserService : IUserService
         _repo = repo;
         _mapper = mapper;
     }
-    public async Task<RetrivedUserDto?> CreateAsync(CreatedUserDto createUserDto)
+    public async Task<RetrievedUserDto?> CreateAsync(CreatedUserDto createUserDto)
     {
         User user = _mapper.Map<User>(createUserDto);
         user.CreatedAt = DateTime.UtcNow;
-        return _mapper.Map<RetrivedUserDto?>(await _repo.CreateAsync(user));
+        return _mapper.Map<RetrievedUserDto?>(await _repo.CreateAsync(user));
     }
 
-    public async Task<IEnumerable<RetrivedUsersDto>> RetrieveAsync(string? location)
+    public async Task<IEnumerable<RetrievedUsersDto>> RetrieveAsync(string? location)
     {
-        List<RetrivedUsersDto> users = _mapper.Map<List<RetrivedUsersDto>>(await _repo.RetrieveAllAsync());
+        List<RetrievedUsersDto> users = _mapper.Map<List<RetrievedUsersDto>>(await _repo.RetrieveAllAsync());
         if (string.IsNullOrWhiteSpace(location)) return users;
         location = location.ToLower();
         return users.Where(user => user.Location == location);
     }
 
-    public async Task<RetrivedUserDto?> RetrieveByIdAsync(int id)
+    public async Task<RetrievedUserDto?> RetrieveByIdAsync(int id)
     {
-        return _mapper.Map<RetrivedUserDto>(await _repo.RetrieveByIdAsync(id));
+        return _mapper.Map<RetrievedUserDto>(await _repo.RetrieveByIdAsync(id));
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedUserDto user)

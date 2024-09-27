@@ -16,12 +16,12 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(201, Type = typeof(RetrivedUserDto))]
+    [ProducesResponseType(201, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(400)]
     public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto user)
     {
         if (!ModelState.IsValid) return BadRequest();
-        RetrivedUserDto? createdUser = await _service.CreateAsync(user);
+        RetrievedUserDto? createdUser = await _service.CreateAsync(user);
         if (createdUser is null) return BadRequest();
         return CreatedAtRoute(nameof(RetrieveUser),
             new { id = createdUser.Id },
@@ -29,18 +29,18 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(200, Type = typeof(IEnumerable<RetrivedUsersDto>))]
+    [ProducesResponseType(200, Type = typeof(IEnumerable<RetrievedUsersDto>))]
     public async Task<IActionResult> RetrieveUsers(string? location)
     {
         return Ok(await _service.RetrieveAsync(location));
     }
 
     [HttpGet("{id}", Name = nameof(RetrieveUser))]
-    [ProducesResponseType(200, Type = typeof(RetrivedUserDto))]
+    [ProducesResponseType(200, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(404)]
     public async Task<IActionResult> RetrieveUser(int id)
     {
-        RetrivedUserDto? user = await _service.RetrieveByIdAsync(id);
+        RetrievedUserDto? user = await _service.RetrieveByIdAsync(id);
         if (user is null) return NotFound();
         return Ok(user);
     }
