@@ -35,7 +35,7 @@ public class CategoryServiceTests
         Assert.IsType<RetrievedCategoryDto>(result);
         Assert.Equal("Говно", result.Name);
     }
-
+    
     [Fact]
     public async Task CreateAsync_ShouldReturnNull_WhenCategoryIsNotCreated()
     {
@@ -55,6 +55,40 @@ public class CategoryServiceTests
         var result = await service.CreateAsync(createdCategoryDto);
 
         Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task RetrieveAsync_ShouldReturnRetrievedCategoriesDto()
+    {
+        IEnumerable<RetrievedCategoriesDto> retrievedCategoriesDto = new List<RetrievedCategoriesDto>
+        {
+            new RetrievedCategoriesDto{Id = 1, Name = "Хуйня"},
+            new RetrievedCategoriesDto{Id = 2, Name = "Хуйня"},
+            new RetrievedCategoriesDto{Id = 3, Name = "Хуйня"}
+        };
+        IEnumerable<Category> retrievedCategories = new List<Category>
+        {
+            new Category{Id = 1, Name = "Хуйня"},
+            new Category{Id = 2, Name = "Хуйня"},
+            new Category{Id = 3, Name = "Хуйня"}
+        };
+        
+        var mockRepo = new Mock<ICategoryRepository>();
+        var mockMapper = new Mock<IMapper>();
+
+        mockMapper
+            .Setup(m => m.Map<IEnumerable<RetrievedCategoriesDto>>(It.IsAny<IEnumerable<Category>>()))
+            .Returns(retrievedCategoriesDto);
+        mockRepo
+            .Setup(m => m.RetrieveAllAsync())
+            .ReturnsAsync(retrievedCategories);
+
+        CategoryService service = new CategoryService(mockRepo.Object, mockMapper.Object);
+
+        var result = await service.RetrieveAsync();
+
+        Assert.NotNull(result);
+        Assert.Equal(retrievedCategoriesDto, result);
     }
 
     [Fact]
@@ -96,4 +130,6 @@ public class CategoryServiceTests
         
         Assert.Null(result);
     }
+    
+    
 }
