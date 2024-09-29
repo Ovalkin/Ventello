@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Services", "Vintel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Test.Unit", "Vintello.Test.Unit\Vintello.Test.Unit.csproj", "{B89C40BB-0D88-4BB0-873C-7905E4B51ABF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Test.Integration", "Vintello.Test.Integration\Vintello.Test.Integration.csproj", "{913C2974-49F1-41F2-BE70-8A084C0AA0BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{B89C40BB-0D88-4BB0-873C-7905E4B51ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B89C40BB-0D88-4BB0-873C-7905E4B51ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B89C40BB-0D88-4BB0-873C-7905E4B51ABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{913C2974-49F1-41F2-BE70-8A084C0AA0BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{913C2974-49F1-41F2-BE70-8A084C0AA0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{913C2974-49F1-41F2-BE70-8A084C0AA0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{913C2974-49F1-41F2-BE70-8A084C0AA0BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

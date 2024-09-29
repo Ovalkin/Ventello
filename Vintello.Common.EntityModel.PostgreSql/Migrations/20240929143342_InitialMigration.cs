@@ -8,11 +8,19 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Vintello.Common.EntityModel.PostgreSql.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "category_id_seq",
+                incrementBy: 1);
+
+            migrationBuilder.CreateSequence(
+                name: "user_id_seq",
+                incrementBy: 1);
+            
             migrationBuilder.CreateTable(
                 name: "categories",
                 columns: table => new
@@ -128,6 +136,12 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
 
             migrationBuilder.DropTable(
                 name: "roles");
+            
+            migrationBuilder.DropSequence(
+                name: "category_id_seq");
+
+            migrationBuilder.DropSequence(
+                name: "user_id_seq");
         }
     }
 }

@@ -33,5 +33,4 @@
       <ProjectReference Include="..\Vintello.Common.Repositories\Vintello.Common.Repositories.csproj" />
       <ProjectReference Include="..\Vintello.Services\Vintello.Services.csproj" />
     </ItemGroup>
-
 </Project>

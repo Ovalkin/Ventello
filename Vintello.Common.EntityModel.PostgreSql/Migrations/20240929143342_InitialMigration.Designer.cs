@@ -13,8 +13,8 @@ using Vintello.Common.EntityModel.PostgreSql;
 namespace Vintello.Common.EntityModel.PostgreSql.Migrations
 {
     [DbContext(typeof(VintelloContext))]
-    [Migration("20240926121033_Init")]
-    partial class Init
+    [Migration("20240929143342_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

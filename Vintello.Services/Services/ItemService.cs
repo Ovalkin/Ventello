@@ -29,14 +29,14 @@ public class ItemService : IItemService
     {
         IEnumerable<RetrievedItemDto> allItems = _mapper.Map<IEnumerable<RetrievedItemDto>>((await _repo.RetrieveAllAsync()).ToList()); 
         if (string.IsNullOrWhiteSpace(status) && user is null && category is null) return allItems;
-        var retrivedItemsDtos = allItems as RetrievedItemDto[] ?? allItems.ToArray();
-        IEnumerable<RetrievedItemDto> items = retrivedItemsDtos;
+        var retrievedItemsDto = allItems as RetrievedItemDto[] ?? allItems.ToArray();
+        IEnumerable<RetrievedItemDto> items = retrievedItemsDto;
         if(!string.IsNullOrWhiteSpace(status)) 
-            items = items.Intersect(retrivedItemsDtos.Where(i => i.Status == status));
+            items = items.Intersect(retrievedItemsDto.Where(i => i.Status == status));
         if (user is not null)
-            items = items.Intersect(retrivedItemsDtos.Where(i => i.UserId == user));
+            items = items.Intersect(retrievedItemsDto.Where(i => i.UserId == user));
         if (category is not null)
-            items = items.Intersect(retrivedItemsDtos.Where(i => i.CategoryId == category));
+            items = items.Intersect(retrievedItemsDto.Where(i => i.CategoryId == category));
         return items;
     }
 
