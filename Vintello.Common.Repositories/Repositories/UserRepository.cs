@@ -34,9 +34,9 @@ public class UserRepository : IUserRepository
         if (affected == 1)
         {
             if (_userCache is null) return user;
-            else return _userCache.AddOrUpdate(user.Id, user, UpdateCache);
+            return _userCache.AddOrUpdate(user.Id, user, UpdateCache);
         }
-        else return null;
+        return null;
     }
 
     public async Task<User?> RetrieveByIdAsync(int id)
@@ -58,7 +58,7 @@ public class UserRepository : IUserRepository
         _db.Update(newUser);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1) return UpdateCache(id, newUser);
-        else return null;
+        return null;
     }
 
     public async Task<bool> DeleteAsync(User user)

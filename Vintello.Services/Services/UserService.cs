@@ -44,7 +44,7 @@ public class UserService : IUserService
 
         User? updated = await _repo.UpdateAsync(id, updatedUser);
         if (updated is null) return false;
-        else return true;
+        return true;
     }
 
     public async Task<bool?> DeleteAsync(int id)

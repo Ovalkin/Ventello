@@ -6,8 +6,15 @@ namespace Vintello.Web.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CategoriesController(ICategoryService _service) : ControllerBase
+public class CategoriesController : ControllerBase
 {
+    private readonly ICategoryService _service;
+
+    public CategoriesController(ICategoryService service)
+    {
+        _service = service;
+    }
+    
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedCategoryDto))]
     [ProducesResponseType(400)]
