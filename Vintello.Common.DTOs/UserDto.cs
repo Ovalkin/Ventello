@@ -14,8 +14,6 @@ public class CreatedUserDto
     [RegularExpression(@"^(([0-9])|(\+[0-9]))[0-9]{10}$", ErrorMessage = "Номер телефона не валиден!")]
     public string? Phone { get; set; }
     public string Password { get; set; } = null!;
-    [Compare("Password", ErrorMessage = "Парольи не совпадают!")]
-    public string PasswordConfirm { get; set; } = null!;
     public string? Location { get; set; }
     public string? ProfilePic { get; set; }
 }
