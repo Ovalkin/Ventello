@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("TestConnection")!);
+//builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();

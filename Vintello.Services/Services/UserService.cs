@@ -39,9 +39,10 @@ public class UserService : IUserService
     {
         User? existing = await _repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
+        int roleId = existing.RoleId;
         
         User? updatedUser = _mapper.Map(user, existing);
-
+        updatedUser.RoleId = roleId;
         User? updated = await _repo.UpdateAsync(id, updatedUser);
         if (updated is null) return false;
         return true;
