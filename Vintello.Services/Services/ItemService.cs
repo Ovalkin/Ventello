@@ -49,14 +49,18 @@ public class ItemService : IItemService
     {
         Item? existing = await _repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
-
+        int categoryId = existing.CategoryId;
+        int userId = existing.UserId;
+        
         Item updatedItem = _mapper.Map(item, existing);
         
+        updatedItem.CategoryId = categoryId;
+        updatedItem.UserId = userId;
         updatedItem.UpdatedAt = DateTime.UtcNow;
         
         Item? updated = await _repo.UpdateAsync(id, updatedItem);
         if (updated is null) return false;
-        else return true;
+        return true;
     }
 
     public async Task<bool?> DeleteAsync(int id)

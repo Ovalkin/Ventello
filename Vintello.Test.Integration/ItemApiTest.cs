@@ -7,12 +7,12 @@ using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Test.Integration;
 
-public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
+public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client;
     private readonly VintelloContext _context;
 
-    public UserApiTest(WebApplicationFactory<Program> factory)
+    public ItemApiTest(WebApplicationFactory<Program> factory)
     {
         _client = factory.CreateClient();
 
@@ -26,39 +26,40 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
     [InlineData("POST")]
     public async Task Post_ReturnCreated(string method)
     {
-        CreatedUserDto user = new CreatedUserDto
-            { FirstName = "Дебил", Email = "test@example.com", Password = "Хуесос" };
-        var request = new HttpRequestMessage(new HttpMethod(method), "/api/Users");
+        CreatedItemDto user = new CreatedItemDto
+            { UserId = 1, CategoryId = 1, Title = "Хуйня", Price = 1000, Images = ["хуета"] };
+        var request = new HttpRequestMessage(new HttpMethod(method), "/api/Items");
         request.Content = JsonContent.Create(user);
 
         var response = await _client.SendAsync(request);
 
-        var result = await response.Content.ReadFromJsonAsync<RetrievedUserDto>();
+        var result = await response.Content.ReadFromJsonAsync<RetrievedItemDto>();
         response.EnsureSuccessStatusCode();
-        Assert.Equal("Дебил", result!.FirstName);
+        Assert.Equal("Хуйня", result!.Title);
     }
 
     [Theory]
     [InlineData("GET")]
     public async Task Get_ReturnOK(string method)
     {
-        var request = new HttpRequestMessage(new HttpMethod(method), "/api/Users");
+        var request = new HttpRequestMessage(new HttpMethod(method), "/api/Items");
 
         var response = await _client.SendAsync(request);
 
         response.EnsureSuccessStatusCode();
-        var users = (await response.Content.ReadFromJsonAsync<List<RetrievedUsersDto>>())!;
-        Assert.IsType<List<RetrievedUsersDto>>(users);
+        var users = (await response.Content.ReadFromJsonAsync<List<RetrievedItemDto>>())!;
+        Assert.IsType<List<RetrievedItemDto>>(users);
     }
 
     [Theory]
     [InlineData("GET")]
     public async Task GetById_ReturnOK(string method)
     {
+        const int id = 10000;
         try
         {
-            _context.Users.Add(new User
-                { Id = 10000, FirstName = "Тест", Email = "test@example.com", Password = "Хуесос" });
+            _context.Items.Add(new Item
+                { Id = id, UserId = 1, CategoryId = 1, Title = "Хуйня", Images = ["хуйня"], Price = 1000 });
             await _context.SaveChangesAsync();
         }
         catch
@@ -69,7 +70,7 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
         var request = new HttpRequestMessage(new HttpMethod(method), "api/Users/10000");
 
         var response = await _client.SendAsync(request);
-        var responseContent = await response.Content.ReadFromJsonAsync<RetrievedUserDto>();
+        var responseContent = await response.Content.ReadFromJsonAsync<RetrievedItemDto>();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(10000, responseContent!.Id);
@@ -79,7 +80,7 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
     [InlineData("GET")]
     public async Task GetById_ReturnNotFound(string method)
     {
-        var request = new HttpRequestMessage(new HttpMethod(method), "api/Users/10000000");
+        var request = new HttpRequestMessage(new HttpMethod(method), "api/Items/10000000");
 
         var response = await _client.SendAsync(request);
 
@@ -93,8 +94,12 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
         const int id = 200;
         try
         {
-            _context.Users.Add(
-                new User { Id = id, FirstName = "Тест", Email = "test@example.com", Password = "Хуесос" });
+            _context.Items.Add(new Item
+            {
+                Id = id, UserId = 1, CategoryId = 1, Status = "created", Title = "Хуйня", Images = ["хуйня"],
+                Price = 1000,
+                CreatedAt = DateTime.UtcNow
+            });
             await _context.SaveChangesAsync();
         }
         catch
@@ -102,8 +107,8 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
             //
         }
 
-        var request = new HttpRequestMessage(new HttpMethod(method), $"/api/Users/{id}");
-        request.Content = JsonContent.Create(new UpdatedUserDto {LastName = "Дураков" });
+        var request = new HttpRequestMessage(new HttpMethod(method), $"/api/Items/{id}");
+        request.Content = JsonContent.Create(new UpdatedItemDto { Title = "Дураков" });
 
         var response = await _client.SendAsync(request);
 
@@ -117,8 +122,12 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
         const int id = 300;
         try
         {
-            _context.Users.Add(
-                new User { Id = id, FirstName = "Тест", Email = "test@example.com", Password = "Хуесос" });
+            _context.Items.Add(new Item
+            {
+                Id = id, UserId = 1, CategoryId = 1, Status = "created", Title = "Хуйня", Images = ["хуйня"],
+                Price = 1000,
+                CreatedAt = DateTime.UtcNow
+            });
             await _context.SaveChangesAsync();
         }
         catch
@@ -126,7 +135,7 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
             //
         }
 
-        var request = new HttpRequestMessage(new HttpMethod(method), $"api/Users/{id}");
+        var request = new HttpRequestMessage(new HttpMethod(method), $"api/Items/{id}");
 
         var response = await _client.SendAsync(request);
 
