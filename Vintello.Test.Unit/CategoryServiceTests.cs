@@ -12,8 +12,8 @@ public class CategoryServiceTests
     [Fact]
     public async Task CreateAsync_CategoryCreated_ReturnRetrievedCategory()
     {
-        var createdCategoryDto = new CreatedCategoryDto { Name = "Говно", Description = "Хуйня" };
-        var createdCategory = new Category { Id = 1, Name = "Говно", Description = "Хуйня" };
+        var createdCategoryDto = new CreatedCategoryDto { Name = "Тестовая категория", Description = "Тестовая категория" };
+        var createdCategory = new Category { Id = 1, Name = "Тестовая категория", Description = "Тестовая категория" };
 
         var mockRepo = new Mock<ICategoryRepository>();
         var mockMapper = new Mock<IMapper>();
@@ -26,20 +26,20 @@ public class CategoryServiceTests
             .Returns(createdCategory);
         mockMapper
             .Setup(m => m.Map<RetrievedCategoryDto>(It.IsAny<Category>()))
-            .Returns(new RetrievedCategoryDto { Id = 1, Name = "Говно", Description = "Хуйня" });
+            .Returns(new RetrievedCategoryDto { Id = 1, Name = "Тестовая категория", Description = "Тестовая категория" });
 
         CategoryService service = new CategoryService(mockRepo.Object, mockMapper.Object);
         var result = await service.CreateAsync(createdCategoryDto);
 
         Assert.NotNull(result);
         Assert.IsType<RetrievedCategoryDto>(result);
-        Assert.Equal("Говно", result.Name);
+        Assert.Equal("Тестовая категория", result.Name);
     }
     
     [Fact]
     public async Task CreateAsync_CategoryNotCreated_ReturnNull()
     {
-        var createdCategoryDto = new CreatedCategoryDto { Description = "Хуйня" };
+        var createdCategoryDto = new CreatedCategoryDto { Description = "Тестовая категория" };
 
         var mockRepo = new Mock<ICategoryRepository>();
         var mockMapper = new Mock<IMapper>();
@@ -49,7 +49,7 @@ public class CategoryServiceTests
             .ReturnsAsync(null as Category);
         mockMapper
             .Setup(m => m.Map<Category>(It.IsAny<CreatedCategoryDto>()))
-            .Returns(new Category { Description = "Хуйня" });
+            .Returns(new Category { Description = "Тестовая категория" });
 
         CategoryService service = new CategoryService(mockRepo.Object, mockMapper.Object);
         var result = await service.CreateAsync(createdCategoryDto);
@@ -62,15 +62,15 @@ public class CategoryServiceTests
     {
         IEnumerable<RetrievedCategoriesDto> retrievedCategoriesDto = new List<RetrievedCategoriesDto>
         {
-            new RetrievedCategoriesDto{Id = 1, Name = "Хуйня"},
-            new RetrievedCategoriesDto{Id = 2, Name = "Хуйня"},
-            new RetrievedCategoriesDto{Id = 3, Name = "Хуйня"}
+            new RetrievedCategoriesDto{Id = 1, Name = "Тестовая категория"},
+            new RetrievedCategoriesDto{Id = 2, Name = "Тестовая категория"},
+            new RetrievedCategoriesDto{Id = 3, Name = "Тестовая категория"}
         };
         IEnumerable<Category> retrievedCategories = new List<Category>
         {
-            new Category{Id = 1, Name = "Хуйня"},
-            new Category{Id = 2, Name = "Хуйня"},
-            new Category{Id = 3, Name = "Хуйня"}
+            new Category{Id = 1, Name = "Тестовая категория"},
+            new Category{Id = 2, Name = "Тестовая категория"},
+            new Category{Id = 3, Name = "Тестовая категория"}
         };
         
         var mockRepo = new Mock<ICategoryRepository>();
@@ -94,14 +94,14 @@ public class CategoryServiceTests
     [Fact]
     public async Task RetrieveByIdAsync_CategoryFound_ReturnRetrievedCategoryDto()
     {
-        var retrievedCategoryDto = new RetrievedCategoryDto{Id = 1, Name = "Хуйня"};
+        var retrievedCategoryDto = new RetrievedCategoryDto{Id = 1, Name = "Тестовая категория"};
         
         var mockRepo = new Mock<ICategoryRepository>();
         var mockMapper = new Mock<IMapper>();
 
         mockRepo
             .Setup(m => m.RetrieveByIdAsync(1))
-            .ReturnsAsync(new Category{Id = 1, Name = "Хуйня"});
+            .ReturnsAsync(new Category{Id = 1, Name = "Тестовая категория"});
         mockMapper
             .Setup(m => m.Map<RetrievedCategoryDto>(It.IsAny<Category>()))
             .Returns(retrievedCategoryDto);
@@ -150,9 +150,9 @@ public class CategoryServiceTests
     [Fact]
     public async Task UpdateAsync_CategoryNotUpdated_ReturnFalse()
     {
-        UpdatedCategoryDto updatedCategoryDto = new UpdatedCategoryDto{Name = "Хех"};
-        Category category = new Category { Id = 1, Name = "Хух" };
-        Category updatedCategory = new Category { Id = 1, Name = "Хeх" };
+        UpdatedCategoryDto updatedCategoryDto = new UpdatedCategoryDto{Name = "Тестовая категория"};
+        Category category = new Category { Id = 1, Name = "Тестовая категория" };
+        Category updatedCategory = new Category { Id = 1, Name = "Тестовая категория" };
         
         var mockRepo = new Mock<ICategoryRepository>();
         var mockMapper = new Mock<IMapper>();
@@ -177,9 +177,9 @@ public class CategoryServiceTests
     [Fact]
     public async Task UpdateAsync_CategoryUpdated_ReturnTrue()
     {
-        UpdatedCategoryDto updatedCategoryDto = new UpdatedCategoryDto{Name = "Хех"};
-        Category category = new Category { Id = 1, Name = "Хух" };
-        Category updatedCategory = new Category { Id = 1, Name = "Хeх" };
+        UpdatedCategoryDto updatedCategoryDto = new UpdatedCategoryDto{Name = "Тестовая категория"};
+        Category category = new Category { Id = 1, Name = "Тестовая категория" };
+        Category updatedCategory = new Category { Id = 1, Name = "Тестовая категория" };
         
         var mockRepo = new Mock<ICategoryRepository>();
         var mockMapper = new Mock<IMapper>();
@@ -221,7 +221,7 @@ public class CategoryServiceTests
     [Fact]
     public async Task DeleteAsync_CategoryNotDeleted_ReturnFalse()
     {
-        Category category = new Category { Id = 1, Name = "Хух" };
+        Category category = new Category { Id = 1, Name = "Тестовая категория" };
         var mockRepo = new Mock<ICategoryRepository>();
         var mockMapper = new Mock<IMapper>();
 
@@ -242,7 +242,7 @@ public class CategoryServiceTests
     [Fact]
     public async Task DeleteAsync_CategoryDeleted_ReturnTrue()
     {
-        Category category = new Category { Id = 1, Name = "Хух" };
+        Category category = new Category { Id = 1, Name = "Тестовая категория" };
         var mockRepo = new Mock<ICategoryRepository>();
         var mockMapper = new Mock<IMapper>();
 
