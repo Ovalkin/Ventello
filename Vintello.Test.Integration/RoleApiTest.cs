@@ -26,7 +26,7 @@ public class RoleApiTest : IClassFixture<WebApplicationFactory<Program>>
     [InlineData("POST")]
     public async Task Post_ReturnCreated(string method)
     {
-        CreatedRolesDto role = new CreatedRolesDto { Name = "Дебил" };
+        CreatedRolesDto role = new CreatedRolesDto { Name = "Тестовая роль" };
         var request = new HttpRequestMessage(new HttpMethod(method), "/api/Roles");
         request.Content = JsonContent.Create(role);
 
@@ -56,7 +56,7 @@ public class RoleApiTest : IClassFixture<WebApplicationFactory<Program>>
     {
         try
         {
-            _context.Roles.Add(new Role { Id = 10000, Name = "Тест" });
+            _context.Roles.Add(new Role { Id = 10000, Name = "Тестовая роль" });
             await _context.SaveChangesAsync();
         }
         catch 
@@ -91,7 +91,7 @@ public class RoleApiTest : IClassFixture<WebApplicationFactory<Program>>
         const int id = 200;
         try
         {
-            _context.Roles.Add(new Role { Id = id, Name = "Фигня", Description = "Обычная" });
+            _context.Roles.Add(new Role { Id = id, Name = "Тестовая роль", Description = "Тестовая роль" });
             await _context.SaveChangesAsync();
         }
         catch
@@ -100,7 +100,7 @@ public class RoleApiTest : IClassFixture<WebApplicationFactory<Program>>
         }
 
         var request = new HttpRequestMessage(new HttpMethod(method), $"api/Roles/{id}");
-        request.Content = JsonContent.Create(new UpdatedRoleDto { Name = "Фигня обновленная" });
+        request.Content = JsonContent.Create(new UpdatedRoleDto { Name = "Изменная роль" });
 
         var response = await _client.SendAsync(request);
 
@@ -117,7 +117,7 @@ public class RoleApiTest : IClassFixture<WebApplicationFactory<Program>>
             _context.Roles.Add(new Role
             {
                 Id = id,
-                Name = "Удаляемая категория",
+                Name = "Удаляемая роль",
                 Description = "Не должна оставаться в бд"
             });
             await _context.SaveChangesAsync();

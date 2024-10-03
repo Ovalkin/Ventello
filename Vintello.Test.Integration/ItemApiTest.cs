@@ -27,7 +27,7 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
     public async Task Post_ReturnCreated(string method)
     {
         CreatedItemDto user = new CreatedItemDto
-            { UserId = 1, CategoryId = 1, Title = "Хуйня", Price = 1000, Images = ["хуета"] };
+            { UserId = 1, CategoryId = 1, Title = "Тестовый айтем", Price = 1000, Images = ["путь"] };
         var request = new HttpRequestMessage(new HttpMethod(method), "/api/Items");
         request.Content = JsonContent.Create(user);
 
@@ -59,7 +59,7 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
         try
         {
             _context.Items.Add(new Item
-                { Id = id, UserId = 1, CategoryId = 1, Title = "Хуйня", Images = ["хуйня"], Price = 1000 });
+                { Id = id, UserId = 1, CategoryId = 1, Title = "Тестовый айтем", Images = ["путь"], Price = 1000 });
             await _context.SaveChangesAsync();
         }
         catch
@@ -67,7 +67,7 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
             //
         }
 
-        var request = new HttpRequestMessage(new HttpMethod(method), "api/Users/10000");
+        var request = new HttpRequestMessage(new HttpMethod(method), "api/Item/10000");
 
         var response = await _client.SendAsync(request);
         var responseContent = await response.Content.ReadFromJsonAsync<RetrievedItemDto>();
@@ -96,7 +96,7 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
         {
             _context.Items.Add(new Item
             {
-                Id = id, UserId = 1, CategoryId = 1, Status = "created", Title = "Хуйня", Images = ["хуйня"],
+                Id = id, UserId = 1, CategoryId = 1, Status = "created", Title = "Тестовый айтем", Images = ["путь"],
                 Price = 1000,
                 CreatedAt = DateTime.UtcNow
             });
@@ -108,7 +108,7 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
         }
 
         var request = new HttpRequestMessage(new HttpMethod(method), $"/api/Items/{id}");
-        request.Content = JsonContent.Create(new UpdatedItemDto { Title = "Дураков" });
+        request.Content = JsonContent.Create(new UpdatedItemDto { Title = "Тестовый измененный айтем" });
 
         var response = await _client.SendAsync(request);
 
@@ -124,7 +124,7 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
         {
             _context.Items.Add(new Item
             {
-                Id = id, UserId = 1, CategoryId = 1, Status = "created", Title = "Хуйня", Images = ["хуйня"],
+                Id = id, UserId = 1, CategoryId = 1, Status = "created", Title = "Тестовый айтем", Images = ["путь"],
                 Price = 1000,
                 CreatedAt = DateTime.UtcNow
             });

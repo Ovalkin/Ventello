@@ -27,7 +27,7 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
     public async Task Post_ReturnCreated(string method)
     {
         CreatedUserDto user = new CreatedUserDto
-            { FirstName = "Дебил", Email = "test@example.com", Password = "Хуесос" };
+            { FirstName = "Имя", Email = "test@example.com", Password = "пароль" };
         var request = new HttpRequestMessage(new HttpMethod(method), "/api/Users");
         request.Content = JsonContent.Create(user);
 
@@ -58,7 +58,7 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
         try
         {
             _context.Users.Add(new User
-                { Id = 10000, FirstName = "Тест", Email = "test@example.com", Password = "Хуесос" });
+                { Id = 10000, FirstName = "Имя", Email = "test@example.com", Password = "пароль" });
             await _context.SaveChangesAsync();
         }
         catch
@@ -94,7 +94,7 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
         try
         {
             _context.Users.Add(
-                new User { Id = id, FirstName = "Тест", Email = "test@example.com", Password = "Хуесос" });
+                new User { Id = id, FirstName = "Имя", Email = "test@example.com", Password = "пароль" });
             await _context.SaveChangesAsync();
         }
         catch
@@ -103,7 +103,7 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
         }
 
         var request = new HttpRequestMessage(new HttpMethod(method), $"/api/Users/{id}");
-        request.Content = JsonContent.Create(new UpdatedUserDto {LastName = "Дураков" });
+        request.Content = JsonContent.Create(new UpdatedUserDto {LastName = "Фамилия" });
 
         var response = await _client.SendAsync(request);
 
@@ -118,7 +118,7 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
         try
         {
             _context.Users.Add(
-                new User { Id = id, FirstName = "Тест", Email = "test@example.com", Password = "Хуесос" });
+                new User { Id = id, FirstName = "Имя", Email = "test@example.com", Password = "пароль" });
             await _context.SaveChangesAsync();
         }
         catch
