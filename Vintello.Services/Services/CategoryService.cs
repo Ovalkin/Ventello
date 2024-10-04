@@ -18,22 +18,22 @@ public class CategoryService : ICategoryService
 
     public async Task<RetrievedCategoryDto?> CreateAsync(CreatedCategoryDto categoryDto)
     {
-        Category? category = await _repo.CreateAsync(_mapper.Map<Category>(categoryDto));
-        if (category is not null) return _mapper.Map<RetrievedCategoryDto>(category);
+        Category? category = await _repo.CreateAsync(CategoryDto.CreateCategory(categoryDto));
+        if (category is not null) return  CategoryDto.CreateDto<RetrievedCategoryDto>(category);
         return null;
     }
 
     public async Task<IEnumerable<RetrievedCategoriesDto>> RetrieveAsync()
     {
         var categories = await _repo.RetrieveAllAsync();
-        return _mapper.Map<IEnumerable<RetrievedCategoriesDto>>(categories);
+        return CategoryDto.CreateDto<RetrievedCategoriesDto>(categories);
     }
 
     public async Task<RetrievedCategoryDto?> RetrieveByIdAsync(int id)
     {
         Category? category = await _repo.RetrieveByIdAsync(id);
         if (category is null) return null;
-        return _mapper.Map<RetrievedCategoryDto>(category);
+        return CategoryDto.CreateDto<RetrievedCategoryDto>(category);
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedCategoryDto category)
@@ -41,7 +41,7 @@ public class CategoryService : ICategoryService
         Category? existing = await _repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
 
-        Category updatedCategory = _mapper.Map(category, existing);
+        Category updatedCategory = CategoryDto.CreateCategory(category, existing);
 
         Category? updated = await _repo.UpdateAsync(id, updatedCategory);
         if (updated is null) return false;
