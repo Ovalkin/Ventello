@@ -18,7 +18,7 @@ public class RolesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateRole([FromBody] CreatedRolesDto role)
+    public async Task<IActionResult> CreateRole([FromBody] CreatedRoleDto role)
     {
         if (!ModelState.IsValid) return BadRequest();
         RetrievedRoleDto? createdRole = await _service.CreateAsync(role);

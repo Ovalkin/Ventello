@@ -17,7 +17,7 @@ public class AppMappingProfile : Profile
             .ForAllMembers(ops => ops
                 .Condition((_, _, srcMember) => srcMember != null));
         
-        CreateMap<CreatedRolesDto, Role>().ReverseMap();
+        CreateMap<CreatedRoleDto, Role>().ReverseMap();
         CreateMap<RetrievedRolesDto, Role>().ReverseMap();
         CreateMap<Role, RetrievedRoleDto>()
             .ForMember(r => r.Users, expression => expression.MapFrom(src => src.Users ))

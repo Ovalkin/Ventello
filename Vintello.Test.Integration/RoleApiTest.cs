@@ -26,7 +26,7 @@ public class RoleApiTest : IClassFixture<WebApplicationFactory<Program>>
     [InlineData("POST")]
     public async Task Post_ReturnCreated(string method)
     {
-        CreatedRolesDto role = new CreatedRolesDto { Name = "Тестовая роль" };
+        CreatedRoleDto role = new CreatedRoleDto { Name = "Тестовая роль" };
         var request = new HttpRequestMessage(new HttpMethod(method), "/api/Roles");
         request.Content = JsonContent.Create(role);
 
@@ -34,7 +34,7 @@ public class RoleApiTest : IClassFixture<WebApplicationFactory<Program>>
         
         var result = await response.Content.ReadFromJsonAsync<RetrievedRoleDto>();
         response.EnsureSuccessStatusCode();
-        Assert.Equal("Дебил", result!.Name);
+        Assert.Equal("Тестовая роль", result!.Name);
     }
     
     [Theory]
