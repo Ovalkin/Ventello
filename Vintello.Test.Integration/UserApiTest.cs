@@ -35,7 +35,7 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
 
         var result = await response.Content.ReadFromJsonAsync<RetrievedUserDto>();
         response.EnsureSuccessStatusCode();
-        Assert.Equal("Дебил", result!.FirstName);
+        Assert.Equal("Имя", result!.FirstName);
     }
 
     [Theory]

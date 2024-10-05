@@ -7,7 +7,6 @@ public class UpdatedCategoryDto
 {
     [RegularExpression(@"^\D*$", ErrorMessage = "Имя может содержать только слова!")]
     public string? Name { get; set; }
-
     public string? Description { get; set; }
 
     public static Category CreateCategory(UpdatedCategoryDto categoryDto, Category category)

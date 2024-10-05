@@ -1,5 +1,4 @@
 using Vintello.Common.DTOs;
-using AutoMapper;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Common.Repositories;
 

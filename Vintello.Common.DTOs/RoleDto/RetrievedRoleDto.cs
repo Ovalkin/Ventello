@@ -15,7 +15,8 @@ public class RetrievedRoleDto
         {
             Id = role.Id,
             Name = role.Name,
-            Description = role.Description
+            Description = role.Description,
+            Users = RetrievedUsersDto.CreateDto(role.Users).ToList()
         };
     }
 }

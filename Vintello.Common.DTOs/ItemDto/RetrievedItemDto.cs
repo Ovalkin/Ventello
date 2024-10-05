@@ -31,9 +31,9 @@ public class RetrievedItemDto
             Images = item.Images
         };
     }
-    public static IEnumerable<RetrievedItemDto?> CreateDto(IEnumerable<Item> items)
+    public static IEnumerable<RetrievedItemDto> CreateDto(IEnumerable<Item> items)
     {
-        List<RetrievedItemDto?> result = new();
+        List<RetrievedItemDto> result = new();
         foreach (var item in items)
         {
             result.Add(CreateDto(item));

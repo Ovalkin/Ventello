@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Common.DTOs;
 
@@ -16,4 +17,19 @@ public class CreatedUserDto
     public string Password { get; set; } = null!;
     public string? Location { get; set; }
     public string? ProfilePic { get; set; }
+
+    public static User CreateUser(CreatedUserDto createdUserDto)
+    {
+        return new User
+        {
+            FirstName = createdUserDto.FirstName,
+            LastName = createdUserDto.LastName,
+            Email = createdUserDto.Email,
+            Phone = createdUserDto.Phone,
+            Password = createdUserDto.Password,
+            Location = createdUserDto.Location,
+            ProfilePic = createdUserDto.ProfilePic,
+            CreatedAt = DateTime.Now
+        };
+    }
 }

@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "9qm3fkJ7KN2tDrr96c13rw5qvt2tZMWPnK3xvnd23szSzDVKkTVd0WW2ElG03DL4IqUl9J7HY6g3+kSyVDWYOQ==",
+  "dgSpecHash": "U+KskuWQ2cXN0ocW2iYRQ7R+AjkmQPDIbvKXXu2WYRIiNqzCCCgqG/rMlJ2AyBaUpWqsQbtFMi/Plb10YKLlNw==",
   "success": true,
   "projectFilePath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\egorv\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.4\\microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",

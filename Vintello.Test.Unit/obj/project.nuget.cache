@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "9mtxTM4l2us55VqdVe0kJGavDBS+ONCe4dQauCtBcPv4P/+IB5y2tjc5CqJU4zKeJMkGA3x05o76uFeSGZLAeA==",
+  "dgSpecHash": "FUqrlB9/bMYbsncw7GA7YCvBHSBzP275dVdAU0TKK1EnjPeXO8tdmMBNON0UrX2VsW+wYq650YHvOcN47XN9Qg==",
   "success": true,
   "projectFilePath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Test.Unit\\Vintello.Test.Unit.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\egorv\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",

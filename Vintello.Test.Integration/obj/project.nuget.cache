@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "sOVLpjzhRernIouRMHpUOEwYp9lA/MtN/9S/Jp8L2uzX6za1CK623GClhhoenpXeA82uTxEPxzTi75dA6KW+Cw==",
+  "dgSpecHash": "9/BXthoVOn8/tnsy0HNyd0TntnGsJrBMXeHKZEYKr/Er4VflwLY9kxT/z0gm1Llu16ZKckks1LMYb2QI8QZouQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Test.Integration\\Vintello.Test.Integration.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\egorv\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.aspnetcore.mvc.testing\\8.0.8\\microsoft.aspnetcore.mvc.testing.8.0.8.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.aspnetcore.testhost\\8.0.8\\microsoft.aspnetcore.testhost.8.0.8.nupkg.sha512",

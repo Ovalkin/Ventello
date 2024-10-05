@@ -22,9 +22,8 @@ public class CreatedItemDto
     [Required(ErrorMessage = "Фотографии обязательны!")]
     public List<string>? Images { get; set; } = null!;
     
-    public static Item? CreateItem(CreatedItemDto? itemDto)
+    public static Item CreateItem(CreatedItemDto itemDto)
     {
-        if (itemDto is null) return null;
         return new Item
         {
             UserId = itemDto.UserId,

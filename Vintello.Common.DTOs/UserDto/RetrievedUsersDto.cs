@@ -1,3 +1,5 @@
+using Vintello.Common.EntityModel.PostgreSql;
+
 namespace Vintello.Common.DTOs;
 
 public class RetrievedUsersDto
@@ -13,4 +15,27 @@ public class RetrievedUsersDto
     public string? Bio { get; set; }
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+
+    public static IEnumerable<RetrievedUsersDto> CreateDto(IEnumerable<User> users)
+    {
+        List<RetrievedUsersDto> result = new();
+        foreach (var user in users)
+        {
+            result.Add(new RetrievedUsersDto
+            {
+                Id = user.Id,
+                RoleId = user.RoleId,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.Phone,
+                Location = user.Location,
+                ProfilePic = user.ProfilePic,
+                Bio = user.Bio,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt,
+            });
+        }
+        return result.AsEnumerable();
+    }
 }

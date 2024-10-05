@@ -1,4 +1,3 @@
-using AutoMapper;
 using Vintello.Common.DTOs;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Common.Repositories;
@@ -23,7 +22,7 @@ public class ItemService : IItemService
 
     public async Task<IEnumerable<RetrievedItemDto>> RetrieveAsync(string? status, int? user, int? category)
     {
-        IEnumerable<RetrievedItemDto> allItems = RetrievedItemDto.CreateDto((await _repo.RetrieveAllAsync()).ToList())!;
+        IEnumerable<RetrievedItemDto> allItems = RetrievedItemDto.CreateDto((await _repo.RetrieveAllAsync()).ToList());
         if (string.IsNullOrWhiteSpace(status) && user is null && category is null) return allItems;
         var retrievedItemsDto = allItems as RetrievedItemDto[] ?? allItems.ToArray();
         IEnumerable<RetrievedItemDto> items = retrievedItemsDto;
@@ -38,7 +37,9 @@ public class ItemService : IItemService
 
     public async Task<RetrievedItemDto?> RetrieveByIdAsync(int id)
     {
-        return RetrievedItemDto.CreateDto((await _repo.RetrieveByIdAsync(id))!);
+        Item? item = await _repo.RetrieveByIdAsync(id);
+        if (item is null) return null;
+        return RetrievedItemDto.CreateDto(item);
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedItemDto item)
