@@ -27,7 +27,7 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
     public async Task Post_ReturnCreated(string method)
     {
         CreatedItemDto user = new CreatedItemDto
-            { UserId = 1, CategoryId = 1, Title = "Тестовый айтем", Price = 1000, Images = ["путь"] };
+            { UserId = 1, CategoryId = 1, Title = "Тестовый айтем", Price = 1000.00m, Images = ["путь"] };
         var request = new HttpRequestMessage(new HttpMethod(method), "/api/Items");
         request.Content = JsonContent.Create(user);
 
@@ -35,7 +35,7 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
 
         var result = await response.Content.ReadFromJsonAsync<RetrievedItemDto>();
         response.EnsureSuccessStatusCode();
-        Assert.Equal("Хуйня", result!.Title);
+        Assert.Equal("Тестовый айтем", result!.Title);
     }
 
     [Theory]
@@ -59,7 +59,16 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
         try
         {
             _context.Items.Add(new Item
-                { Id = id, UserId = 1, CategoryId = 1, Title = "Тестовый айтем", Images = ["путь"], Price = 1000 });
+            {
+                Id = id,
+                UserId = 1,
+                CategoryId = 1,
+                Title = "Тестовый айтем",
+                Status = "create",
+                CreatedAt = DateTime.Now,
+                Images = ["путь"],
+                Price = 1000.00m
+            });
             await _context.SaveChangesAsync();
         }
         catch
@@ -67,7 +76,7 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
             //
         }
 
-        var request = new HttpRequestMessage(new HttpMethod(method), "api/Item/10000");
+        var request = new HttpRequestMessage(new HttpMethod(method), $"api/Items/{id}");
 
         var response = await _client.SendAsync(request);
         var responseContent = await response.Content.ReadFromJsonAsync<RetrievedItemDto>();
@@ -96,9 +105,14 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
         {
             _context.Items.Add(new Item
             {
-                Id = id, UserId = 1, CategoryId = 1, Status = "created", Title = "Тестовый айтем", Images = ["путь"],
-                Price = 1000,
-                CreatedAt = DateTime.UtcNow
+                Id = id,
+                UserId = 1,
+                CategoryId = 1,
+                Title = "Тестовый айтем",
+                Status = "create",
+                CreatedAt = DateTime.Now,
+                Images = ["путь"],
+                Price = 1000.00m
             });
             await _context.SaveChangesAsync();
         }
@@ -124,9 +138,14 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
         {
             _context.Items.Add(new Item
             {
-                Id = id, UserId = 1, CategoryId = 1, Status = "created", Title = "Тестовый айтем", Images = ["путь"],
-                Price = 1000,
-                CreatedAt = DateTime.UtcNow
+                Id = id,
+                UserId = 1,
+                CategoryId = 1,
+                Title = "Тестовый айтем",
+                Status = "create",
+                CreatedAt = DateTime.Now,
+                Images = ["путь"],
+                Price = 1000.00m
             });
             await _context.SaveChangesAsync();
         }

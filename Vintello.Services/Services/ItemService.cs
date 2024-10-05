@@ -8,26 +8,22 @@ namespace Vintello.Services;
 public class ItemService : IItemService
 {
     private readonly IItemRepository _repo;
-    private readonly IMapper _mapper;
 
-    public ItemService(IItemRepository repo, IMapper mapper)
+    public ItemService(IItemRepository repo)
     {
         _repo = repo;
-        _mapper = mapper;
     }
     
     public async Task<RetrievedItemDto?> CreateAsync(CreatedItemDto item)
     {
-        Item? addItem = _mapper.Map<Item>(item);
-        addItem.Status = "created";
-        addItem.CreatedAt = DateTime.UtcNow;
-        Item? addedItem = await _repo.CreateAsync(addItem);
-        return _mapper.Map<RetrievedItemDto?>(addedItem);
+        Item? addedItem = await _repo.CreateAsync(CreatedItemDto.CreateItem(item));
+        if (addedItem != null) return RetrievedItemDto.CreateDto(addedItem);
+        return null;
     }
 
     public async Task<IEnumerable<RetrievedItemDto>> RetrieveAsync(string? status, int? user, int? category)
     {
-        IEnumerable<RetrievedItemDto> allItems = _mapper.Map<IEnumerable<RetrievedItemDto>>((await _repo.RetrieveAllAsync()).ToList()); 
+        IEnumerable<RetrievedItemDto> allItems = RetrievedItemDto.CreateDto((await _repo.RetrieveAllAsync()).ToList())!;
         if (string.IsNullOrWhiteSpace(status) && user is null && category is null) return allItems;
         var retrievedItemsDto = allItems as RetrievedItemDto[] ?? allItems.ToArray();
         IEnumerable<RetrievedItemDto> items = retrievedItemsDto;
@@ -42,22 +38,14 @@ public class ItemService : IItemService
 
     public async Task<RetrievedItemDto?> RetrieveByIdAsync(int id)
     {
-        return _mapper.Map<RetrievedItemDto?>(await _repo.RetrieveByIdAsync(id));
+        return RetrievedItemDto.CreateDto((await _repo.RetrieveByIdAsync(id))!);
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedItemDto item)
     {
         Item? existing = await _repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
-        int categoryId = existing.CategoryId;
-        int userId = existing.UserId;
-        
-        Item updatedItem = _mapper.Map(item, existing);
-        
-        updatedItem.CategoryId = categoryId;
-        updatedItem.UserId = userId;
-        updatedItem.UpdatedAt = DateTime.UtcNow;
-        
+        Item updatedItem = UpdatedItemDto.CreateItem(item, existing);
         Item? updated = await _repo.UpdateAsync(id, updatedItem);
         if (updated is null) return false;
         return true;

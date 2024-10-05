@@ -7,11 +7,14 @@
     &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.CategoryApiTest.Create_ReturnCreated&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7093dfd2_002D6d30_002D4856_002D9317_002D2a224536ea72/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CategoryApiTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e293c0be_002D6b92_002D465d_002D8d7f_002Dd54f04ffca25/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ItemApiTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.CategoryApiTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
+	
 	
 	
 	

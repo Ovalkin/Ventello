@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Common.DTOs;
 
@@ -13,4 +14,22 @@ public class UpdatedItemDto
     [RegularExpression(@"^\d*$")]
     public decimal? Price { get; set; }
     public List<string>? Images { get; set; }
+
+    public static Item CreateItem(UpdatedItemDto updatedItemDto, Item item)
+    {
+        if (updatedItemDto.CategoryId != null)
+            item.CategoryId = (int)updatedItemDto.CategoryId;
+        if (updatedItemDto.Title != null)
+            item.Title = updatedItemDto.Title;
+        if (updatedItemDto.Description != null)
+            item.Description = updatedItemDto.Description;
+        if (updatedItemDto.Status != null)
+            item.Status = updatedItemDto.Status;
+        if (updatedItemDto.Price != null)
+            item.Price = updatedItemDto.Price;
+        if (updatedItemDto.Images != null)
+            item.Images = updatedItemDto.Images;
+        item.UpdatedAt = DateTime.Now;
+        return item;
+    }
 }

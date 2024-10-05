@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("TestConnection")!);
 //builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();

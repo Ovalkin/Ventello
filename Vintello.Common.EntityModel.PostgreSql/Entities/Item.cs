@@ -37,7 +37,7 @@ public partial class Item
     public DateTime? UpdatedAt { get; set; }
 
     [Column("price")]
-    public int? Price { get; set; }
+    public decimal? Price { get; set; }
 
     [ForeignKey("CategoryId")]
     [InverseProperty("Items")]

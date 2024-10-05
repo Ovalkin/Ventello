@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Common.DTOs;
 
@@ -15,9 +16,25 @@ public class CreatedItemDto
     public string Title { get; set; } = null!;
     public string? Description { get; set; }
     [Required(ErrorMessage = "Цена обязательна!")]
-    [RegularExpression(@"^\d*$")]
+    [RegularExpression(@"^\d*,\d*$")]
     [Range(0, 1_000_000_000, ErrorMessage = "Цена не должна находиться в диапазоне от 0 - 1 000 000 000!")]
     public decimal Price { get; set; }
     [Required(ErrorMessage = "Фотографии обязательны!")]
-    public string[] Images { get; set; } = null!;
+    public List<string>? Images { get; set; } = null!;
+    
+    public static Item? CreateItem(CreatedItemDto? itemDto)
+    {
+        if (itemDto is null) return null;
+        return new Item
+        {
+            UserId = itemDto.UserId,
+            CategoryId = itemDto.CategoryId,
+            Title = itemDto.Title,
+            Description = itemDto.Description,
+            Price = itemDto.Price,
+            Images = itemDto.Images,
+            Status = "created",
+            CreatedAt = DateTime.Now
+        };
+    }
 }

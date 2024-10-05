@@ -28,8 +28,9 @@ public class ItemRepository : IItemRepository
         return null!;
     }
     
-    public async Task<Item?> CreateAsync(Item item)
+    public async Task<Item?> CreateAsync(Item? item)
     {
+        if (item is null) return null;
         Category? category = await _db.Categories.FindAsync(item.CategoryId);
         if (category is null) return null;
         item.Category = category;
