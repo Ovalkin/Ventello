@@ -8,32 +8,30 @@ namespace Vintello.Services;
 public class CategoryService : ICategoryService
 {
     private readonly ICategoryRepository _repo;
-    private readonly IMapper _mapper;
 
-    public CategoryService(ICategoryRepository repo, IMapper mapper)
+    public CategoryService(ICategoryRepository repo)
     {
         _repo = repo;
-        _mapper = mapper;
     }
 
     public async Task<RetrievedCategoryDto?> CreateAsync(CreatedCategoryDto categoryDto)
     {
-        Category? category = await _repo.CreateAsync(CategoryDto.CreateCategory(categoryDto));
-        if (category is not null) return  CategoryDto.CreateDto<RetrievedCategoryDto>(category);
+        Category? category = await _repo.CreateAsync(CreatedCategoryDto.CreateCategory(categoryDto));
+        if (category is not null) return  RetrievedCategoryDto.CreateDto(category);
         return null;
     }
 
     public async Task<IEnumerable<RetrievedCategoriesDto>> RetrieveAsync()
     {
         var categories = await _repo.RetrieveAllAsync();
-        return CategoryDto.CreateDto<RetrievedCategoriesDto>(categories);
+        return RetrievedCategoriesDto.CreateDto(categories);
     }
 
     public async Task<RetrievedCategoryDto?> RetrieveByIdAsync(int id)
     {
         Category? category = await _repo.RetrieveByIdAsync(id);
         if (category is null) return null;
-        return CategoryDto.CreateDto<RetrievedCategoryDto>(category);
+        return RetrievedCategoryDto.CreateDto(category);
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedCategoryDto category)
@@ -41,7 +39,7 @@ public class CategoryService : ICategoryService
         Category? existing = await _repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
 
-        Category updatedCategory = CategoryDto.CreateCategory(category, existing);
+        Category updatedCategory = UpdatedCategoryDto.CreateCategory(category, existing);
 
         Category? updated = await _repo.UpdateAsync(id, updatedCategory);
         if (updated is null) return false;

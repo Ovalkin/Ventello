@@ -3,31 +3,20 @@ using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Common.DTOs;
 
-public class CreatedCategoryDto : CategoryDto
+public class CreatedCategoryDto
 {
     [Required(ErrorMessage = "Имя обязательно!")]
     [RegularExpression(@"^\D*$", ErrorMessage = "Имя может содержать только слова!")]
     public string Name { get; set; } = null!;
+
     public string? Description { get; set; }
 
-    protected override Category GetCategory<TCategoryDto>(TCategoryDto categoryDto)
+    public static Category CreateCategory(CreatedCategoryDto categoryDto)
     {
-        CreatedCategoryDto createdCategoryDto = (categoryDto as CreatedCategoryDto)!;
-        return new Category { Name = createdCategoryDto.Name, Description = createdCategoryDto.Description };
-    }
-
-    protected override CategoryDto GetCategoryDto(Category category)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override IEnumerable<CategoryDto> GetCategoriesDto(IEnumerable<Category> category)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override Category UpdateCategory<TCategoryDto>(TCategoryDto categoryDto, Category category)
-    {
-        throw new NotImplementedException();
+        return new Category
+        {
+            Name = categoryDto.Name,
+            Description = categoryDto.Description
+        };
     }
 }

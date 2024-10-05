@@ -2,14 +2,14 @@ using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Common.DTOs;
 
-public class RetrievedCategoryDto : CategoryDto
+public class RetrievedCategoryDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
     public List<RetrievedItemDto> Items { get; set; } = new();
 
-    protected override CategoryDto GetCategoryDto(Category category)
+    public static RetrievedCategoryDto CreateDto(Category category)
     {
         return new RetrievedCategoryDto
         {
@@ -17,20 +17,5 @@ public class RetrievedCategoryDto : CategoryDto
             Name = category.Name,
             Description = category.Description
         };
-    }
-
-    protected override IEnumerable<CategoryDto> GetCategoriesDto(IEnumerable<Category> category)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override Category UpdateCategory<TCategoryDto>(TCategoryDto categoryDto, Category category)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override Category GetCategory<TCategoryDto>(TCategoryDto categoryDto)
-    {
-        throw new NotImplementedException();
     }
 }

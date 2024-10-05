@@ -24,7 +24,7 @@ public class CategoryApiTest : IClassFixture<WebApplicationFactory<Program>>
 
     [Theory]
     [InlineData("POST")]
-    public async Task Post_ReturnCreated(string method)
+    public async Task Create_ReturnCreated(string method)
     {
         CreatedCategoryDto category = new CreatedCategoryDto { Name = "Тестовая категория" };
         var request = new HttpRequestMessage(new HttpMethod(method), "/api/Categories");
