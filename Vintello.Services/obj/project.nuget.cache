@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "U+KskuWQ2cXN0ocW2iYRQ7R+AjkmQPDIbvKXXu2WYRIiNqzCCCgqG/rMlJ2AyBaUpWqsQbtFMi/Plb10YKLlNw==",
+  "dgSpecHash": "tdd9Nlj8obZ1UgzCx64KerrY4Is1cdnp7Z04H9oGr+IWjtwZYcvdsr0eoprgRWTlUmNRHjeEPneEJDMI5YNGjQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\egorv\\.nuget\\packages\\microsoft.bcl.timeprovider\\8.0.1\\microsoft.bcl.timeprovider.8.0.1.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.4\\microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",
@@ -17,8 +18,13 @@
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\egorv\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.1.1\\microsoft.identitymodel.abstractions.8.1.1.nupkg.sha512",
+    "C:\\Users\\egorv\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.1.1\\microsoft.identitymodel.jsonwebtokens.8.1.1.nupkg.sha512",
+    "C:\\Users\\egorv\\.nuget\\packages\\microsoft.identitymodel.logging\\8.1.1\\microsoft.identitymodel.logging.8.1.1.nupkg.sha512",
+    "C:\\Users\\egorv\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.1.1\\microsoft.identitymodel.tokens.8.1.1.nupkg.sha512",
     "C:\\Users\\egorv\\.nuget\\packages\\npgsql\\8.0.3\\npgsql.8.0.3.nupkg.sha512",
-    "C:\\Users\\egorv\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.4\\npgsql.entityframeworkcore.postgresql.8.0.4.nupkg.sha512"
+    "C:\\Users\\egorv\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.4\\npgsql.entityframeworkcore.postgresql.8.0.4.nupkg.sha512",
+    "C:\\Users\\egorv\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.1.1\\system.identitymodel.tokens.jwt.8.1.1.nupkg.sha512"
   ],
   "logs": []
 }
