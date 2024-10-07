@@ -11,7 +11,7 @@ public class UpdatedItemDto
     public string? Title { get; set; }
     public string? Description { get; set; }
     public string? Status { get; set; } 
-    [RegularExpression(@"^\d*$")]
+    [RegularExpression(@"(^\d*,\d*$)|(^\d*$)")]
     public decimal? Price { get; set; }
     public List<string>? Images { get; set; }
 

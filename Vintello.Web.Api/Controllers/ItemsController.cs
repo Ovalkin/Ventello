@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
 using Vintello.Services;
@@ -18,8 +19,10 @@ public class ItemsController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedItemDto))]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> CreateItem([FromBody] CreatedItemDto item)
     {
+        item.Price = (decimal)item.Price;
         if (!ModelState.IsValid) return BadRequest();
         RetrievedItemDto? createdItem = await _service.CreateAsync(item);
         if (createdItem is null) return BadRequest();
