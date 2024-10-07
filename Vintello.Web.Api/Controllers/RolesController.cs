@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
 using Vintello.Services;
@@ -18,6 +19,7 @@ public class RolesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> CreateRole([FromBody] CreatedRoleDto role)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -49,6 +51,7 @@ public class RolesController : ControllerBase
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> UpdateRole(int id, [FromBody] UpdatedRoleDto role)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -62,6 +65,7 @@ public class RolesController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> DeleteRole(int id)
     {
         bool? deleted = await _service.DeleteAsync(id);

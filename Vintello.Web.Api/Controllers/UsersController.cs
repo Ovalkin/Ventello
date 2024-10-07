@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
 using Vintello.Services;
@@ -49,6 +50,7 @@ public class UsersController : ControllerBase
     [ProducesResponseType(404)]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdatedUserDto user)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -62,6 +64,7 @@ public class UsersController : ControllerBase
     [ProducesResponseType(404)]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> DeleteUser(int id)
     {
         bool? deleted = await _service.DeleteAsync(id);

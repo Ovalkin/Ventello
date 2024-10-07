@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
 using Vintello.Services;
@@ -18,6 +19,7 @@ public class CategoriesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedCategoryDto))]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> CreateCategory([FromBody] CreatedCategoryDto category)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -49,6 +51,7 @@ public class CategoriesController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdatedCategoryDto category)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -62,6 +65,7 @@ public class CategoriesController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> DeleteCategory(int id)
     {
         bool? deleted = await _service.DeleteAsync(id);

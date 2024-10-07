@@ -22,7 +22,6 @@ public class ItemsController : ControllerBase
     [Authorize]
     public async Task<IActionResult> CreateItem([FromBody] CreatedItemDto item)
     {
-        item.Price = (decimal)item.Price;
         if (!ModelState.IsValid) return BadRequest();
         RetrievedItemDto? createdItem = await _service.CreateAsync(item);
         if (createdItem is null) return BadRequest();
@@ -52,6 +51,7 @@ public class ItemsController : ControllerBase
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> UpdateItem(int id, UpdatedItemDto item)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -65,6 +65,7 @@ public class ItemsController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
+    [Authorize]
     public async Task<IActionResult> RemoveItem(int id)
     {
         bool? deleted = await _service.DeleteAsync(id);
