@@ -22,6 +22,7 @@ public class CreatedUserDto
     {
         return new User
         {
+            RoleId = 1,
             FirstName = createdUserDto.FirstName,
             LastName = createdUserDto.LastName,
             Email = createdUserDto.Email,

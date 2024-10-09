@@ -20,7 +20,7 @@ public class CreatedItemDto
     [Range(0, 1_000_000_000, ErrorMessage = "Цена не должна находиться в диапазоне от 0 - 1 000 000 000!")]
     public decimal Price { get; set; }
     [Required(ErrorMessage = "Фотографии обязательны!")]
-    public List<string>? Images { get; set; } = null!;
+    public List<string> Images { get; set; } = null!;
     
     public static Item CreateItem(CreatedItemDto itemDto)
     {

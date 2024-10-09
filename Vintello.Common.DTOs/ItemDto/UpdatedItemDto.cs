@@ -26,7 +26,7 @@ public class UpdatedItemDto
         if (updatedItemDto.Status != null)
             item.Status = updatedItemDto.Status;
         if (updatedItemDto.Price != null)
-            item.Price = updatedItemDto.Price;
+            item.Price = (decimal)updatedItemDto.Price;
         if (updatedItemDto.Images != null)
             item.Images = updatedItemDto.Images;
         item.UpdatedAt = DateTime.Now;
