@@ -15,7 +15,7 @@ public class CategoriesController : ControllerBase
     {
         _service = service;
     }
-    
+
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedCategoryDto))]
     [ProducesResponseType(400)]
@@ -25,8 +25,8 @@ public class CategoriesController : ControllerBase
         if (!ModelState.IsValid) return BadRequest();
         RetrievedCategoryDto? createdCategory = await _service.CreateAsync(category);
         if (createdCategory is null) return BadRequest();
-        return CreatedAtRoute(nameof(GetCategory),
-            new { id = createdCategory.Id },
+        return CreatedAtRoute(
+            nameof(GetCategory), new { id = createdCategory.Id },
             createdCategory);
     }
 

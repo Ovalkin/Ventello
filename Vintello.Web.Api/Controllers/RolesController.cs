@@ -25,8 +25,7 @@ public class RolesController : ControllerBase
         if (!ModelState.IsValid) return BadRequest();
         RetrievedRoleDto? createdRole = await _service.CreateAsync(role);
         if (createdRole is null) return BadRequest();
-        return CreatedAtRoute(nameof(RetrieveRole),
-            new { id = createdRole.Id },
+        return CreatedAtRoute(nameof(RetrieveRole), new { id = createdRole.Id },
             createdRole);
     }
 

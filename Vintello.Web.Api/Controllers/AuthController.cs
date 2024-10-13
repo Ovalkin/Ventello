@@ -18,6 +18,8 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -26,4 +28,6 @@ public class AuthController : ControllerBase
         string token = _serviceJwt.GenerateToken(user);
         return Ok(token);
     }
+    
+    
 }

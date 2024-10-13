@@ -23,6 +23,9 @@ public partial class VintelloContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("host=localhost; port=5432; database=vintello;  username=postgres;  password=7878;");
+    
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //     => optionsBuilder.Use
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

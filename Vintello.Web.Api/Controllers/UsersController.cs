@@ -24,8 +24,7 @@ public class UsersController : ControllerBase
         if (!ModelState.IsValid) return BadRequest();
         RetrievedUserDto? createdUser = await _service.CreateAsync(user);
         if (createdUser is null) return BadRequest();
-        return CreatedAtRoute(nameof(RetrieveUser),
-            new { id = createdUser.Id },
+        return CreatedAtRoute(nameof(RetrieveUser), new { id = createdUser.Id },
             createdUser);
     }
 

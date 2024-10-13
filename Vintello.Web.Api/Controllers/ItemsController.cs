@@ -25,8 +25,7 @@ public class ItemsController : ControllerBase
         if (!ModelState.IsValid) return BadRequest();
         RetrievedItemDto? createdItem = await _service.CreateAsync(item);
         if (createdItem is null) return BadRequest();
-        return CreatedAtRoute(nameof(RetrieveItem),
-            new { id = createdItem.Id },
+        return CreatedAtRoute(nameof(RetrieveItem), new { id = createdItem.Id },
             createdItem);
     }
 
@@ -66,7 +65,7 @@ public class ItemsController : ControllerBase
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
     [Authorize]
-    public async Task<IActionResult> RemoveItem(int id)
+    public async Task<IActionResult> DeleteItem(int id)
     {
         bool? deleted = await _service.DeleteAsync(id);
         if (deleted == true) return NoContent();
