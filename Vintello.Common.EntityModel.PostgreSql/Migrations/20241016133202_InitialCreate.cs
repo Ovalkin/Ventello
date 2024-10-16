@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Vintello.Common.EntityModel.PostgreSql;
 
 #nullable disable
 
@@ -13,6 +14,10 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:Enum:actions", "create,read,update,delete")
+                .Annotation("Npgsql:Enum:entities", "category,item,role,user");
+
             migrationBuilder.CreateTable(
                 name: "categories",
                 columns: table => new
@@ -28,6 +33,32 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PermissionRole",
+                columns: table => new
+                {
+                    PermissionId = table.Column<int>(type: "integer", nullable: false),
+                    RoleId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PermissionRole", x => new { x.PermissionId, x.RoleId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "permissions",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    action = table.Column<Actions>(type: "actions", nullable: false),
+                    entity = table.Column<Entities>(type: "entities", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("permissions_pkey", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "roles",
                 columns: table => new
                 {
@@ -39,6 +70,28 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("roles_pkey", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "roles_permissions",
+                columns: table => new
+                {
+                    role_id = table.Column<int>(type: "integer", nullable: false),
+                    permission_id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("roles_permissions_pkey", x => new { x.role_id, x.permission_id });
+                    table.ForeignKey(
+                        name: "roles_permissions_permission_id_fkey",
+                        column: x => x.permission_id,
+                        principalTable: "permissions",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "roles_permissions_role_id_fkey",
+                        column: x => x.role_id,
+                        principalTable: "roles",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -120,6 +173,11 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_roles_permissions_permission_id",
+                table: "roles_permissions",
+                column: "permission_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_users_role_id",
                 table: "users",
                 column: "role_id");
@@ -144,10 +202,19 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 name: "items");
 
             migrationBuilder.DropTable(
+                name: "PermissionRole");
+
+            migrationBuilder.DropTable(
+                name: "roles_permissions");
+
+            migrationBuilder.DropTable(
                 name: "categories");
 
             migrationBuilder.DropTable(
                 name: "users");
+
+            migrationBuilder.DropTable(
+                name: "permissions");
 
             migrationBuilder.DropTable(
                 name: "roles");
