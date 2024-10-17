@@ -13,6 +13,10 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
             migrationBuilder.InsertData(
                 table: "roles",
                 columns: new[] { "name", "description" },
+                values: new object[] {"SuperAdmin", "Главный администратор"});
+            migrationBuilder.InsertData(
+                table: "roles",
+                columns: new[] { "name", "description" },
                 values: new object[] {"Admin", "Администратор"});
             migrationBuilder.InsertData(
                 table: "roles",
