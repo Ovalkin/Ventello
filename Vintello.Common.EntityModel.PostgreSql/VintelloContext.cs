@@ -8,6 +8,7 @@ public partial class VintelloContext : DbContext
     public VintelloContext()
     {
     }
+
     [Obsolete("Obsolete")]
     static VintelloContext()
         => NpgsqlConnection.GlobalTypeMapper.MapEnum<Actions>().MapEnum<Entities>();
@@ -28,7 +29,8 @@ public partial class VintelloContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("host=localhost; port=5432; database=vintello5;  username=postgres;  password=7878;");
+        => optionsBuilder.UseNpgsql(
+            "host=localhost; port=5432; database=vintello8;  username=postgres;  password=7878;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -36,10 +38,19 @@ public partial class VintelloContext : DbContext
             .HasPostgresEnum<Actions>()
             .HasPostgresEnum<Entities>();
 
-        modelBuilder.Entity<Category>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("categories_pkey");
-        });
+        modelBuilder.HasSequence<int>("categories_id_seq").StartsAt(1).IncrementsBy(1);
+        modelBuilder.HasSequence<int>("items_id_seq").StartsAt(1).IncrementsBy(1);
+        modelBuilder.HasSequence<int>("permissions_id_seq").StartsAt(1).IncrementsBy(1);
+        modelBuilder.HasSequence<int>("roles_id_seq").StartsAt(1).IncrementsBy(1);
+        modelBuilder.HasSequence<int>("users_id_seq").StartsAt(1).IncrementsBy(1);
+        
+        modelBuilder.Entity<Category>().Property(f => f.Id).HasDefaultValueSql("nextval('categories_id_seq'::regclass)");
+        modelBuilder.Entity<Item>().Property(f => f.Id).HasDefaultValueSql("nextval('items_id_seq'::regclass)");
+        modelBuilder.Entity<Permission>().Property(f => f.Id).HasDefaultValueSql("nextval('permissions_id_seq'::regclass)");
+        modelBuilder.Entity<Role>().Property(f => f.Id).HasDefaultValueSql("nextval('roles_id_seq'::regclass)");
+        modelBuilder.Entity<User>().Property(f => f.Id).HasDefaultValueSql("nextval('users_id_seq'::regclass)");
+        
+        modelBuilder.Entity<Category>(entity => { entity.HasKey(e => e.Id).HasName("categories_pkey"); });
 
         modelBuilder.Entity<Item>(entity =>
         {
@@ -52,10 +63,7 @@ public partial class VintelloContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Items).HasConstraintName("items_user_id_fkey");
         });
 
-        modelBuilder.Entity<Permission>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("permissions_pkey");
-        });
+        modelBuilder.Entity<Permission>(entity => { entity.HasKey(e => e.Id).HasName("permissions_pkey"); });
 
         modelBuilder.Entity<Role>(entity =>
         {
