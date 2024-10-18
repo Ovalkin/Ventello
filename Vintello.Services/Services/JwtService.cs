@@ -24,7 +24,7 @@ public class JwtService : IJwtService
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role.Name)
+                new Claim(ClaimTypes.Role, user.Role.ToString())
             }),
             Expires = DateTime.Now.AddMinutes(double.Parse(_confJwt["TokenLifetimeMinutes"]!)),
             Issuer = _confJwt["Issuer"],

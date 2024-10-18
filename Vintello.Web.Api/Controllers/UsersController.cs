@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
+using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Services;
 
 namespace Vintello.Web.Api.Controllers;
@@ -19,7 +20,6 @@ public class UsersController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(400)]
-    
     public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto user)
     {
         if (!ModelState.IsValid) return BadRequest();

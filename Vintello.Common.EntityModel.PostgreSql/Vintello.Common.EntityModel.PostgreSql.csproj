@@ -26,8 +26,4 @@
       <None Remove="obj\**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Migrations\" />
-    </ItemGroup>
-
 </Project>

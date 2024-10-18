@@ -22,7 +22,7 @@ public class CreatedUserDto
     {
         return new User
         {
-            RoleId = 1,
+            Role = RolesEnum.Client,
             FirstName = createdUserDto.FirstName,
             LastName = createdUserDto.LastName,
             Email = createdUserDto.Email,
