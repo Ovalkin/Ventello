@@ -13,8 +13,8 @@ using Vintello.Common.EntityModel.PostgreSql;
 namespace Vintello.Common.EntityModel.PostgreSql.Migrations
 {
     [DbContext(typeof(VintelloContext))]
-    [Migration("20241009174945_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241018042010_SeedRoles")]
+    partial class SeedRoles
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,14 +26,21 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.HasSequence<int>("categories_id_seq");
+
+            modelBuilder.HasSequence<int>("items_id_seq");
+
+            modelBuilder.HasSequence<int>("roles_id_seq");
+
+            modelBuilder.HasSequence<int>("users_id_seq");
+
             modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("nextval('categories_id_seq'::regclass)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
@@ -57,9 +64,8 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("nextval('items_id_seq'::regclass)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer")
@@ -118,9 +124,8 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("nextval('roles_id_seq'::regclass)");
 
                     b.Property<string>("Description")
                         .HasColumnType("text")
@@ -146,9 +151,8 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("nextval('users_id_seq'::regclass)");
 
                     b.Property<string>("Bio")
                         .HasColumnType("text")

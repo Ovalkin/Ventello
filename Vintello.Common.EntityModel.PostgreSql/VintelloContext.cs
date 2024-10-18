@@ -22,19 +22,22 @@ public partial class VintelloContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("host=localhost; port=5432; database=vintello;  username=postgres;  password=7878;");
-    
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //     => optionsBuilder.Use
+        => optionsBuilder.UseNpgsql(
+            "host=localhost; port=5432; database=vintello8;  username=postgres;  password=7878;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasSequence<int>("categories_id_seq").StartsAt(1).IncrementsBy(1);
+        modelBuilder.HasSequence<int>("items_id_seq").StartsAt(1).IncrementsBy(1);
+        modelBuilder.HasSequence<int>("roles_id_seq").StartsAt(1).IncrementsBy(1);
+        modelBuilder.HasSequence<int>("users_id_seq").StartsAt(1).IncrementsBy(1);
         
+        modelBuilder.Entity<Category>().Property(f => f.Id).HasDefaultValueSql("nextval('categories_id_seq'::regclass)");
+        modelBuilder.Entity<Item>().Property(f => f.Id).HasDefaultValueSql("nextval('items_id_seq'::regclass)");
+        modelBuilder.Entity<Role>().Property(f => f.Id).HasDefaultValueSql("nextval('roles_id_seq'::regclass)");
+        modelBuilder.Entity<User>().Property(f => f.Id).HasDefaultValueSql("nextval('users_id_seq'::regclass)");
         
-        modelBuilder.Entity<Category>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("categories_pkey");
-        });
+        modelBuilder.Entity<Category>(entity => { entity.HasKey(e => e.Id).HasName("categories_pkey"); });
 
         modelBuilder.Entity<Item>(entity =>
         {
@@ -46,6 +49,7 @@ public partial class VintelloContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Items).HasConstraintName("items_user_id_fkey");
         });
+
 
         modelBuilder.Entity<Role>(entity =>
         {

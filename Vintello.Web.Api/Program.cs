@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Common.Repositories;
 using Vintello.Services;
+using Vintello.Web.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,8 @@ builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("T
 //builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -65,8 +68,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

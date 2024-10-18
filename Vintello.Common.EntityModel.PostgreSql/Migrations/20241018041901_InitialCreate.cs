@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -13,12 +12,23 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence<int>(
+                name: "categories_id_seq");
+
+            migrationBuilder.CreateSequence<int>(
+                name: "items_id_seq");
+
+            migrationBuilder.CreateSequence<int>(
+                name: "roles_id_seq");
+
+            migrationBuilder.CreateSequence<int>(
+                name: "users_id_seq");
+
             migrationBuilder.CreateTable(
                 name: "categories",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('categories_id_seq'::regclass)"),
                     name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true)
                 },
@@ -31,8 +41,7 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 name: "roles",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('roles_id_seq'::regclass)"),
                     name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
@@ -45,8 +54,7 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 name: "users",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('users_id_seq'::regclass)"),
                     role_id = table.Column<int>(type: "integer", nullable: false),
                     first_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     last_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
@@ -74,8 +82,7 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 name: "items",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('items_id_seq'::regclass)"),
                     user_id = table.Column<int>(type: "integer", nullable: false),
                     category_id = table.Column<int>(type: "integer", nullable: false),
                     title = table.Column<string>(type: "character varying", nullable: false),
@@ -151,6 +158,18 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
 
             migrationBuilder.DropTable(
                 name: "roles");
+
+            migrationBuilder.DropSequence(
+                name: "categories_id_seq");
+
+            migrationBuilder.DropSequence(
+                name: "items_id_seq");
+
+            migrationBuilder.DropSequence(
+                name: "roles_id_seq");
+
+            migrationBuilder.DropSequence(
+                name: "users_id_seq");
         }
     }
 }

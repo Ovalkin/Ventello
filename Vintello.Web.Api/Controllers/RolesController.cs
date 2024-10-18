@@ -19,7 +19,7 @@ public class RolesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(400)]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> CreateRole([FromBody] CreatedRoleDto role)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -39,6 +39,7 @@ public class RolesController : ControllerBase
     [HttpGet("{id}", Name = nameof(RetrieveRole))]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
+    [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> RetrieveRole(int id)
     {
         RetrievedRoleDto? role = await _service.RetrieveByIdAsync(id);
@@ -50,7 +51,7 @@ public class RolesController : ControllerBase
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> UpdateRole(int id, [FromBody] UpdatedRoleDto role)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -64,7 +65,7 @@ public class RolesController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> DeleteRole(int id)
     {
         bool? deleted = await _service.DeleteAsync(id);
