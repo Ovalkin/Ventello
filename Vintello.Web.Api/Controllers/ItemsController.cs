@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
+using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Services;
 
 namespace Vintello.Web.Api.Controllers;

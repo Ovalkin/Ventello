@@ -19,7 +19,7 @@ public class CategoriesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedCategoryDto))]
     [ProducesResponseType(400)]
-    [Authorize]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public async Task<IActionResult> CreateCategory([FromBody] CreatedCategoryDto category)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -51,7 +51,7 @@ public class CategoriesController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    [Authorize]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdatedCategoryDto category)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -65,7 +65,7 @@ public class CategoriesController : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> DeleteCategory(int id)
     {
         bool? deleted = await _service.DeleteAsync(id);

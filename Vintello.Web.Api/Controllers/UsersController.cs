@@ -19,6 +19,7 @@ public class UsersController : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(400)]
+    
     public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto user)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -38,6 +39,7 @@ public class UsersController : ControllerBase
     [HttpGet("{id}", Name = nameof(RetrieveUser))]
     [ProducesResponseType(200, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(404)]
+    [Authorize]
     public async Task<IActionResult> RetrieveUser(int id)
     {
         RetrievedUserDto? user = await _service.RetrieveByIdAsync(id);

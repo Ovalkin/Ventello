@@ -13,7 +13,7 @@ using Vintello.Common.EntityModel.PostgreSql;
 namespace Vintello.Common.EntityModel.PostgreSql.Migrations
 {
     [DbContext(typeof(VintelloContext))]
-    [Migration("20241017063702_SeedRoles")]
+    [Migration("20241018042010_SeedRoles")]
     partial class SeedRoles
     {
         /// <inheritdoc />
@@ -24,50 +24,15 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "actions", new[] { "create", "read", "update", "delete" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "entities", new[] { "category", "item", "role", "user" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.HasSequence<int>("categories_id_seq");
 
             modelBuilder.HasSequence<int>("items_id_seq");
 
-            modelBuilder.HasSequence<int>("permissions_id_seq");
-
             modelBuilder.HasSequence<int>("roles_id_seq");
 
             modelBuilder.HasSequence<int>("users_id_seq");
-
-            modelBuilder.Entity("PermissionRole", b =>
-                {
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("PermissionId", "RoleId");
-
-                    b.ToTable("PermissionRole");
-                });
-
-            modelBuilder.Entity("RolesPermission", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("role_id");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("integer")
-                        .HasColumnName("permission_id");
-
-                    b.HasKey("RoleId", "PermissionId")
-                        .HasName("roles_permissions_pkey");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("roles_permissions", (string)null);
-                });
 
             modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.Category", b =>
                 {
@@ -152,28 +117,6 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("items");
-                });
-
-            modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.Permission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('permissions_id_seq'::regclass)");
-
-                    b.Property<Actions>("Actions")
-                        .HasColumnType("actions")
-                        .HasColumnName("action");
-
-                    b.Property<Entities>("Entities")
-                        .HasColumnType("entities")
-                        .HasColumnName("entity");
-
-                    b.HasKey("Id")
-                        .HasName("permissions_pkey");
-
-                    b.ToTable("permissions");
                 });
 
             modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.Role", b =>
@@ -277,21 +220,6 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                         .IsUnique();
 
                     b.ToTable("users");
-                });
-
-            modelBuilder.Entity("RolesPermission", b =>
-                {
-                    b.HasOne("Vintello.Common.EntityModel.PostgreSql.Permission", null)
-                        .WithMany()
-                        .HasForeignKey("PermissionId")
-                        .IsRequired()
-                        .HasConstraintName("roles_permissions_permission_id_fkey");
-
-                    b.HasOne("Vintello.Common.EntityModel.PostgreSql.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .IsRequired()
-                        .HasConstraintName("roles_permissions_role_id_fkey");
                 });
 
             modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.Item", b =>
