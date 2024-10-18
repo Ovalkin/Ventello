@@ -44,8 +44,7 @@ public class UserRepository : IUserRepository
         if (_userCache is null) return null!;
         _userCache.TryGetValue(id, out User? user);
         if (user is null) return null;
-        await _db.Entry(user).Collection(u => u.Items).LoadAsync(); 
-        user.Role = _db.Roles.First(r => r.Id == user.RoleId);
+        await _db.Entry(user).Collection(u => u.Items).LoadAsync();
         return user;
     }
 

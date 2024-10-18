@@ -21,13 +21,12 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "roles_enum", new[] { "super_admin", "admin", "client" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.HasSequence<int>("categories_id_seq");
 
             modelBuilder.HasSequence<int>("items_id_seq");
-
-            modelBuilder.HasSequence<int>("roles_id_seq");
 
             modelBuilder.HasSequence<int>("users_id_seq");
 
@@ -116,33 +115,6 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                     b.ToTable("items");
                 });
 
-            modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('roles_id_seq'::regclass)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id")
-                        .HasName("roles_pkey");
-
-                    b.HasIndex(new[] { "Name" }, "roles_name_key")
-                        .IsUnique();
-
-                    b.ToTable("roles");
-                });
-
             modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.User", b =>
                 {
                     b.Property<int>("Id")
@@ -197,9 +169,9 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                         .HasColumnType("character varying(255)")
                         .HasColumnName("profile_pic");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("role_id");
+                    b.Property<RolesEnum>("Role")
+                        .HasColumnType("roles_enum")
+                        .HasColumnName("role");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -207,8 +179,6 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
 
                     b.HasKey("Id")
                         .HasName("users_pkey");
-
-                    b.HasIndex("RoleId");
 
                     b.HasIndex(new[] { "Email" }, "users_email_key")
                         .IsUnique();
@@ -240,26 +210,9 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.User", b =>
-                {
-                    b.HasOne("Vintello.Common.EntityModel.PostgreSql.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("users_role_id_fkey");
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.Category", b =>
                 {
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.Role", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Vintello.Common.EntityModel.PostgreSql.User", b =>

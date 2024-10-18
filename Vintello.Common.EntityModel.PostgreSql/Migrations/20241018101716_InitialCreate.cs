@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Vintello.Common.EntityModel.PostgreSql;
 
 #nullable disable
 
@@ -12,14 +13,14 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:Enum:roles_enum", "super_admin,admin,client");
+
             migrationBuilder.CreateSequence<int>(
                 name: "categories_id_seq");
 
             migrationBuilder.CreateSequence<int>(
                 name: "items_id_seq");
-
-            migrationBuilder.CreateSequence<int>(
-                name: "roles_id_seq");
 
             migrationBuilder.CreateSequence<int>(
                 name: "users_id_seq");
@@ -38,24 +39,11 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "roles",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('roles_id_seq'::regclass)"),
-                    name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    description = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("roles_pkey", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "users",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('users_id_seq'::regclass)"),
-                    role_id = table.Column<int>(type: "integer", nullable: false),
+                    role = table.Column<RolesEnum>(type: "roles_enum", nullable: false),
                     first_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     last_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
@@ -70,12 +58,6 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("users_pkey", x => x.id);
-                    table.ForeignKey(
-                        name: "users_role_id_fkey",
-                        column: x => x.role_id,
-                        principalTable: "roles",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -121,17 +103,6 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "roles_name_key",
-                table: "roles",
-                column: "name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_users_role_id",
-                table: "users",
-                column: "role_id");
-
-            migrationBuilder.CreateIndex(
                 name: "users_email_key",
                 table: "users",
                 column: "email",
@@ -156,17 +127,11 @@ namespace Vintello.Common.EntityModel.PostgreSql.Migrations
             migrationBuilder.DropTable(
                 name: "users");
 
-            migrationBuilder.DropTable(
-                name: "roles");
-
             migrationBuilder.DropSequence(
                 name: "categories_id_seq");
 
             migrationBuilder.DropSequence(
                 name: "items_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "roles_id_seq");
 
             migrationBuilder.DropSequence(
                 name: "users_id_seq");

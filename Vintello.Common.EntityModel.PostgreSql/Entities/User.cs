@@ -13,8 +13,8 @@ public partial class User
     [Column("id")]
     public int Id { get; set; }
 
-    [Column("role_id")]
-    public int RoleId { get; set; }
+    [Column("role")]
+    public RolesEnum Role { get; set; }
 
     [Column("first_name")]
     [StringLength(255)]
@@ -55,8 +55,4 @@ public partial class User
 
     [InverseProperty("User")]
     public virtual ICollection<Item> Items { get; set; } = new List<Item>();
-
-    [ForeignKey("RoleId")]
-    [InverseProperty("Users")]
-    public virtual Role Role { get; set; } = null!;
 }

@@ -5,7 +5,7 @@ namespace Vintello.Common.DTOs;
 public class RetrievedUserDto
 {
     public int Id { get; set; }
-    public int RoleId { get; set; }
+    public RolesEnum Role { get; set; }
     public string FirstName { get; set; } = null!;
     public string? LastName { get; set; }
     public string Email { get; set; } = null!;
@@ -22,7 +22,7 @@ public class RetrievedUserDto
         return new RetrievedUserDto
         {
             Id = user.Id,
-            RoleId = user.RoleId,
+            Role = user.Role,
             FirstName = user.FirstName,
             LastName = user.LastName,
             Email = user.Email,
