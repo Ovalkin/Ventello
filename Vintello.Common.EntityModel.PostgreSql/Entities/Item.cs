@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Vintello.Common.EntityModel.PostgreSql;
 
 [Table("items")]
-public partial class Item
+public sealed class Item
 {
     [Key]
     [Column("id")]
@@ -40,9 +40,9 @@ public partial class Item
 
     [ForeignKey("CategoryId")]
     [InverseProperty("Items")]
-    public virtual Category Category { get; set; } = null!;
+    public Category Category { get; set; } = null!;
 
     [ForeignKey("UserId")]
     [InverseProperty("Items")]
-    public virtual User User { get; set; } = null!;
+    public User User { get; set; } = null!;
 }

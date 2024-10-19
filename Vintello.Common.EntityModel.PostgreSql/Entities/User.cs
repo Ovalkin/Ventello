@@ -7,7 +7,7 @@ namespace Vintello.Common.EntityModel.PostgreSql;
 [Table("users")]
 [Index("Email", Name = "users_email_key", IsUnique = true)]
 [Index("Phone", Name = "users_phone_key", IsUnique = true)]
-public partial class User
+public sealed class User
 {
     [Key]
     [Column("id")]
@@ -54,5 +54,5 @@ public partial class User
     public DateTime? UpdatedAt { get; set; }
 
     [InverseProperty("User")]
-    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
+    public ICollection<Item> Items { get; set; } = new List<Item>();
 }

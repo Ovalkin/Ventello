@@ -7,25 +7,17 @@ namespace Vintello.Web.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController : ControllerBase
+public class AuthController(IAuthService serviceAuth, IJwtService serviceJwt) : ControllerBase
 {
-    private readonly IAuthService _serviceAuth;
-    private readonly IJwtService _serviceJwt;
-    public AuthController(IAuthService serviceAuth, IJwtService serviceJwt)
-    {
-        _serviceAuth = serviceAuth;
-        _serviceJwt = serviceJwt;
-    }
-
     [HttpPost("login")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
         if (!ModelState.IsValid) return BadRequest();
-        User? user = await _serviceAuth.Auth(loginDto.Email, loginDto.Password);
+        User? user = await serviceAuth.Auth(loginDto.Email, loginDto.Password);
         if (user is null) return BadRequest();
-        string token = _serviceJwt.GenerateToken(user);
+        string token = serviceJwt.GenerateToken(user);
         return Ok(token);
     }
     

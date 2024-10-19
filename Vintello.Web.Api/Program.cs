@@ -1,11 +1,9 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Common.Repositories;
 using Vintello.Services;
-using Vintello.Web.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +31,7 @@ builder.Services.AddAuthorization();
 
 //builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("TestConnection")!);
 builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
+
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
