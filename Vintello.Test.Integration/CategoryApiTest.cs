@@ -18,7 +18,7 @@ public class CategoryApiTest : IClassFixture<WebApplicationFactory<Program>>
 
         var scope = factory.Services.CreateScope();
         var serviceProvider = scope.ServiceProvider;
-
+        
         _context = serviceProvider.GetRequiredService<VintelloContext>();
     }
 

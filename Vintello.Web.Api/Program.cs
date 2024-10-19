@@ -29,7 +29,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddAuthorization();
 
-//builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("TestConnection")!);
 builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
