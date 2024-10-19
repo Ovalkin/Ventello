@@ -10,26 +10,21 @@ public partial class VintelloContext : DbContext
     }
     
     [Obsolete("Obsolete")]
-    static VintelloContext()
-        => NpgsqlConnection.GlobalTypeMapper
+    static VintelloContext() => NpgsqlConnection.GlobalTypeMapper
             .MapEnum<RolesEnum>();
-
-
-    public VintelloContext(DbContextOptions<VintelloContext> options)
-        : base(options)
+    public VintelloContext(DbContextOptions<VintelloContext> options) : base(options)
     {
     }
 
-    public virtual DbSet<Category> Categories { get; set; }
-
-    public virtual DbSet<Item> Items { get; set; }
-
-    public virtual DbSet<User> Users { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(
-            "host=localhost; port=5432; database=vintello90;  username=postgres;  password=7878;");
-
+    {
+        string connection = "host=localhost; port=5432; database=vintello;  username=postgres;  password=7878;";
+        //string connection = "host=localhost; port=5432; database=vintello_tests;  username=postgres;  password=7878;";
+        optionsBuilder.UseNpgsql(connection);
+    }
+    public virtual DbSet<Category> Categories { get; set; }
+    public virtual DbSet<Item> Items { get; set; }
+    public virtual DbSet<User> Users { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasPostgresEnum<RolesEnum>();

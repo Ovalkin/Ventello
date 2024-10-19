@@ -1,5 +1,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Common.Repositories;
@@ -19,29 +20,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         var jwtSetting = builder.Configuration.GetSection("Jwt");
         ops.TokenValidationParameters = new TokenValidationParameters
         {
-            // указывает, будет ли валидироваться издатель при валидации токена
             ValidateIssuer = true,
-            // строка, представляющая издателя
             ValidIssuer = jwtSetting["Issuer"],
-            // будет ли валидироваться потребитель токена
             ValidateAudience = true,
-            // установка потребителя токена
             ValidAudience = jwtSetting["Audience"],
-            // будет ли валидироваться время существования
             ValidateLifetime = true,
-            // установка ключа безопасности
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting["Key"]!)) ,
-            // валидация ключа безопасности
             ValidateIssuerSigningKey = true,
         };
     });
 builder.Services.AddAuthorization();
 
-builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("TestConnection")!);
-//builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
+//builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("TestConnection")!);
+builder.Services.AddVintelloContext(builder.Configuration.GetConnectionString("DefaultConnection")!);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
-
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();

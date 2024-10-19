@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Vintello.Common.EntityModel.PostgreSql;
 
 [Table("categories")]
-public partial class Category
+public class Category
 {
     [Key]
     [Column("id")]
