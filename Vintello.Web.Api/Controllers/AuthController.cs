@@ -16,7 +16,7 @@ public class AuthController(IAuthService serviceAuth, IJwtService serviceJwt) : 
     {
         if (!ModelState.IsValid) return BadRequest();
         User? user = await serviceAuth.Auth(loginDto.Email, loginDto.Password);
-        if (user is null) return BadRequest();
+        if (user is null) return BadRequest("Логин или пароль не верны!");
         string token = serviceJwt.GenerateToken(user);
         return Ok(token);
     }

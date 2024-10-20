@@ -7,12 +7,12 @@ using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Test.Integration;
 
-public class CategoryApiTest : IClassFixture<WebApplicationFactory<Program>>
+public class CategoryApiTest : IClassFixture<CustomWebApplicationFactory>
 {
     private readonly HttpClient _client;
     private readonly VintelloContext _context;
 
-    public CategoryApiTest(WebApplicationFactory<Program> factory)
+    public CategoryApiTest(CustomWebApplicationFactory factory)
     {
         _client = factory.CreateClient();
 
