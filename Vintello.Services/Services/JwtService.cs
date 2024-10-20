@@ -7,13 +7,10 @@ using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Services;
 
-public class JwtService : IJwtService
+public class JwtService(IConfiguration conf) : IJwtService
 {
-    private readonly IConfiguration _confJwt;
-    public JwtService(IConfiguration conf)
-    {
-        _confJwt = conf.GetSection("Jwt");
-    }
+    private readonly IConfiguration _confJwt = conf.GetSection("Jwt");
+
     public string GenerateToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();

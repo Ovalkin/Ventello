@@ -5,23 +5,23 @@ namespace Vintello.Common.Repositories;
 
 public class ItemRepository : IItemRepository
 {
-    private static ConcurrentDictionary<int, Item>? _itemCashe;
+    private static ConcurrentDictionary<int, Item>? _itemCache;
     private readonly VintelloContext _db;
 
     public ItemRepository(VintelloContext db)
     {
         _db = db;
-        _itemCashe ??= new ConcurrentDictionary<int, Item>
+        _itemCache ??= new ConcurrentDictionary<int, Item>
             (db.Items.ToDictionary(item => item.Id));
     }
 
     private Item UpdateCache(int id, Item item)
     {
-        if (_itemCashe is not null)
+        if (_itemCache is not null)
         {
-            if (_itemCashe.TryGetValue(id, out Item? oldItem))
+            if (_itemCache.TryGetValue(id, out Item? oldItem))
             {
-                if (_itemCashe.TryUpdate(id, item, oldItem)) return item;
+                if (_itemCache.TryUpdate(id, item, oldItem)) return item;
             }
         }
 
@@ -43,22 +43,22 @@ public class ItemRepository : IItemRepository
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
         {
-            if (_itemCashe is null) return item;
-            else return _itemCashe.AddOrUpdate(item.Id, item, UpdateCache);
+            if (_itemCache is null) return item;
+            else return _itemCache.AddOrUpdate(item.Id, item, UpdateCache);
         }
         else return null;
     }
 
     public Task<Item?> RetrieveByIdAsync(int id)
     {
-        if (_itemCashe is null) return null!;
-        _itemCashe.TryGetValue(id, out Item? item);
+        if (_itemCache is null) return null!;
+        _itemCache.TryGetValue(id, out Item? item);
         return Task.FromResult(item);
     }
 
     public Task<IEnumerable<Item>> RetrieveAllAsync()
     {
-        return Task.FromResult(_itemCashe?.Values ?? Enumerable.Empty<Item>());
+        return Task.FromResult(_itemCache?.Values ?? Enumerable.Empty<Item>());
     }
     public async Task<Item?> UpdateAsync(int id, Item item)
     {
@@ -73,7 +73,7 @@ public class ItemRepository : IItemRepository
         _db.Items.Remove(item);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
-            if (_itemCashe is not null) return _itemCashe.TryRemove(item.Id, out item!);
+            if (_itemCache is not null) return _itemCache.TryRemove(item.Id, out item!);
         return false;
     }
 }

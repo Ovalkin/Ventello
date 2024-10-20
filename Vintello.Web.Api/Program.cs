@@ -7,7 +7,7 @@ using Vintello.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("https://localhost:5000");
+builder.WebHost.UseUrls("http://localhost:4000");
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();

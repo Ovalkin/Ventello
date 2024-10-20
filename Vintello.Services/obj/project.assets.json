@@ -1013,43 +1013,35 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\egorv\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/home/ovalkin/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj",
+      "projectUniqueName": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Services/Vintello.Services.csproj",
       "projectName": "Vintello.Services",
-      "projectPath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj",
-      "packagesPath": "C:\\Users\\egorv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Services\\obj\\",
+      "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Services/Vintello.Services.csproj",
+      "packagesPath": "/home/ovalkin/.nuget/packages/",
+      "outputPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Services/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\egorv\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/ovalkin/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Common.DTOs\\Vintello.Common.DTOs.csproj": {
-              "projectPath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Common.DTOs\\Vintello.Common.DTOs.csproj"
+            "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/Vintello.Common.DTOs.csproj": {
+              "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/Vintello.Common.DTOs.csproj"
             },
-            "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Common.Repositories\\Vintello.Common.Repositories.csproj": {
-              "projectPath": "C:\\Users\\egorv\\Desktop\\Vintello\\Vintello.Common.Repositories\\Vintello.Common.Repositories.csproj"
+            "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/Vintello.Common.Repositories.csproj": {
+              "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/Vintello.Common.Repositories.csproj"
             }
           }
         }
@@ -1080,12 +1072,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.8, 8.0.8]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
