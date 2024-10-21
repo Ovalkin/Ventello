@@ -9,9 +9,6 @@ namespace Vintello.Test.Integration;
 
 public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
 {
-    private readonly HttpClient _client;
-    private readonly VintelloContext _context;
-
     public ItemApiTest(WebApplicationFactory<Program> factory)
     {
         _client = factory.CreateClient();
@@ -21,6 +18,9 @@ public class ItemApiTest : IClassFixture<WebApplicationFactory<Program>>
 
         _context = serviceProvider.GetRequiredService<VintelloContext>();
     }
+    
+    private readonly HttpClient _client;
+    private readonly VintelloContext _context;
 
     [Theory]
     [InlineData("POST")]

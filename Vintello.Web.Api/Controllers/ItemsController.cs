@@ -1,3 +1,6 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
@@ -15,10 +18,15 @@ public class ItemsController(IItemService service) : ControllerBase
     [Authorize]
     public async Task<IActionResult> CreateItem([FromBody] CreatedItemDto item)
     {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        var role = User.FindFirst(ClaimTypes.Role)!.Value;
+        
         if (!ModelState.IsValid) return BadRequest();
-        RetrievedItemDto? createdItem = await service.CreateAsync(item);
+        RetrievedItemDto? createdItem = await service.CreateAsync(item, userId, role);
         if (createdItem is null) return BadRequest();
-        return CreatedAtRoute(nameof(RetrieveItem), new { id = createdItem.Id },
+        return CreatedAtRoute(
+            nameof(RetrieveItem),
+            new { id = createdItem.Id },
             createdItem);
     }
 
@@ -46,8 +54,12 @@ public class ItemsController(IItemService service) : ControllerBase
     [Authorize]
     public async Task<IActionResult> UpdateItem(int id, UpdatedItemDto item)
     {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        var role = User.FindFirst(ClaimTypes.Role)!.Value;
+        
         if (!ModelState.IsValid) return BadRequest();
-        bool? updated = await service.UpdateAsync(id, item);
+        item.UserId = userId;
+        bool? updated = await service.UpdateAsync(id, item, userId, role);
         if (updated == true) return NoContent();
         if (updated == false) return BadRequest();
         return NotFound();
@@ -60,7 +72,9 @@ public class ItemsController(IItemService service) : ControllerBase
     [Authorize]
     public async Task<IActionResult> DeleteItem(int id)
     {
-        bool? deleted = await service.DeleteAsync(id);
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        var role = User.FindFirst(ClaimTypes.Role)!.Value;
+        bool? deleted = await service.DeleteAsync(id, userId, role);
         if (deleted == true) return NoContent();
         if (deleted == null) return NotFound();
         return BadRequest();

@@ -6,8 +6,10 @@ namespace Vintello.Services;
 
 public class ItemService(IItemRepository repo) : IItemService
 {
-    public async Task<RetrievedItemDto?> CreateAsync(CreatedItemDto item)
+    public async Task<RetrievedItemDto?> CreateAsync(CreatedItemDto item, string userId, string userRole)
     {
+        if (userRole == "Client" && userId != item.UserId.ToString())
+            return null;
         Item? addedItem = await repo.CreateAsync(CreatedItemDto.CreateItem(item));
         if (addedItem != null) return RetrievedItemDto.CreateDto(addedItem);
         return null;
@@ -35,8 +37,10 @@ public class ItemService(IItemRepository repo) : IItemService
         return RetrievedItemDto.CreateDto(item);
     }
 
-    public async Task<bool?> UpdateAsync(int id, UpdatedItemDto item)
+    public async Task<bool?> UpdateAsync(int id, UpdatedItemDto item, string userId, string userRole)
     {
+        if (userRole == "Client" && userId != item.UserId)
+            return null;
         Item? existing = await repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
         Item updatedItem = UpdatedItemDto.CreateItem(item, existing);
@@ -45,10 +49,12 @@ public class ItemService(IItemRepository repo) : IItemService
         return true;
     }
 
-    public async Task<bool?> DeleteAsync(int id)
+    public async Task<bool?> DeleteAsync(int id, string userId, string userRole)
     {
         Item? item = await repo.RetrieveByIdAsync(id);
         if (item is null) return null;
+        if (userRole == "Client" && userId != item.UserId.ToString())
+            return false;
         return await repo.DeleteAsync(item);
     }
 }

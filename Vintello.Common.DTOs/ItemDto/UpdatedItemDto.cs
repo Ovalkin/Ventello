@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Common.DTOs;
@@ -14,7 +15,10 @@ public class UpdatedItemDto
     [RegularExpression(@"(^\d*,\d*$)|(^\d*$)")]
     public decimal? Price { get; set; }
     public List<string>? Images { get; set; }
-
+    
+    [JsonIgnore]
+    public string? UserId { get; set; }
+    
     public static Item CreateItem(UpdatedItemDto updatedItemDto, Item item)
     {
         if (updatedItemDto.CategoryId != null)
