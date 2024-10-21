@@ -13,6 +13,7 @@
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.AuthApiTest.Login_WithLoginAndPasswordIsValid_ShouldReturnJwtToken&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.AuthApiTest.Login_WithLoginAndPasswordIsNotValid_ShouldReturnBadRequest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.CategoryApiTest.Create_ReturnCreated&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	

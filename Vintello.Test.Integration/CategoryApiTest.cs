@@ -1,31 +1,61 @@
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Vintello.Common.DTOs;
 using Vintello.Common.EntityModel.PostgreSql;
+using Vintello.Test.Integration.Helpers;
 
 namespace Vintello.Test.Integration;
 
 public class CategoryApiTest : IClassFixture<CustomWebApplicationFactory>
 {
-    private readonly HttpClient _client;
-    private readonly VintelloContext _context;
-
     public CategoryApiTest(CustomWebApplicationFactory factory)
     {
         _client = factory.CreateClient();
 
         var scope = factory.Services.CreateScope();
         var serviceProvider = scope.ServiceProvider;
-        
+
         _context = serviceProvider.GetRequiredService<VintelloContext>();
     }
 
+    private readonly HttpClient _client;
+    private readonly VintelloContext _context;
+    private readonly User _adminUser = new()
+    {
+        Id = 1,
+        FirstName = "Админ",
+        Role = RolesEnum.Admin,
+        Email = "admin@example.com",
+        Password = "пароль"
+    };
+    private readonly User _superAdminUser = new()
+    {
+        Id = 1,
+        FirstName = "Супер",
+        LastName = "Админ",
+        Role = RolesEnum.SuperAdmin,
+        Email = "supadmin@example.com",
+        Password = "пароль"
+    };
+    private readonly User _clientUser = new()
+    {
+        Id = 1,
+        FirstName = "Клиент",
+        Role = RolesEnum.Client,
+        Email = "client@example.com",
+        Password = "пароль"
+    };
+    
     [Theory]
     [InlineData("POST")]
     public async Task Create_ReturnCreated(string method)
     {
+        var token = TestAuthHelper.GenerateToken(_adminUser);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        
         CreatedCategoryDto category = new CreatedCategoryDto { Name = "Тестовая категория" };
         var request = new HttpRequestMessage(new HttpMethod(method), "/api/Categories");
         request.Content = JsonContent.Create(category);
@@ -59,7 +89,7 @@ public class CategoryApiTest : IClassFixture<CustomWebApplicationFactory>
             _context.Categories.Add(new Category { Id = 10000, Name = "Тест" });
             await _context.SaveChangesAsync();
         }
-        catch 
+        catch
         {
             //
         }
