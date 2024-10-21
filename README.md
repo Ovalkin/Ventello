@@ -1,7 +1,10 @@
 # Vintello
+Основаня концепция - онлайн площадка для перепродажи винтажных вещей.
 
-Концепция онлайн площадки для перепродажи винтажных вещей.  
-Готовый CRUD для 4 сущностей, Авторизация и аутентификация с JWT, DTOs.
+Это проект в который я добавляю всё интересное и нужное, ради практического опыта. 
+* Entity Framework Core
+* JWT
+* DTOs (мапппинг в статических метода)
 
 ## Стек
 * Entity Framework Core
@@ -17,4 +20,4 @@ dotnet ef database update --connection "host=localhost; port=5432; database=vint
 ```pwd
 dotnet ef database update --connection "host=localhost; port=5432; database=vintello_tests;  username=postgres;  password=7878;"
 ```
-*строки подключения могут изменится в процессе разработки, находяться [здесь](./Vintello.Web.Api/appsettings.json). 
+*строки подключения могут изменится в процессе разработки, находяться [здесь](./Vintello.Web.Api/appsettings.json).
