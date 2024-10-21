@@ -41,8 +41,12 @@ public class AuthApiTest : IClassFixture<CustomWebApplicationFactory>
                 Password = password
             });
             await _context.SaveChangesAsync();
-        } catch { /**/ }
-        
+        }
+        catch
+        {
+            /**/
+        }
+
         var request = new HttpRequestMessage(new HttpMethod(method), "api/Auth/login");
         var content = new LoginDto { Email = login, Password = password };
         request.Content = JsonContent.Create(content);
@@ -52,7 +56,7 @@ public class AuthApiTest : IClassFixture<CustomWebApplicationFactory>
         response.EnsureSuccessStatusCode();
         Assert.IsType<string>(result);
     }
-    
+
     [Theory]
     [InlineData("POST")]
     public async Task Login_WithLoginAndPasswordIsNotValid_ShouldReturnBadRequest(string method)
@@ -73,8 +77,12 @@ public class AuthApiTest : IClassFixture<CustomWebApplicationFactory>
                 Password = password
             });
             await _context.SaveChangesAsync();
-        } catch { /**/ }
-        
+        }
+        catch
+        {
+            /**/
+        }
+
         var request = new HttpRequestMessage(new HttpMethod(method), "api/Auth/login");
         var content = new LoginDto { Email = login };
         request.Content = JsonContent.Create(content);
