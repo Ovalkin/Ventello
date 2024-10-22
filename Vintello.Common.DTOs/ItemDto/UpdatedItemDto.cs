@@ -15,14 +15,14 @@ public class UpdatedItemDto
     [RegularExpression(@"(^\d*,\d*$)|(^\d*$)")]
     public decimal? Price { get; set; }
     public List<string>? Images { get; set; }
-    
-    [JsonIgnore]
     public string? UserId { get; set; }
     
     public static Item CreateItem(UpdatedItemDto updatedItemDto, Item item)
     {
         if (updatedItemDto.CategoryId != null)
             item.CategoryId = (int)updatedItemDto.CategoryId;
+        if (updatedItemDto.UserId != null)
+            item.UserId = int.Parse(updatedItemDto.UserId);
         if (updatedItemDto.Title != null)
             item.Title = updatedItemDto.Title;
         if (updatedItemDto.Description != null)

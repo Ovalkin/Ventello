@@ -7,12 +7,9 @@ using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Test.Integration;
 
-public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
+public class UserApiTest : IClassFixture<CustomWebApplicationFactory>
 {
-    private readonly HttpClient _client;
-    private readonly VintelloContext _context;
-
-    public UserApiTest(WebApplicationFactory<Program> factory)
+    public UserApiTest(CustomWebApplicationFactory factory)
     {
         _client = factory.CreateClient();
 
@@ -22,12 +19,16 @@ public class UserApiTest : IClassFixture<WebApplicationFactory<Program>>
         _context = serviceProvider.GetRequiredService<VintelloContext>();
     }
 
+
+    private readonly HttpClient _client;
+    private readonly VintelloContext _context;
+   
     [Theory]
     [InlineData("POST")]
     public async Task Post_ReturnCreated(string method)
     {
         CreatedUserDto user = new CreatedUserDto
-            { FirstName = "Имя", Email = "test@example.com", Password = "пароль" };
+            { FirstName = "Имя", Email = "test2@example.com", Password = "пароль" };
         var request = new HttpRequestMessage(new HttpMethod(method), "/api/Users");
         request.Content = JsonContent.Create(user);
 

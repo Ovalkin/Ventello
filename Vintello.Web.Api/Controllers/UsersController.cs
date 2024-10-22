@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
@@ -12,6 +13,7 @@ public class UsersController(IUserService service) : ControllerBase
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(400)]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto user)
     {
         if (!ModelState.IsValid) return BadRequest();
@@ -46,8 +48,11 @@ public class UsersController(IUserService service) : ControllerBase
     [Authorize]
     public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdatedUserDto user)
     {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        var role = User.FindFirst(ClaimTypes.Role)!.Value;
+        
         if (!ModelState.IsValid) return BadRequest();
-        bool? updated = await service.UpdateAsync(id, user);
+        bool? updated = await service.UpdateAsync(id, user, role, userId);
         if (updated == true) return NoContent();
         if (updated == false) return BadRequest();
         return NotFound();
@@ -60,7 +65,10 @@ public class UsersController(IUserService service) : ControllerBase
     [Authorize]
     public async Task<IActionResult> DeleteUser(int id)
     {
-        bool? deleted = await service.DeleteAsync(id);
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        var role = User.FindFirst(ClaimTypes.Role)!.Value;
+        
+        bool? deleted = await service.DeleteAsync(id, role, userId);
         if (deleted == true) return NoContent();
         if (deleted == null) return NotFound();
         return BadRequest();

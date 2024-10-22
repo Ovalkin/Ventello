@@ -1,6 +1,4 @@
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
@@ -56,10 +54,8 @@ public class ItemsController(IItemService service) : ControllerBase
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var role = User.FindFirst(ClaimTypes.Role)!.Value;
-        
         if (!ModelState.IsValid) return BadRequest();
-        item.UserId = userId;
-        bool? updated = await service.UpdateAsync(id, item, userId, role);
+        var updated = await service.UpdateAsync(id, item, userId, role);
         if (updated == true) return NoContent();
         if (updated == false) return BadRequest();
         return NotFound();

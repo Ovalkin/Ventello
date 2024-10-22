@@ -1,4 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AString_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002Econfig_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F4b7a63d2a45e45fe9b1a0d2dbfd9fd9bb2d000_003F98_003Fe5c77fdc_003FString_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/AnalysisEnabled/@EntryValue">VISIBLE_FILES</s:String>
 	
 	
@@ -9,6 +10,25 @@
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/FiltersState/=SpellingFilter/@EntryIndexedValue">On</s:String>
 	<s:Boolean x:Key="/Default/CodeInspection/Roslyn/RoslynEnabled/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/InlayHints/GeneralInlayHintsOptions/EnableInlayHints/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e6a0c9a8_002D6bd7_002D479b_002Dba1b_002D83ce5db17149/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UpdateItem_WithRoleIsClient_ReturnForbidden" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.UpdateItem_WithRoleIsClient_ReturnForbidden&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=edd0302d_002D5037_002D4c7a_002D96e6_002D3f4b4466cb5a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateItem_WithCreatedItemDataIsValidAndRoleAdmin_ShouldReturnCreated" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.CreateItem_WithCreatedItemDataIsValidAndRoleAdmin_ShouldReturnCreated&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.CreateItem_WithCreatedItemDataIsValidAndRoleClient_ShouldReturnCreated&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.UserApiTest.Post_ReturnCreated&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.CreateItem_WithCreatedItemDataIsValidAndRoleSuperAdmin_ShouldReturnCreated&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.CreateItem_WithCreatedItemDataIsNotValidAndRoleCLient_ShouldReturnBadRequest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.RetrieveItems_WithAll_ReturnOK&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.UpdateItem_WithRoleIsAdmin_ReturnNoContent&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.UpdateItem_WithRoleIsClient_ReturnNoContent&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.UpdateItem_WithRoleIsClient_ReturnForbidden&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
 	
 	
 	

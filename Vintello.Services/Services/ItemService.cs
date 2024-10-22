@@ -39,8 +39,8 @@ public class ItemService(IItemRepository repo) : IItemService
 
     public async Task<bool?> UpdateAsync(int id, UpdatedItemDto item, string userId, string userRole)
     {
-        if (userRole == "Client" && userId != item.UserId)
-            return null;
+        if (userRole == "Client" & userId != item.UserId)
+            return false;
         Item? existing = await repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
         Item updatedItem = UpdatedItemDto.CreateItem(item, existing);

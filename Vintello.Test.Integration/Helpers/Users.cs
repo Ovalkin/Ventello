@@ -15,7 +15,7 @@ public class Users
 
     public static readonly User SuperAdminUser = new()
     {
-        Id = 1,
+        Id = 2,
         FirstName = "Супер",
         LastName = "Админ",
         Role = RolesEnum.SuperAdmin,
@@ -25,7 +25,7 @@ public class Users
 
     public static readonly User ClientUser = new()
     {
-        Id = 1,
+        Id = 3,
         FirstName = "Клиент",
         Role = RolesEnum.Client,
         Email = "client@example.com",
