@@ -15,7 +15,7 @@ public class CategoryService(ICategoryRepository repo) : ICategoryService
 
     public async Task<IEnumerable<RetrievedCategoriesDto>> RetrieveAsync()
     {
-        var categories = await repo.RetrieveAllAsync();
+        IEnumerable<Category> categories = await repo.RetrieveAllAsync();
         return RetrievedCategoriesDto.CreateDto(categories);
     }
 
@@ -30,9 +30,7 @@ public class CategoryService(ICategoryRepository repo) : ICategoryService
     {
         Category? existing = await repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
-
         Category updatedCategory = UpdatedCategoryDto.CreateCategory(category, existing);
-
         Category? updated = await repo.UpdateAsync(id, updatedCategory);
         if (updated is null) return false;
         return true;

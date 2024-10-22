@@ -18,7 +18,6 @@ public class ItemsController(IItemService service) : ControllerBase
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var role = User.FindFirst(ClaimTypes.Role)!.Value;
-        
         if (!ModelState.IsValid) return BadRequest();
         RetrievedItemDto? createdItem = await service.CreateAsync(item, userId, role);
         if (createdItem is null) return BadRequest();
