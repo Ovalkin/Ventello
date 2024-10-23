@@ -29,14 +29,14 @@ public class UserService(IUserRepository repo) : IUserService
     public async Task<bool?> UpdateAsync(int id, UpdatedUserDto user, string userRole, string userId)
     {
         if (userRole == "Client" && userId != id.ToString())
-            return null;
+            return false;
         
         User? existing = await repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
         
-        User updatedUser = UpdatedUserDto.CreateUser(user, existing);
+        existing = UpdatedUserDto.CreateUser(user, existing);
 
-        User? updated = await repo.UpdateAsync(id, updatedUser);
+        bool? updated = await repo.UpdateAsync(id, existing);
         if (updated is null) return false;
         return true;
     }

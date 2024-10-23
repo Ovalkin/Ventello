@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
@@ -8,6 +9,7 @@ namespace Vintello.Web.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class UsersController(IUserService service) : ControllerBase
 {
     [HttpPost]
@@ -16,15 +18,21 @@ public class UsersController(IUserService service) : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto user)
     {
+        if (User.Identity?.IsAuthenticated != null)
+            if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role)!.Value == "Client")
+                return Forbid();
         if (!ModelState.IsValid) return BadRequest();
         RetrievedUserDto? createdUser = await service.CreateAsync(user);
         if (createdUser is null) return BadRequest();
-        return CreatedAtRoute(nameof(RetrieveUser), new { id = createdUser.Id },
+        return CreatedAtRoute(
+            nameof(RetrieveUser),
+            new { id = createdUser.Id },
             createdUser);
     }
 
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(IEnumerable<RetrievedUsersDto>))]
+    [AllowAnonymous]
     public async Task<IActionResult> RetrieveUsers(string? location)
     {
         return Ok(await service.RetrieveAsync(location));
@@ -50,7 +58,7 @@ public class UsersController(IUserService service) : ControllerBase
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var role = User.FindFirst(ClaimTypes.Role)!.Value;
-        
+
         if (!ModelState.IsValid) return BadRequest();
         bool? updated = await service.UpdateAsync(id, user, role, userId);
         if (updated == true) return NoContent();
@@ -67,7 +75,7 @@ public class UsersController(IUserService service) : ControllerBase
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var role = User.FindFirst(ClaimTypes.Role)!.Value;
-        
+
         bool? deleted = await service.DeleteAsync(id, role, userId);
         if (deleted == true) return NoContent();
         if (deleted == null) return NotFound();
