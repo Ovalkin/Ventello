@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Microsoft.EntityFrameworkCore;
 using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Common.Repositories;
@@ -44,8 +45,11 @@ public class UserRepository : IUserRepository
         if (_userCache is null) return null!;
         _userCache.TryGetValue(id, out User? user);
         if (user is null) return null;
-        await _db.Entry(user).Collection(u => u.Items).LoadAsync();
-        return user;
+        await _db.Entry(user)
+            .Collection(u => u.Items)
+            .Query()
+            .LoadAsync();
+        return UpdateCache(id, user);
     }
 
     public Task<IEnumerable<User>> RetrieveAllAsync()
@@ -53,12 +57,12 @@ public class UserRepository : IUserRepository
         return Task.FromResult(_userCache?.Values ?? Enumerable.Empty<User>());
     }
 
-    public async Task<User?> UpdateAsync(int id, User newUser)
+    public async Task<bool?> UpdateAsync(int id, User newUser)
     {
         _db.Update(newUser);
         int affected = await _db.SaveChangesAsync();
-        if (affected == 1) return UpdateCache(id, newUser);
-        return null;
+        if (affected == 1) return true;
+        return false;
     }
 
     public async Task<bool> DeleteAsync(User user)
