@@ -43,8 +43,8 @@ public class ItemService(IItemRepository repo) : IItemService
             return false;
         Item? existing = await repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
-        Item updatedItem = UpdatedItemDto.CreateItem(item, existing);
-        Item? updated = await repo.UpdateAsync(id, updatedItem);
+        existing = UpdatedItemDto.CreateItem(item, existing);
+        Item? updated = await repo.UpdateAsync(id, existing);
         if (updated is null) return false;
         return true;
     }
