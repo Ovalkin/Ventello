@@ -9,8 +9,7 @@ public class CategoryService(ICategoryRepository repo) : ICategoryService
     public async Task<RetrievedCategoryDto?> CreateAsync(CreatedCategoryDto categoryDto)
     {
         Category? category = await repo.CreateAsync(CreatedCategoryDto.CreateCategory(categoryDto));
-        if (category is not null) return  RetrievedCategoryDto.CreateDto(category);
-        return null;
+        return category is not null ? RetrievedCategoryDto.CreateDto(category) : null;
     }
 
     public async Task<IEnumerable<RetrievedCategoriesDto>> RetrieveAsync()
@@ -22,8 +21,7 @@ public class CategoryService(ICategoryRepository repo) : ICategoryService
     public async Task<RetrievedCategoryDto?> RetrieveByIdAsync(int id)
     {
         Category? category = await repo.RetrieveByIdAsync(id);
-        if (category is null) return null;
-        return RetrievedCategoryDto.CreateDto(category);
+        return category is null ? null : RetrievedCategoryDto.CreateDto(category);
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedCategoryDto category)
@@ -32,8 +30,7 @@ public class CategoryService(ICategoryRepository repo) : ICategoryService
         if (existing is null) return null;
         Category updatedCategory = UpdatedCategoryDto.CreateCategory(category, existing);
         Category? updated = await repo.UpdateAsync(id, updatedCategory);
-        if (updated is null) return false;
-        return true;
+        return updated is not null;
     }
 
     public async Task<bool?> DeleteAsync(int id)

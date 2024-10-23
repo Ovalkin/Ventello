@@ -19,7 +19,8 @@ public class CategoriesController(ICategoryService service) : ControllerBase
         RetrievedCategoryDto? createdCategory = await service.CreateAsync(category);
         if (createdCategory is null) return BadRequest();
         return CreatedAtRoute(
-            nameof(GetCategory), new { id = createdCategory.Id },
+            nameof(GetCategory),
+            new { id = createdCategory.Id },
             createdCategory);
     }
 
@@ -30,7 +31,7 @@ public class CategoriesController(ICategoryService service) : ControllerBase
         return await service.RetrieveAsync();
     }
 
-    [HttpGet("{id}", Name = nameof(GetCategory))]
+    [HttpGet("{id:int}", Name = nameof(GetCategory))]
     [ProducesResponseType(200, Type = typeof(RetrievedCategoryDto))]
     [ProducesResponseType(404)]
     public async Task<IActionResult> GetCategory(int id)
@@ -40,7 +41,7 @@ public class CategoriesController(ICategoryService service) : ControllerBase
         return Ok(category);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
@@ -49,12 +50,15 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     {
         if (!ModelState.IsValid) return BadRequest();
         bool? updated = await service.UpdateAsync(id, category);
-        if (updated == true) return NoContent();
-        if (updated == false) return BadRequest();
-        return NotFound();
+        return updated switch
+        {
+            true => NoContent(),
+            false => BadRequest(),
+            _ => NotFound()
+        };
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
@@ -62,8 +66,11 @@ public class CategoriesController(ICategoryService service) : ControllerBase
     public async Task<IActionResult> DeleteCategory(int id)
     {
         bool? deleted = await service.DeleteAsync(id);
-        if (deleted == true) return NoContent();
-        if (deleted == null) return NotFound();
-        return BadRequest();
+        return deleted switch
+        {
+            true => NoContent(),
+            null => NotFound(),
+            _ => BadRequest()
+        };
     }
 }

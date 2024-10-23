@@ -34,7 +34,7 @@ public class ItemsController(IItemService service) : ControllerBase
         return await service.RetrieveAsync(status, user, category);
     }
 
-    [HttpGet("{id}", Name = nameof(RetrieveItem))]
+    [HttpGet("{id:int}", Name = nameof(RetrieveItem))]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     public async Task<IActionResult> RetrieveItem(int id)
@@ -44,7 +44,7 @@ public class ItemsController(IItemService service) : ControllerBase
         return Ok(item);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
@@ -55,12 +55,15 @@ public class ItemsController(IItemService service) : ControllerBase
         var role = User.FindFirst(ClaimTypes.Role)!.Value;
         if (!ModelState.IsValid) return BadRequest();
         var updated = await service.UpdateAsync(id, item, userId, role);
-        if (updated == true) return NoContent();
-        if (updated == false) return BadRequest();
-        return NotFound();
+        return updated switch
+        {
+            true => NoContent(),
+            false => BadRequest(),
+            _ => NotFound()
+        };
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
@@ -70,8 +73,11 @@ public class ItemsController(IItemService service) : ControllerBase
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var role = User.FindFirst(ClaimTypes.Role)!.Value;
         bool? deleted = await service.DeleteAsync(id, userId, role);
-        if (deleted == true) return NoContent();
-        if (deleted == null) return NotFound();
-        return BadRequest();
+        return deleted switch
+        {
+            true => NoContent(),
+            null => NotFound(),
+            _ => BadRequest()
+        };
     }
 }

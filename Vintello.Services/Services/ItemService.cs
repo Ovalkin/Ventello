@@ -11,8 +11,7 @@ public class ItemService(IItemRepository repo) : IItemService
         if (createrRole == "Client" && createdId != item.UserId.ToString())
             return null;
         Item? addedItem = await repo.CreateAsync(CreatedItemDto.CreateItem(item));
-        if (addedItem != null) return RetrievedItemDto.CreateDto(addedItem);
-        return null;
+        return addedItem != null ? RetrievedItemDto.CreateDto(addedItem) : null;
     }
 
     public async Task<IEnumerable<RetrievedItemDto>> RetrieveAsync(string? status, int? user, int? category)
@@ -33,8 +32,7 @@ public class ItemService(IItemRepository repo) : IItemService
     public async Task<RetrievedItemDto?> RetrieveByIdAsync(int id)
     {
         Item? item = await repo.RetrieveByIdAsync(id);
-        if (item is null) return null;
-        return RetrievedItemDto.CreateDto(item);
+        return item is null ? null : RetrievedItemDto.CreateDto(item);
     }
 
     public async Task<bool?> UpdateAsync(int id, UpdatedItemDto item, string userId, string userRole)
@@ -45,8 +43,7 @@ public class ItemService(IItemRepository repo) : IItemService
         if (existing is null) return null;
         existing = UpdatedItemDto.CreateItem(item, existing);
         Item? updated = await repo.UpdateAsync(id, existing);
-        if (updated is null) return false;
-        return true;
+        return updated is not null;
     }
 
     public async Task<bool?> DeleteAsync(int id, string userId, string userRole)

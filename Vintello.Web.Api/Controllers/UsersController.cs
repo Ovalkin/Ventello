@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
@@ -38,7 +37,7 @@ public class UsersController(IUserService service) : ControllerBase
         return Ok(await service.RetrieveAsync(location));
     }
 
-    [HttpGet("{id}", Name = nameof(RetrieveUser))]
+    [HttpGet("{id:int}", Name = nameof(RetrieveUser))]
     [ProducesResponseType(200, Type = typeof(RetrievedUserDto))]
     [ProducesResponseType(404)]
     [Authorize]
@@ -49,7 +48,7 @@ public class UsersController(IUserService service) : ControllerBase
         return Ok(user);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     [ProducesResponseType(404)]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -58,15 +57,17 @@ public class UsersController(IUserService service) : ControllerBase
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var role = User.FindFirst(ClaimTypes.Role)!.Value;
-
         if (!ModelState.IsValid) return BadRequest();
         bool? updated = await service.UpdateAsync(id, user, role, userId);
-        if (updated == true) return NoContent();
-        if (updated == false) return BadRequest();
-        return NotFound();
+        return updated switch
+        {
+            true => NoContent(),
+            false => BadRequest(),
+            _ => NotFound()
+        };
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     [ProducesResponseType(404)]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
@@ -75,10 +76,12 @@ public class UsersController(IUserService service) : ControllerBase
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var role = User.FindFirst(ClaimTypes.Role)!.Value;
-
         bool? deleted = await service.DeleteAsync(id, role, userId);
-        if (deleted == true) return NoContent();
-        if (deleted == null) return NotFound();
-        return BadRequest();
+        return deleted switch
+        {
+            true => NoContent(),
+            null => NotFound(),
+            _ => BadRequest()
+        };
     }
 }

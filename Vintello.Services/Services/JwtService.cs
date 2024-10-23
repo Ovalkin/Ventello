@@ -28,7 +28,6 @@ public class JwtService(IConfiguration conf) : IJwtService
             Audience = _confJwt["Audience"],
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
-
         var token = tokenHandler.CreateToken(tokenDescription);
         return tokenHandler.WriteToken(token);
     }

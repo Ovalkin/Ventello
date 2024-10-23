@@ -34,19 +34,17 @@ public class ItemRepository : IItemRepository
         Category? category = await _db.Categories.FindAsync(item.CategoryId);
         if (category is null) return null;
         item.Category = category;
-
         User? user = await _db.Users.FindAsync(item.UserId);
         if (user is null) return null;
         item.User = user;
-        
         await _db.Items.AddAsync(item);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1)
         {
             if (_itemCache is null) return item;
-            else return _itemCache.AddOrUpdate(item.Id, item, UpdateCache);
+            return _itemCache.AddOrUpdate(item.Id, item, UpdateCache);
         }
-        else return null;
+        return null;
     }
 
     public Task<Item?> RetrieveByIdAsync(int id)
@@ -65,7 +63,7 @@ public class ItemRepository : IItemRepository
         _db.Update(item);
         int affected = await _db.SaveChangesAsync();
         if (affected == 1) return UpdateCache(id, item);
-        else return null;
+        return null;
     }
 
     public async Task<bool> DeleteAsync(Item item)

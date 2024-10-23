@@ -15,7 +15,7 @@ public class CategoryRepository : ICategoryRepository
             (_db.Categories.ToDictionary(category => category.Id));
     }
 
-    private Category UpdateCache(int id, Category category)
+    private static Category UpdateCache(int id, Category category)
     {
         if (_categoryCache is not null)
         {
@@ -44,7 +44,6 @@ public class CategoryRepository : ICategoryRepository
         if (_categoryCache is null) return null!;
         _categoryCache.TryGetValue(id, out Category? category);
         if (category is null) return null!;
-
         await _db.Entry(category).Collection(c => c.Items).LoadAsync();
         return category;
     }
