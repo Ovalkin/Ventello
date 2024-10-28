@@ -30,7 +30,11 @@
     <ItemGroup>
       <ProjectReference Include="..\Vintello.Common.DTOs\Vintello.Common.DTOs.csproj" />
       <ProjectReference Include="..\Vintello.Common.EntityModel.PostgreSql\Vintello.Common.EntityModel.PostgreSql.csproj" />
-      <ProjectReference Include="..\Vintello.Common.Repositories\Vintello.Common.Repositories.csproj" />
+      <ProjectReference Include="..\Vintello.Repositories\Vintello.Repositories.csproj" />
       <ProjectReference Include="..\Vintello.Services\Vintello.Services.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Middlewares\" />
     </ItemGroup>
 </Project>

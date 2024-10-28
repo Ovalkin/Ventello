@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using Microsoft.EntityFrameworkCore;
 using Vintello.Common.EntityModel.PostgreSql;
 
-namespace Vintello.Common.Repositories;
+namespace Vintello.Repositories;
 
 public class UserRepository : IUserRepository
 {

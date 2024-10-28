@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/ovalkin/Рабочий стол/Vintello/Vintello.Web.Api/Vintello.Web.Api.csproj": {}
+    "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Web.Api\\Vintello.Web.Api.csproj": {}
   },
   "projects": {
-    "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/Vintello.Common.DTOs.csproj": {
+    "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.DTOs\\Vintello.Common.DTOs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/Vintello.Common.DTOs.csproj",
+        "projectUniqueName": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.DTOs\\Vintello.Common.DTOs.csproj",
         "projectName": "Vintello.Common.DTOs",
-        "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/Vintello.Common.DTOs.csproj",
-        "packagesPath": "/home/ovalkin/.nuget/packages/",
-        "outputPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/obj/",
+        "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.DTOs\\Vintello.Common.DTOs.csproj",
+        "packagesPath": "C:\\Users\\ovalkin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.DTOs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ovalkin/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ovalkin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/Vintello.Common.EntityModel.PostgreSql.csproj": {
-                "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/Vintello.Common.EntityModel.PostgreSql.csproj"
+              "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj": {
+                "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj"
               }
             }
           }
@@ -36,6 +36,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -52,32 +57,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.8, 8.0.8]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/Vintello.Common.EntityModel.PostgreSql.csproj": {
+    "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/Vintello.Common.EntityModel.PostgreSql.csproj",
+        "projectUniqueName": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj",
         "projectName": "Vintello.Common.EntityModel.PostgreSql",
-        "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/Vintello.Common.EntityModel.PostgreSql.csproj",
-        "packagesPath": "/home/ovalkin/.nuget/packages/",
-        "outputPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/obj/",
+        "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj",
+        "packagesPath": "C:\\Users\\ovalkin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ovalkin/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ovalkin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -95,6 +94,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -123,32 +127,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.8, 8.0.8]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/Vintello.Common.Repositories.csproj": {
+    "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Repositories\\Vintello.Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/Vintello.Common.Repositories.csproj",
-        "projectName": "Vintello.Common.Repositories",
-        "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/Vintello.Common.Repositories.csproj",
-        "packagesPath": "/home/ovalkin/.nuget/packages/",
-        "outputPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/obj/",
+        "projectUniqueName": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Repositories\\Vintello.Repositories.csproj",
+        "projectName": "Vintello.Repositories",
+        "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Repositories\\Vintello.Repositories.csproj",
+        "packagesPath": "C:\\Users\\ovalkin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ovalkin/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ovalkin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -160,8 +158,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/Vintello.Common.EntityModel.PostgreSql.csproj": {
-                "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/Vintello.Common.EntityModel.PostgreSql.csproj"
+              "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj": {
+                "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj"
               }
             }
           }
@@ -170,6 +168,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -186,32 +189,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.8, 8.0.8]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/ovalkin/Рабочий стол/Vintello/Vintello.Services/Vintello.Services.csproj": {
+    "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Services/Vintello.Services.csproj",
+        "projectUniqueName": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj",
         "projectName": "Vintello.Services",
-        "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Services/Vintello.Services.csproj",
-        "packagesPath": "/home/ovalkin/.nuget/packages/",
-        "outputPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Services/obj/",
+        "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj",
+        "packagesPath": "C:\\Users\\ovalkin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ovalkin/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ovalkin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -223,11 +220,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/Vintello.Common.DTOs.csproj": {
-                "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/Vintello.Common.DTOs.csproj"
+              "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.DTOs\\Vintello.Common.DTOs.csproj": {
+                "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.DTOs\\Vintello.Common.DTOs.csproj"
               },
-              "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/Vintello.Common.Repositories.csproj": {
-                "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/Vintello.Common.Repositories.csproj"
+              "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Repositories\\Vintello.Repositories.csproj": {
+                "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Repositories\\Vintello.Repositories.csproj"
               }
             }
           }
@@ -236,6 +233,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -258,32 +260,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.8, 8.0.8]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/ovalkin/Рабочий стол/Vintello/Vintello.Web.Api/Vintello.Web.Api.csproj": {
+    "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Web.Api\\Vintello.Web.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Web.Api/Vintello.Web.Api.csproj",
+        "projectUniqueName": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Web.Api\\Vintello.Web.Api.csproj",
         "projectName": "Vintello.Web.Api",
-        "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Web.Api/Vintello.Web.Api.csproj",
-        "packagesPath": "/home/ovalkin/.nuget/packages/",
-        "outputPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Web.Api/obj/",
+        "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Web.Api\\Vintello.Web.Api.csproj",
+        "packagesPath": "C:\\Users\\ovalkin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Web.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ovalkin/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ovalkin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -295,17 +291,17 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/Vintello.Common.DTOs.csproj": {
-                "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.DTOs/Vintello.Common.DTOs.csproj"
+              "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.DTOs\\Vintello.Common.DTOs.csproj": {
+                "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.DTOs\\Vintello.Common.DTOs.csproj"
               },
-              "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/Vintello.Common.EntityModel.PostgreSql.csproj": {
-                "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.EntityModel.PostgreSql/Vintello.Common.EntityModel.PostgreSql.csproj"
+              "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj": {
+                "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Common.EntityModel.PostgreSql\\Vintello.Common.EntityModel.PostgreSql.csproj"
               },
-              "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/Vintello.Common.Repositories.csproj": {
-                "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Common.Repositories/Vintello.Common.Repositories.csproj"
+              "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Repositories\\Vintello.Repositories.csproj": {
+                "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Repositories\\Vintello.Repositories.csproj"
               },
-              "/home/ovalkin/Рабочий стол/Vintello/Vintello.Services/Vintello.Services.csproj": {
-                "projectPath": "/home/ovalkin/Рабочий стол/Vintello/Vintello.Services/Vintello.Services.csproj"
+              "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj": {
+                "projectPath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj"
               }
             }
           }
@@ -314,6 +310,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -340,12 +341,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.8, 8.0.8]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -354,7 +349,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

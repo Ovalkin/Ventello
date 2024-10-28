@@ -1,6 +1,6 @@
 using Vintello.Common.DTOs;
 using Vintello.Common.EntityModel.PostgreSql;
-using Vintello.Common.Repositories;
+using Vintello.Repositories;
 
 namespace Vintello.Services;
 

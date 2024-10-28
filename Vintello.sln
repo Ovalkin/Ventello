@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Common.EntityModel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Common.DTOs", "Vintello.Common.DTOs\Vintello.Common.DTOs.csproj", "{42D9F1CC-4755-4CB1-B019-0C989E833035}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Common.Repositories", "Vintello.Common.Repositories\Vintello.Common.Repositories.csproj", "{2170009D-DB9E-46FC-8205-B5BDDB09ABDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Repositories", "Vintello.Repositories\Vintello.Repositories.csproj", "{2170009D-DB9E-46FC-8205-B5BDDB09ABDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vintello.Services", "Vintello.Services\Vintello.Services.csproj", "{1C731629-C9B1-490F-8326-781B95A9389D}"
 EndProject

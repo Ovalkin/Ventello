@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "S9sAW2/kM80=",
+  "dgSpecHash": "gbiZ/A5DShs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Services\\Vintello.Services.csproj",
+  "projectFilePath": "C:\\Users\\ovalkin\\Desktop\\Vintello\\Vintello.Repositories\\Vintello.Repositories.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.bcl.timeprovider\\8.0.1\\microsoft.bcl.timeprovider.8.0.1.nupkg.sha512",
     "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.4\\microsoft.entityframeworkcore.8.0.4.nupkg.sha512",
     "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.4\\microsoft.entityframeworkcore.abstractions.8.0.4.nupkg.sha512",
     "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.4\\microsoft.entityframeworkcore.analyzers.8.0.4.nupkg.sha512",
@@ -18,13 +17,8 @@
     "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
     "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
-    "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.1.1\\microsoft.identitymodel.abstractions.8.1.1.nupkg.sha512",
-    "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.1.1\\microsoft.identitymodel.jsonwebtokens.8.1.1.nupkg.sha512",
-    "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.identitymodel.logging\\8.1.1\\microsoft.identitymodel.logging.8.1.1.nupkg.sha512",
-    "C:\\Users\\ovalkin\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.1.1\\microsoft.identitymodel.tokens.8.1.1.nupkg.sha512",
     "C:\\Users\\ovalkin\\.nuget\\packages\\npgsql\\8.0.3\\npgsql.8.0.3.nupkg.sha512",
-    "C:\\Users\\ovalkin\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.4\\npgsql.entityframeworkcore.postgresql.8.0.4.nupkg.sha512",
-    "C:\\Users\\ovalkin\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.1.1\\system.identitymodel.tokens.jwt.8.1.1.nupkg.sha512"
+    "C:\\Users\\ovalkin\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.4\\npgsql.entityframeworkcore.postgresql.8.0.4.nupkg.sha512"
   ],
   "logs": []
 }

@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Vintello.Common.DTOs\Vintello.Common.DTOs.csproj" />
-      <ProjectReference Include="..\Vintello.Common.Repositories\Vintello.Common.Repositories.csproj" />
+      <ProjectReference Include="..\Vintello.Repositories\Vintello.Repositories.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,6 +1,6 @@
 using Vintello.Common.EntityModel.PostgreSql;
 
-namespace Vintello.Common.Repositories;
+namespace Vintello.Repositories;
 
 public interface ICategoryRepository
 {

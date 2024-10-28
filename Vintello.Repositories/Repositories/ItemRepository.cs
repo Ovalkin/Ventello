@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using Vintello.Common.EntityModel.PostgreSql;
 
-namespace Vintello.Common.Repositories;
+namespace Vintello.Repositories;
 
 public class ItemRepository : IItemRepository
 {
