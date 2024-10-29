@@ -15,25 +15,11 @@
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/FiltersState/=SpellingFilter/@EntryIndexedValue">Off</s:String>
 	<s:Boolean x:Key="/Default/CodeInspection/Roslyn/RoslynEnabled/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/InlayHints/GeneralInlayHintsOptions/EnableInlayHints/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e6a0c9a8_002D6bd7_002D479b_002Dba1b_002D83ce5db17149/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UpdateItem_WithRoleIsClient_ReturnForbidden" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.UpdateItem_WithRoleIsClient_ReturnForbidden&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=607211d5_002D3a5b_002D484e_002Dbac1_002D6522aed91cf0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=edd0302d_002D5037_002D4c7a_002D96e6_002D3f4b4466cb5a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateItem_WithCreatedItemDataIsValidAndRoleAdmin_ShouldReturnCreated" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.CreateItem_WithCreatedItemDataIsValidAndRoleAdmin_ShouldReturnCreated&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.CreateItem_WithCreatedItemDataIsValidAndRoleClient_ShouldReturnCreated&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.UserApiTest.Post_ReturnCreated&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.CreateItem_WithCreatedItemDataIsValidAndRoleSuperAdmin_ShouldReturnCreated&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.CreateItem_WithCreatedItemDataIsNotValidAndRoleCLient_ShouldReturnBadRequest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.RetrieveItems_WithAll_ReturnOK&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.UpdateItem_WithRoleIsAdmin_ReturnNoContent&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.UpdateItem_WithRoleIsClient_ReturnNoContent&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest.UpdateItem_WithRoleIsClient_ReturnForbidden&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::913C2974-49F1-41F2-BE70-8A084C0AA0BC::net8.0::Vintello.Test.Integration.ItemApiTest&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
 	
 	
 	

@@ -1,8 +1,8 @@
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
 using Vintello.Services;
+using Vintello.Web.Api.Filters;
 
 namespace Vintello.Web.Api.Controllers;
 
@@ -17,9 +17,6 @@ public class UsersController(IUserService service) : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto user)
     {
-        if (User.Identity?.IsAuthenticated != null)
-            if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role)!.Value == "Client")
-                return Forbid();
         if (!ModelState.IsValid) return BadRequest();
         RetrievedUserDto? createdUser = await service.CreateAsync(user);
         if (createdUser is null) return BadRequest();
@@ -53,12 +50,11 @@ public class UsersController(IUserService service) : ControllerBase
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     [Authorize]
+    [TestFilter]
     public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdatedUserDto user)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-        var role = User.FindFirst(ClaimTypes.Role)!.Value;
         if (!ModelState.IsValid) return BadRequest();
-        bool? updated = await service.UpdateAsync(id, user, role, userId);
+        bool? updated = await service.UpdateAsync(id, user);
         return updated switch
         {
             true => NoContent(),
@@ -72,11 +68,10 @@ public class UsersController(IUserService service) : ControllerBase
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [Authorize]
+    [TestFilter]
     public async Task<IActionResult> DeleteUser(int id)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-        var role = User.FindFirst(ClaimTypes.Role)!.Value;
-        bool? deleted = await service.DeleteAsync(id, role, userId);
+        bool? deleted = await service.DeleteAsync(id);
         return deleted switch
         {
             true => NoContent(),

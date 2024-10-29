@@ -4,10 +4,12 @@ using Microsoft.IdentityModel.Tokens;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Repositories;
 using Vintello.Services;
+using Vintello.Web.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseUrls("https://localhost:5000");
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();

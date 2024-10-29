@@ -24,10 +24,8 @@ public class UserService(IUserRepository repo) : IUserService
         return user is null ? null : RetrievedUserDto.CreateDto(user);
     }
 
-    public async Task<bool?> UpdateAsync(int id, UpdatedUserDto user, string userRole, string userId)
+    public async Task<bool?> UpdateAsync(int id, UpdatedUserDto user)
     {
-        if (userRole == "Client" && userId != id.ToString())
-            return false;
         User? existing = await repo.RetrieveByIdAsync(id);
         if (existing is null) return null;
         existing = UpdatedUserDto.CreateUser(user, existing);
@@ -35,10 +33,8 @@ public class UserService(IUserRepository repo) : IUserService
         return updated is not null;
     }
 
-    public async Task<bool?> DeleteAsync(int id, string userRole, string userId)
+    public async Task<bool?> DeleteAsync(int id)
     {
-        if (userRole == "Client" && userId != id.ToString())
-            return null;
         User? user = await repo.RetrieveByIdAsync(id);
         if (user is null) return null;
         return await repo.DeleteAsync(user);

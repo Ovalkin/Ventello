@@ -33,8 +33,4 @@
       <ProjectReference Include="..\Vintello.Repositories\Vintello.Repositories.csproj" />
       <ProjectReference Include="..\Vintello.Services\Vintello.Services.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Middlewares\" />
-    </ItemGroup>
 </Project>
