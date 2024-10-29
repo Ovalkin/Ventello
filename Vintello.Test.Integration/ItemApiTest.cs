@@ -399,7 +399,7 @@ public class ItemApiTest : IClassFixture<CustomWebApplicationFactory>
         }
 
         var request = new HttpRequestMessage(new HttpMethod(method), $"/api/Items/{id}");
-        request.Content = JsonContent.Create(new UpdatedItemDto { Title = "Тестовый измененный", UserId = 10});
+        request.Content = JsonContent.Create(new UpdatedItemDto { Title = "Тестовый измененный"});
 
         var response = await _client.SendAsync(request);
 

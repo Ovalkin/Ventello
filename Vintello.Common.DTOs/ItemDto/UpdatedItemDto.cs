@@ -1,13 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 using Vintello.Common.EntityModel.PostgreSql;
 
 namespace Vintello.Common.DTOs;
 
 public class UpdatedItemDto
 {
-    [RegularExpression(@"^\d*$")]
-    public int? UserId { get; set; }
     [RegularExpression(@"^\d*$")]
     public int? CategoryId { get; set; }
     [RegularExpression(@"^\D*$")]
@@ -22,8 +19,6 @@ public class UpdatedItemDto
     {
         if (updatedItemDto.CategoryId != null)
             item.CategoryId = (int)updatedItemDto.CategoryId;
-        if (updatedItemDto.UserId != null)
-            item.UserId = (int)updatedItemDto.UserId;
         if (updatedItemDto.Title != null)
             item.Title = updatedItemDto.Title;
         if (updatedItemDto.Description != null)

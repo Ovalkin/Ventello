@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vintello.Common.DTOs;
 using Vintello.Services;
+using Vintello.Web.Api.Filters;
 
 namespace Vintello.Web.Api.Controllers;
 
@@ -14,12 +15,11 @@ public class ItemsController(IItemService service) : ControllerBase
     [ProducesResponseType(201, Type = typeof(RetrievedItemDto))]
     [ProducesResponseType(400)]
     [Authorize]
+    [ServiceFilter<ItemOwnershipFilter>]
     public async Task<IActionResult> CreateItem([FromBody] CreatedItemDto item)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-        var role = User.FindFirst(ClaimTypes.Role)!.Value;
         if (!ModelState.IsValid) return BadRequest();
-        RetrievedItemDto? createdItem = await service.CreateAsync(item, userId, role);
+        RetrievedItemDto? createdItem = await service.CreateAsync(item);
         if (createdItem is null) return BadRequest();
         return CreatedAtRoute(
             nameof(RetrieveItem),
@@ -49,12 +49,11 @@ public class ItemsController(IItemService service) : ControllerBase
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
     [Authorize]
+    [ServiceFilter<ItemOwnershipFilter>]
     public async Task<IActionResult> UpdateItem(int id, UpdatedItemDto item)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-        var role = User.FindFirst(ClaimTypes.Role)!.Value;
         if (!ModelState.IsValid) return BadRequest();
-        var updated = await service.UpdateAsync(id, item, userId, role);
+        var updated = await service.UpdateAsync(id, item);
         return updated switch
         {
             true => NoContent(),
@@ -68,11 +67,10 @@ public class ItemsController(IItemService service) : ControllerBase
     [ProducesResponseType(404)]
     [ProducesResponseType(400)]
     [Authorize]
+    [ServiceFilter<ItemOwnershipFilter>]
     public async Task<IActionResult> DeleteItem(int id)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-        var role = User.FindFirst(ClaimTypes.Role)!.Value;
-        bool? deleted = await service.DeleteAsync(id, userId, role);
+        bool? deleted = await service.DeleteAsync(id);
         return deleted switch
         {
             true => NoContent(),

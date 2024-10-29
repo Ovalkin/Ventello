@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Repositories;
 using Vintello.Services;
+using Vintello.Web.Api.Filters;
 using Vintello.Web.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,8 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services
     .AddRepositories()
     .AddServices();
+
+builder.Services.AddScoped<ItemOwnershipFilter>();
 
 var app = builder.Build();
 
