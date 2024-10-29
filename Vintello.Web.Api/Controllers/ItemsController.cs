@@ -15,10 +15,14 @@ public class ItemsController(IItemService service) : ControllerBase
     [ProducesResponseType(201, Type = typeof(RetrievedItemDto))]
     [ProducesResponseType(400)]
     [Authorize]
-    [ServiceFilter<ItemOwnershipFilter>]
     public async Task<IActionResult> CreateItem([FromBody] CreatedItemDto item)
     {
         if (!ModelState.IsValid) return BadRequest();
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        var role = User.FindFirst(ClaimTypes.Role)!.Value;
+        if (userId != item.UserId.ToString() && role == "Client")
+            return Forbid();
+        
         RetrievedItemDto? createdItem = await service.CreateAsync(item);
         if (createdItem is null) return BadRequest();
         return CreatedAtRoute(

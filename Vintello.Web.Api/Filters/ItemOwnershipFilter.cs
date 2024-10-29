@@ -1,6 +1,10 @@
-﻿using System.Security.Claims;
+﻿using System.Globalization;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Vintello.Common.DTOs;
 using Vintello.Common.EntityModel.PostgreSql;
 using Vintello.Repositories;
 
@@ -18,7 +22,6 @@ public class ItemOwnershipFilter : Attribute, IAsyncActionFilter
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         var user = context.HttpContext.User;
-
         var userId = user.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var role = user.FindFirst(ClaimTypes.Role)!.Value;
 
@@ -39,10 +42,6 @@ public class ItemOwnershipFilter : Attribute, IAsyncActionFilter
                 context.Result = new NotFoundResult();
                 return;
             }
-        }
-        else
-        {
-            throw new Exception();
         }
 
         await next();
